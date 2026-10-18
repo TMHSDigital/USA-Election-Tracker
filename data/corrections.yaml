@@ -1,0 +1,4 @@
+# Public corrections log. Newest entries are shown first on /corrections/.
+# Each entry: id (stable anchor), date (ISO 8601 with time and offset), pages
+# affected, a factual summary, optional details. Never delete entries.
+corrections: []
