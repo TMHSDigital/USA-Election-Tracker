@@ -1,0 +1,39 @@
+name: link-check-weekly
+
+# Checks every official URL in the seed files. Broken links open or update an
+# issue; pages that block automated clients are listed for a manual check.
+on:
+  schedule:
+    - cron: "41 13 * * 1" # Mondays 13:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - name: Check links
+        id: check
+        working-directory: ingest
+        continue-on-error: true
+        run: uv run ingest link-check --report ../link-report.md
+      - name: Publish report
+        run: cat link-report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update issue
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          existing=$(gh issue list --state open --label link-check --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file link-report.md
+          else
+            gh label create link-check --color FBCA04 --force >/dev/null
+            gh issue create --title "Broken official links" --label link-check --body-file link-report.md
+          fi

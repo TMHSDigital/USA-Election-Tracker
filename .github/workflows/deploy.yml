@@ -1,0 +1,70 @@
+name: deploy
+
+# Builds the site from main plus the last good data on the `data` branch and
+# deploys to GitHub Pages. Triggered by pushes to main, by the ingest and live
+# workflows (workflow_dispatch), or by hand.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Check out last good data
+        run: |
+          git fetch --depth=1 origin data
+          git worktree add .data/raw FETCH_HEAD
+
+      - uses: astral-sh/setup-uv@v10
+      - name: Compose data bundle
+        working-directory: ingest
+        env:
+          LIVE_RESULTS_ENABLED: ${{ vars.LIVE_RESULTS_ENABLED || 'false' }}
+        run: uv run ingest compose --in ../.data/raw --out ../.data/site
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Build site
+        working-directory: site
+        env:
+          DATA_DIR: ../.data/site
+          PUBLIC_GOATCOUNTER_CODE: ${{ vars.GOATCOUNTER_CODE }}
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

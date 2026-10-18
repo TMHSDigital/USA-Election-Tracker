@@ -1,0 +1,37 @@
+name: Source request
+description: Propose a new data source
+title: "Source request: "
+labels: ["source-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        New sources need maintainer approval before any code is written.
+        See docs/adding-a-source.md.
+  - type: input
+    id: url
+    attributes:
+      label: Source URL
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License and terms of use (link)
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What it would add to the site
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The terms allow redistribution and automated access.
+          required: true
+        - label: The source is free and needs no paid key.
+          required: true
