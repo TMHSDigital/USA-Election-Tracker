@@ -1,6 +1,7 @@
 from ..core.adapter import Adapter
 from .acs import AcsAdapter
 from .boundaries import BoundariesAdapter
+from .clarity import ClarityAdapter
 from .fec import FecAdapter
 from .history import HistoryAdapter
 from .legislators import LegislatorsAdapter
@@ -16,5 +17,6 @@ ADAPTERS: dict[str, type[Adapter]] = {
         HistoryAdapter,
         BoundariesAdapter,
         AcsAdapter,
+        ClarityAdapter,
     )
 }

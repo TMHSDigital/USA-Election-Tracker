@@ -187,7 +187,7 @@
   "night.liveDisabled": "Live results on this site are turned off. Use the official links above.",
   "night.liveLag": "Updates on this site lag the official source by several minutes or more, because they run on a schedule and pages are cached. The official source is always more current.",
   "night.unofficial": "Unofficial",
-  "night.reporting": "Reporting, as stated by the source: {text}",
+  "night.reporting": "{text} (as stated by the source)",
   "night.fetched": "Fetched by us {date}",
   "night.sourceUpdated": "Source updated {date}",
   "night.source": "Source",

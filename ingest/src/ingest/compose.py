@@ -587,6 +587,11 @@ class Composer:
         }
         write_json(out / "meta.json", meta)
 
+        live = self.in_dir / "live_clarity" / "contests.json"
+        if self.live_enabled and live.exists():
+            (out / "live").mkdir(parents=True, exist_ok=True)
+            shutil.copy(live, out / "live" / "contests.json")
+
         bdir = self.in_dir / "boundaries"
         if bdir.exists():
             for sub in ("display", "lookup"):
