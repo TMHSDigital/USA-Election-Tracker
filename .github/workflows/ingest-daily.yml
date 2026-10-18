@@ -39,7 +39,7 @@ jobs:
             git worktree add --orphan -b data .data/raw
           fi
 
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.0
       - name: Run adapters
         id: run
         working-directory: ingest

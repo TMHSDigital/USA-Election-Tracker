@@ -34,7 +34,7 @@ jobs:
           git fetch --depth=1 origin data
           git worktree add .data/raw FETCH_HEAD
 
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.0
       - name: Compose data bundle
         working-directory: ingest
         env:
