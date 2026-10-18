@@ -18,8 +18,9 @@ def slugify(text: str) -> str:
     return text or "x"
 
 
-def race_id(year: int, office: Office, state_po: str, district: int | None = None,
-            special: bool = False) -> str:
+def race_id(
+    year: int, office: Office, state_po: str, district: int | None = None, special: bool = False
+) -> str:
     parts = [str(year), office.value, state_po.lower()]
     if office == Office.HOUSE:
         if district is None:

@@ -42,9 +42,15 @@ class AcsAdapter(Adapter):
         if not key:
             raise ValidationFailed("CENSUS_API_KEY not set")
         fields = ["NAME"] + [f"{v}{s}" for v in VARIABLES for s in ("E", "M")]
-        resp = self.ctx.http.get(URL, params={"get": ",".join(fields),
-                                              "for": "congressional district:*",
-                                              "in": "state:*", "key": key})
+        resp = self.ctx.http.get(
+            URL,
+            params={
+                "get": ",".join(fields),
+                "for": "congressional district:*",
+                "in": "state:*",
+                "key": key,
+            },
+        )
         return json.loads(resp.content)
 
     def validate(self, raw: list[list[Any]]) -> list[list[Any]]:
@@ -57,8 +63,11 @@ class AcsAdapter(Adapter):
     def normalize(self, raw: list[list[Any]]) -> Dataset:
         registry = load_registry(self.ctx.repo_root)
         src = source_record(registry, "census_acs5", self.ctx.now)
-        plan = yaml.safe_load((self.ctx.repo_root / "data" / "seeds" /
-                               "boundary-sets-2026.yaml").read_text(encoding="utf-8"))
+        plan = yaml.safe_load(
+            (self.ctx.repo_root / "data" / "seeds" / "boundary-sets-2026.yaml").read_text(
+                encoding="utf-8"
+            )
+        )
         changed = set(plan.get("changed_for_2026", {}))
         header = raw[0]
         idx = {h: i for i, h in enumerate(header)}
@@ -73,12 +82,18 @@ class AcsAdapter(Adapter):
             n = int(cd)
             district = 0 if st.house_seats == 1 else n
             for var, label in VARIABLES.items():
-                rows.append(DistrictDemographics(
-                    state_po=st.po, district=district, boundary_vintage="cd119",
-                    variable=var, label=label,
-                    estimate=_val(rec[idx[var + "E"]]),
-                    margin_of_error=_val(rec[idx[var + "M"]]),
-                    source_ids=[src.source_id]))
+                rows.append(
+                    DistrictDemographics(
+                        state_po=st.po,
+                        district=district,
+                        boundary_vintage="cd119",
+                        variable=var,
+                        label=label,
+                        estimate=_val(rec[idx[var + "E"]]),
+                        margin_of_error=_val(rec[idx[var + "M"]]),
+                        source_ids=[src.source_id],
+                    )
+                )
         rows.sort(key=lambda r: (r.state_po, r.district, r.variable))
         return Dataset(tables={"demographics": rows}, sources=[src], retrieved_at=self.ctx.now)
 

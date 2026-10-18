@@ -6,8 +6,6 @@ from pathlib import Path
 import pytest
 
 from ingest.adapters import ADAPTERS
-from ingest.adapters.fec import FecAdapter
-from ingest.adapters.history import HistoryAdapter
 from ingest.core.adapter import Context, run_adapters
 from ingest.core.http import FixtureHttp
 from ingest.core.states import STATES
@@ -102,12 +100,15 @@ def test_boundaries_wrong_district_count_fails(ctx: Context, fixture_dir: Path) 
 
 def test_seed_candidates(ctx: Context) -> None:
     status = run(ctx, "candidates_official")
-    assert status["adapters"]["candidates_official"]["ok"], \
-        status["adapters"]["candidates_official"]["error"]
+    assert status["adapters"]["candidates_official"]["ok"], status["adapters"][
+        "candidates_official"
+    ]["error"]
     rows = load(ctx, "candidates_official", "seed_candidates")
     assert {r["race_id"] for r in rows} == {"2026-governor-ga", "2026-house-de-00"}
-    cov = {(c["state_po"], c["office"]): c["status"]
-           for c in load(ctx, "candidates_official", "seed_coverage")}
+    cov = {
+        (c["state_po"], c["office"]): c["status"]
+        for c in load(ctx, "candidates_official", "seed_coverage")
+    }
     assert cov[("WY", "governor")] == "not_found"
     assert cov[("GA", "governor")] == "official"
 
@@ -118,7 +119,8 @@ def test_seed_bad_district_rejected(ctx: Context, repo: Path) -> None:
         "state_po,office,district,special,candidate_name,ballot_name,party_ballot_label,"
         "incumbent,ballot_order,source_url,source_title,retrieved_at,notes\n"
         "GA,US House,15,false,X Y,X Y,Democratic,false,,https://sos.ga.gov/a,t,2026-10-18,\n",
-        encoding="utf-8")
+        encoding="utf-8",
+    )
     status = run(ctx, "candidates_official")
     assert not status["adapters"]["candidates_official"]["ok"]
     assert "district 15" in status["adapters"]["candidates_official"]["error"]
@@ -138,14 +140,14 @@ def test_acs_without_key_fails_cleanly(ctx: Context) -> None:
 
 def test_all_sources_failed_keeps_last_good(ctx: Context, repo: Path, tmp_path: Path) -> None:
     attrs = {"fec": {"min_rows": 5}, "history": {"min_rows": 10}}
-    names = ["state_offices", "candidates_official", "legislators", "fec", "history",
-             "boundaries"]
+    names = ["state_offices", "candidates_official", "legislators", "fec", "history", "boundaries"]
     first = run(ctx, *names, **attrs)
     assert all(first["adapters"][n]["ok"] for n in names)
     snapshot = {n: (ctx.out_dir / n / "_meta.json").read_bytes() for n in names}
 
-    broken = Context(http=FixtureHttp(tmp_path, {}), repo_root=repo, out_dir=ctx.out_dir,
-                     now=ctx.now, env={})
+    broken = Context(
+        http=FixtureHttp(tmp_path, {}), repo_root=repo, out_dir=ctx.out_dir, now=ctx.now, env={}
+    )
     # Seeds are local files; break them too so every adapter fails.
     (repo / "data" / "seeds" / "state-election-offices.yaml").write_text("states: []\n")
     (repo / "data" / "seeds" / "governors-2026.csv").write_text("garbage\n1\n")

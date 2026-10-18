@@ -39,10 +39,44 @@ ELECTION_DATE = date(2026, 11, 3)
 HISTORY_CYCLES = 5
 # Fallback when the governors seed is missing. Cited in sources/registry.yaml as
 # governors_2026_list.
-GOVERNOR_STATES_2026 = (
-    "AL AK AZ AR CA CO CT FL GA HI ID IL IA KS ME MD MA MI MN NE NV NH NM NY OH OK OR PA "
-    "RI SC SD TN TX VT WI WY"
-).split()
+GOVERNOR_STATES_2026 = [
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IA",
+    "KS",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "NE",
+    "NV",
+    "NH",
+    "NM",
+    "NY",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "VT",
+    "WI",
+    "WY",
+]
 FEC_FALLBACK_STATUSES = {"C"}  # statutory candidates only
 
 
@@ -79,8 +113,14 @@ def _pct(votes: int | None, total: int | None) -> float | None:
 
 
 class Composer:
-    def __init__(self, in_dir: Path, out_dir: Path, repo_root: Path, now: datetime | None = None,
-                 live_enabled: bool = False) -> None:
+    def __init__(
+        self,
+        in_dir: Path,
+        out_dir: Path,
+        repo_root: Path,
+        now: datetime | None = None,
+        live_enabled: bool = False,
+    ) -> None:
         self.in_dir = in_dir
         self.out_dir = out_dir
         self.repo_root = repo_root
@@ -89,8 +129,9 @@ class Composer:
         self.warnings: list[str] = []
 
     # ----- race list -------------------------------------------------------
-    def race_keys(self, incumbents: list[dict], seeds: list[dict],
-                  coverage: list[dict]) -> list[tuple[str, str, int | None, bool]]:
+    def race_keys(
+        self, incumbents: list[dict], seeds: list[dict], coverage: list[dict]
+    ) -> list[tuple[str, str, int | None, bool]]:
         keys: set[tuple[str, str, int | None, bool]] = set()
         for st in STATES:
             if st.house_seats == 1:
@@ -163,8 +204,9 @@ class Composer:
             if c and c["status"] == "official":
                 list_status = "official"
                 for s in seeds_by_race.get(rid, []):
-                    cand = self._official_candidate(rid, s, fin_by_seat.get(seat, []),
-                                                    fin_by_id, inc_fec_ids, overrides)
+                    cand = self._official_candidate(
+                        rid, s, fin_by_seat.get(seat, []), fin_by_id, inc_fec_ids, overrides
+                    )
                     candidates.append(cand)
                 if not candidates:
                     self.warnings.append(f"{rid}: official list for {po} has no rows for race")
@@ -193,9 +235,16 @@ class Composer:
             boundary = None
             if office == "house" and po in boundary_sets:
                 b = boundary_sets[po]
-                boundary = {k: b[k] for k in ("boundary_set_id", "enacting_instrument",
-                                              "enacting_instrument_url", "display_path",
-                                              "source_ids")}
+                boundary = {
+                    k: b[k]
+                    for k in (
+                        "boundary_set_id",
+                        "enacting_instrument",
+                        "enacting_instrument_url",
+                        "display_path",
+                        "source_ids",
+                    )
+                }
             race = {
                 "race_id": rid,
                 "office": office,
@@ -211,30 +260,54 @@ class Composer:
                 "candidates": candidates,
                 "boundary": boundary,
                 "history": self._history(hist_by_seat.get(seat, []), special),
-                "demographics": self._demographics(office, po, district, demo_by_seat,
-                                                   boundary_sets),
+                "demographics": self._demographics(
+                    office, po, district, demo_by_seat, boundary_sets
+                ),
                 "official_results_url": (offices.get(po) or {}).get("results_url"),
             }
             races_out.append(race)
             for cand in candidates:
-                candidates_flat.append({"race_id": rid, "state_po": po, "office": office,
-                                        "district": district, "special": special,
-                                        **{k: v for k, v in cand.items() if k != "finance"}})
+                candidates_flat.append(
+                    {
+                        "race_id": rid,
+                        "state_po": po,
+                        "office": office,
+                        "district": district,
+                        "special": special,
+                        **{k: v for k, v in cand.items() if k != "finance"},
+                    }
+                )
 
         self._check_incumbents(races_out, incumbents)
-        used = self._used_source_ids(races_out, offices, boundary_sets)
+        # The site cites these registry entries directly (e.g. Vote.gov links).
+        used = self._used_source_ids(races_out, offices, boundary_sets) | {"vote_gov"}
         for sid in used:
             if sid not in sources and sid in registry:
                 e = registry[sid]
-                sources[sid] = {"source_id": sid, "name": e["name"],
-                                "publisher": e["publisher"], "url": e["url"],
-                                "license": e["license"], "retrieved_at": None,
-                                "source_published_at": None, "notes": e.get("notes", "")}
+                sources[sid] = {
+                    "source_id": sid,
+                    "name": e["name"],
+                    "publisher": e["publisher"],
+                    "url": e["url"],
+                    "license": e["license"],
+                    "retrieved_at": None,
+                    "source_published_at": None,
+                    "notes": e.get("notes", ""),
+                }
         missing = sorted(used - set(sources))
         if missing:
             raise RuntimeError(f"source ids used but not defined: {missing}")
-        return self._write(races_out, candidates_flat, offices, sources, status, finance,
-                           history, demographics, boundary_sets)
+        return self._write(
+            races_out,
+            candidates_flat,
+            offices,
+            sources,
+            status,
+            finance,
+            history,
+            demographics,
+            boundary_sets,
+        )
 
     def _race_notes(self, keys: list[tuple], sources: dict[str, dict]) -> dict[str, dict]:
         import yaml
@@ -246,12 +319,16 @@ class Composer:
         out: dict[str, dict] = {}
         for rule in rules:
             sid = url_source_id("state-notice", rule["source_url"])
-            sources[sid] = {"source_id": sid, "name": rule["source_title"],
-                            "publisher": rule["publisher"], "url": rule["source_url"],
-                            "license": "Government publication, cited and linked; see "
-                                       "publisher terms",
-                            "retrieved_at": str(rule["retrieved_at"]),
-                            "source_published_at": None, "notes": ""}
+            sources[sid] = {
+                "source_id": sid,
+                "name": rule["source_title"],
+                "publisher": rule["publisher"],
+                "url": rule["source_url"],
+                "license": "Government publication, cited and linked; see publisher terms",
+                "retrieved_at": str(rule["retrieved_at"]),
+                "source_published_at": None,
+                "notes": "",
+            }
             m = rule["match"]
             for office, po, district, special in keys:
                 if m.get("state_po", po) != po or m.get("office", office) != office:
@@ -259,10 +336,11 @@ class Composer:
                 if "district" in m and m["district"] != district:
                     continue
                 rid = race_id(2026, _office(office), po, district, special)
-                out[rid] = {"election_type": rule["election_type"],
-                            "runoff_date": str(rule["runoff_date"]) if rule.get("runoff_date")
-                            else None,
-                            "source_ids": [sid]}
+                out[rid] = {
+                    "election_type": rule["election_type"],
+                    "runoff_date": str(rule["runoff_date"]) if rule.get("runoff_date") else None,
+                    "source_ids": [sid],
+                }
         return out
 
     # ----- candidates ------------------------------------------------------
@@ -275,9 +353,15 @@ class Composer:
                     out[(r["race_id"], r["candidate_name"].lower())] = r["fec_candidate_id"]
         return out
 
-    def _official_candidate(self, rid: str, s: dict, seat_fec: list[dict],
-                            fin_by_id: dict[str, dict], inc_fec_ids: set[str],
-                            overrides: dict[tuple[str, str], str]) -> dict[str, Any]:
+    def _official_candidate(
+        self,
+        rid: str,
+        s: dict,
+        seat_fec: list[dict],
+        fin_by_id: dict[str, dict],
+        inc_fec_ids: set[str],
+        overrides: dict[tuple[str, str], str],
+    ) -> dict[str, Any]:
         fec_id, method = None, None
         ov = overrides.get((rid, s["name"].lower()))
         if ov is not None:
@@ -303,13 +387,18 @@ class Composer:
             "finance": _finance(fin),
         }
 
-    def _match_fec(self, s: dict, seat_fec: list[dict],
-                   inc_fec_ids: set[str]) -> tuple[str | None, str | None]:
+    def _match_fec(
+        self, s: dict, seat_fec: list[dict], inc_fec_ids: set[str]
+    ) -> tuple[str | None, str | None]:
         """Strict match. A wrong match shows someone else's money, so ambiguity means no match."""
         pool = [f for f in seat_fec if f.get("election_year") == 2026]
         if s["incumbent"]:
-            inc = [f for f in pool if f["fec_candidate_id"] in inc_fec_ids
-                   and last_name(f["candidate_name"]) == last_name(s["name"])]
+            inc = [
+                f
+                for f in pool
+                if f["fec_candidate_id"] in inc_fec_ids
+                and last_name(f["candidate_name"]) == last_name(s["name"])
+            ]
             if len(inc) == 1:
                 return inc[0]["fec_candidate_id"], "legislators"
         ln, fn = last_name(s["name"]), first_name(s["name"])
@@ -354,8 +443,10 @@ class Composer:
             holders = {last_name(h["name"]) for h in seat_holders.get(seat, [])}
             for c in r["candidates"]:
                 if c["incumbent"] and last_name(c["name"]) not in holders:
-                    self.warnings.append(f"{r['race_id']}: {c['name']} flagged incumbent but "
-                                         "not a current holder of this seat per legislators")
+                    self.warnings.append(
+                        f"{r['race_id']}: {c['name']} flagged incumbent but "
+                        "not a current holder of this seat per legislators"
+                    )
 
     # ----- other sections --------------------------------------------------
     def _history(self, rows: list[dict], special: bool) -> list[dict[str, Any]]:
@@ -363,30 +454,56 @@ class Composer:
         for h in rows:
             by_year[(h["year"], h.get("special", False))].append(h)
         out = []
-        for (year, sp) in sorted(by_year, reverse=True)[:HISTORY_CYCLES]:
+        for year, sp in sorted(by_year, reverse=True)[:HISTORY_CYCLES]:
             group = by_year[(year, sp)]
             total = max((g.get("total_votes") or 0) for g in group) or None
-            cands = [{"name": g["candidate_name"], "party_label": g["party_label"],
-                      "votes": g.get("votes"), "pct": _pct(g.get("votes"), total),
-                      "writein": g.get("writein", False)}
-                     for g in sorted(group, key=lambda g: -(g.get("votes") or 0))]
-            out.append({"year": year, "special": sp, "total_votes": total, "candidates": cands,
-                        "source_ids": sorted({sid for g in group for sid in g["source_ids"]})})
+            cands = [
+                {
+                    "name": g["candidate_name"],
+                    "party_label": g["party_label"],
+                    "votes": g.get("votes"),
+                    "pct": _pct(g.get("votes"), total),
+                    "writein": g.get("writein", False),
+                }
+                for g in sorted(group, key=lambda g: -(g.get("votes") or 0))
+            ]
+            out.append(
+                {
+                    "year": year,
+                    "special": sp,
+                    "total_votes": total,
+                    "candidates": cands,
+                    "source_ids": sorted({sid for g in group for sid in g["source_ids"]}),
+                }
+            )
         return out
 
-    def _demographics(self, office: str, po: str, district: int | None,
-                      demo_by_seat: dict, boundary_sets: dict) -> dict[str, Any] | None:
+    def _demographics(
+        self, office: str, po: str, district: int | None, demo_by_seat: dict, boundary_sets: dict
+    ) -> dict[str, Any] | None:
         if office != "house":
             return None
         rows = demo_by_seat.get((po, district), [])
         if not rows:
-            return {"available": False,
-                    "reason": "boundaries_changed" if po in self._changed_states() else "no_data",
-                    "rows": []}
-        return {"available": True, "vintage": "ACS 5-year 2020-2024",
-                "rows": [{"label": r["label"], "variable": r["variable"],
-                          "estimate": r["estimate"], "moe": r["margin_of_error"],
-                          "source_ids": r["source_ids"]} for r in rows]}
+            return {
+                "available": False,
+                "reason": "boundaries_changed" if po in self._changed_states() else "no_data",
+                "rows": [],
+            }
+        return {
+            "available": True,
+            "vintage": "ACS 5-year 2020-2024",
+            "rows": [
+                {
+                    "label": r["label"],
+                    "variable": r["variable"],
+                    "estimate": r["estimate"],
+                    "moe": r["margin_of_error"],
+                    "source_ids": r["source_ids"],
+                }
+                for r in rows
+            ],
+        }
 
     def _changed_states(self) -> set[str]:
         import yaml
@@ -394,8 +511,7 @@ class Composer:
         p = self.repo_root / "data" / "seeds" / "boundary-sets-2026.yaml"
         return set(yaml.safe_load(p.read_text(encoding="utf-8")).get("changed_for_2026", {}))
 
-    def _used_source_ids(self, races: list[dict], offices: dict,
-                         boundary_sets: dict) -> set[str]:
+    def _used_source_ids(self, races: list[dict], offices: dict, boundary_sets: dict) -> set[str]:
         used: set[str] = set()
 
         def walk(o: Any) -> None:
@@ -415,35 +531,60 @@ class Composer:
         return used
 
     # ----- output ----------------------------------------------------------
-    def _write(self, races, candidates_flat, offices, sources, status, finance, history,
-               demographics, boundary_sets) -> dict[str, Any]:
+    def _write(
+        self,
+        races,
+        candidates_flat,
+        offices,
+        sources,
+        status,
+        finance,
+        history,
+        demographics,
+        boundary_sets,
+    ) -> dict[str, Any]:
         out = self.out_dir
         if out.exists():
             shutil.rmtree(out)
         (out / "races").mkdir(parents=True)
         for r in races:
             write_json(out / "races" / f"{r['race_id']}.json", r)
-        index = [{k: r[k] for k in ("race_id", "office", "state_po", "state_name", "district",
-                                    "special")}
-                 | {"candidate_count": len(r["candidates"]),
-                    "list_status": r["candidate_list"]["status"]} for r in races]
+        index = [
+            {
+                k: r[k]
+                for k in ("race_id", "office", "state_po", "state_name", "district", "special")
+            }
+            | {
+                "candidate_count": len(r["candidates"]),
+                "list_status": r["candidate_list"]["status"],
+            }
+            for r in races
+        ]
         write_json(out / "races.json", index)
 
         states = []
         for st in STATES:
             o = offices.get(st.po)
-            states.append({
-                "state_po": st.po, "state_name": st.name, "state_fips": st.fips,
-                "house_seats": st.house_seats,
-                "office": o,
-                "race_ids": [r["race_id"] for r in races if r["state_po"] == st.po],
-                "boundary_set": boundary_sets.get(st.po),
-            })
+            states.append(
+                {
+                    "state_po": st.po,
+                    "state_name": st.name,
+                    "state_fips": st.fips,
+                    "house_seats": st.house_seats,
+                    "office": o,
+                    "race_ids": [r["race_id"] for r in races if r["state_po"] == st.po],
+                    "boundary_set": boundary_sets.get(st.po),
+                }
+            )
         write_json(out / "states.json", states)
         write_json(out / "sources.json", sorted(sources.values(), key=lambda s: s["source_id"]))
-        meta = {"schema_version": SCHEMA_VERSION, "generated_at": self.now.isoformat(),
-                "live_enabled": self.live_enabled, "status": status,
-                "warnings": self.warnings}
+        meta = {
+            "schema_version": SCHEMA_VERSION,
+            "generated_at": self.now.isoformat(),
+            "live_enabled": self.live_enabled,
+            "status": status,
+            "warnings": self.warnings,
+        }
         write_json(out / "meta.json", meta)
 
         bdir = self.in_dir / "boundaries"
@@ -456,19 +597,29 @@ class Composer:
 
         dl = out / "downloads"
         datasets = {
-            "candidates": (candidates_flat, "Candidates on the 2026 general election ballot, "
-                           "from official state lists, with FEC fallback where noted."),
-            "fec-finance": (finance, "FEC financial summary for 2026 House and Senate "
-                            "candidates."),
+            "candidates": (
+                candidates_flat,
+                "Candidates on the 2026 general election ballot, "
+                "from official state lists, with FEC fallback where noted.",
+            ),
+            "fec-finance": (finance, "FEC financial summary for 2026 House and Senate candidates."),
             "history": (history, "Historical general election results, 2006 onward."),
-            "demographics": (demographics, "ACS 5-year estimates by congressional district "
-                             "(119th Congress boundaries)."),
-            "state-election-offices": (list(offices.values()), "Official state election "
-                                       "office links."),
-            "boundary-sets": (list(boundary_sets.values()), "District boundary sets for the "
-                              "2026 election with enacting instruments."),
-            "sources": (sorted(sources.values(), key=lambda s: s["source_id"]),
-                        "Every source cited on the site."),
+            "demographics": (
+                demographics,
+                "ACS 5-year estimates by congressional district (119th Congress boundaries).",
+            ),
+            "state-election-offices": (
+                list(offices.values()),
+                "Official state election office links.",
+            ),
+            "boundary-sets": (
+                list(boundary_sets.values()),
+                "District boundary sets for the 2026 election with enacting instruments.",
+            ),
+            "sources": (
+                sorted(sources.values(), key=lambda s: s["source_id"]),
+                "Every source cited on the site.",
+            ),
         }
         manifest = []
         for name, (rows, desc) in datasets.items():
@@ -477,11 +628,17 @@ class Composer:
             sids = sorted({sid for r in rows for sid in r.get("source_ids", [])})
             if name == "sources":
                 sids = []
-            manifest.append({"name": name, "description": desc, "rows": len(rows),
-                             "files": [f"{name}.csv", f"{name}.json"],
-                             "source_ids": sids,
-                             "license": "CC BY 4.0 for compilation; underlying source "
-                                        "licenses apply (see source_ids)"})
+            manifest.append(
+                {
+                    "name": name,
+                    "description": desc,
+                    "rows": len(rows),
+                    "files": [f"{name}.csv", f"{name}.json"],
+                    "source_ids": sids,
+                    "license": "CC BY 4.0 for compilation; underlying source "
+                    "licenses apply (see source_ids)",
+                }
+            )
         write_json(dl / "index.json", manifest)
         return meta
 
@@ -501,5 +658,7 @@ def _first_compatible(a: str, b: str) -> bool:
 def _finance(f: dict | None) -> dict[str, Any] | None:
     if not f or f.get("receipts") is None:
         return None
-    return {k: f.get(k) for k in ("receipts", "disbursements", "cash_on_hand",
-                                  "coverage_end_date", "source_ids")}
+    return {
+        k: f.get(k)
+        for k in ("receipts", "disbursements", "cash_on_hand", "coverage_end_date", "source_ids")
+    }

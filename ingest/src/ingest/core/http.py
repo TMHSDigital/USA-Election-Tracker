@@ -6,8 +6,8 @@ import logging
 import random
 import time
 from dataclasses import dataclass, field
-from email.utils import parsedate_to_datetime
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Protocol
 
@@ -15,9 +15,7 @@ import httpx
 
 log = logging.getLogger(__name__)
 
-USER_AGENT = (
-    "USA-Election-Tracker/0.1 (+https://github.com/TMHSDigital/USA-Election-Tracker)"
-)
+USER_AGENT = "USA-Election-Tracker/0.1 (+https://github.com/TMHSDigital/USA-Election-Tracker)"
 RETRY_STATUS = {408, 425, 429, 500, 502, 503, 504}
 
 
@@ -94,8 +92,9 @@ class LiveHttp:
                 break
             delay = retry_after or min(self.max_delay, self.base_delay * 2 ** (attempt - 1))
             delay += random.uniform(0, delay / 4)
-            log.warning("fetch %s failed (%s); retry %d in %.1fs", _redact(url), last_error,
-                        attempt, delay)
+            log.warning(
+                "fetch %s failed (%s); retry %d in %.1fs", _redact(url), last_error, attempt, delay
+            )
             time.sleep(delay)
         raise FetchError(f"GET {_redact(url)} failed: {last_error}")
 

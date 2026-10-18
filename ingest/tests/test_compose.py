@@ -3,10 +3,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from test_adapters import ADAPTERS
+
 from ingest.compose import Composer
 from ingest.core.adapter import Context, run_adapters
-
-from test_adapters import ADAPTERS
 
 ATTRS = {"fec": {"min_rows": 5}, "history": {"min_rows": 10}}
 NAMES = ["state_offices", "candidates_official", "legislators", "fec", "history", "boundaries"]
@@ -43,8 +43,7 @@ def test_ballot_order_used_when_complete(ctx: Context, tmp_path: Path) -> None:
     out, _ = build(ctx, tmp_path)
     r = race(out, "2026-house-de-00")
     assert r["order_method"] == "ballot"
-    assert [c["name"] for c in r["candidates"]] == ["First Person", "Second Person",
-                                                    "Third Person"]
+    assert [c["name"] for c in r["candidates"]] == ["First Person", "Second Person", "Third Person"]
     assert r["candidate_list"]["status"] == "official"
 
 

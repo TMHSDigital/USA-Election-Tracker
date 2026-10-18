@@ -1,8 +1,8 @@
 """Command line entry point.
 
-  uv run ingest run [ADAPTER ...] --out ../.data/raw
-  uv run ingest compose --in ../.data/raw --out ../site/public/data
-  uv run ingest check-seeds
+uv run ingest run [ADAPTER ...] --out ../.data/raw
+uv run ingest compose --in ../.data/raw --out ../site/public/data
+uv run ingest check-seeds
 """
 
 from __future__ import annotations
@@ -30,12 +30,20 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("adapters", nargs="*", help=f"subset of: {', '.join(ADAPTERS)}")
     r.add_argument("--out", type=Path, default=REPO_ROOT / ".data" / "raw")
     r.add_argument("--strict", action="store_true", help="exit 1 if any adapter failed")
+    r.add_argument(
+        "--offline",
+        action="store_true",
+        help="no network: every fetch fails (used by the all-sources-failed smoke test)",
+    )
 
     c = sub.add_parser("compose", help="build the site data bundle")
     c.add_argument("--in", dest="in_dir", type=Path, default=REPO_ROOT / ".data" / "raw")
     c.add_argument("--out", type=Path, default=REPO_ROOT / ".data" / "site")
 
     sub.add_parser("check-seeds", help="validate curated seed files (used in CI)")
+
+    lc = sub.add_parser("link-check", help="check official URLs in seeds; writes a report")
+    lc.add_argument("--report", type=Path, default=REPO_ROOT / ".data" / "link-report.md")
 
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
@@ -45,7 +53,13 @@ def main(argv: list[str] | None = None) -> int:
         unknown = [n for n in names if n not in ADAPTERS]
         if unknown:
             p.error(f"unknown adapters: {unknown}")
-        ctx = Context(http=LiveHttp(), repo_root=REPO_ROOT, out_dir=args.out)
+        if args.offline:
+            from .core.http import FixtureHttp
+
+            http: object = FixtureHttp(args.out, {})
+        else:
+            http = LiveHttp()
+        ctx = Context(http=http, repo_root=REPO_ROOT, out_dir=args.out)  # type: ignore[arg-type]
         status = run_adapters([ADAPTERS[n](ctx) for n in names], args.out)
         failed = [k for k in names if not status["adapters"][k]["ok"]]
         summary = {"failed": failed, "ok": [k for k in names if k not in failed]}
@@ -60,14 +74,20 @@ def main(argv: list[str] | None = None) -> int:
             print(f"WARNING: {w}")
         return 0
 
+    if args.cmd == "link-check":
+        from .linkcheck import run_link_check
+
+        broken = run_link_check(REPO_ROOT, args.report)
+        print(f"{broken} broken link(s); report at {args.report}")
+        return 1 if broken else 0
+
     if args.cmd == "check-seeds":
         import tempfile
 
         from .core.http import FixtureHttp
 
         with tempfile.TemporaryDirectory() as tmp:
-            ctx = Context(http=FixtureHttp(Path(tmp), {}), repo_root=REPO_ROOT,
-                          out_dir=Path(tmp))
+            ctx = Context(http=FixtureHttp(Path(tmp), {}), repo_root=REPO_ROOT, out_dir=Path(tmp))
             names = ["state_offices", "candidates_official"]
             status = run_adapters([ADAPTERS[n](ctx) for n in names], Path(tmp))
             bad = {k: v["error"] for k, v in status["adapters"].items() if not v["ok"]}

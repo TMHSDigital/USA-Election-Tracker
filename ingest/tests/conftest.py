@@ -95,8 +95,9 @@ def repo(tmp_path: Path) -> Path:
     shutil.copy(REPO / "sources" / "registry.yaml", root / "sources" / "registry.yaml")
     seeds = root / "data" / "seeds"
     (seeds / "federal-candidates-2026").mkdir(parents=True)
-    shutil.copy(REPO / "data" / "seeds" / "boundary-sets-2026.yaml",
-                seeds / "boundary-sets-2026.yaml")
+    shutil.copy(
+        REPO / "data" / "seeds" / "boundary-sets-2026.yaml", seeds / "boundary-sets-2026.yaml"
+    )
     (seeds / "state-election-offices.yaml").write_text(make_office_seed(), encoding="utf-8")
     (seeds / "governors-2026.csv").write_text(GOV_SEED, encoding="utf-8")
     (seeds / "federal-candidates-2026" / "DE.csv").write_text(FED_SEED_DE, encoding="utf-8")
@@ -111,7 +112,9 @@ def fixture_dir(tmp_path: Path) -> Path:
     tiger.mkdir()
     for s in STATES:
         for year, layer in ((2026, "cd120"), (2025, "cd119")):
-            (tiger / f"{year}_{s.fips}.zip").write_bytes(make_tiger_zip(s.fips, layer, s.house_seats))
+            (tiger / f"{year}_{s.fips}.zip").write_bytes(
+                make_tiger_zip(s.fips, layer, s.house_seats)
+            )
     return d
 
 
@@ -125,5 +128,10 @@ def all_routes() -> dict[str, str]:
 
 @pytest.fixture
 def ctx(repo: Path, fixture_dir: Path, tmp_path: Path) -> Context:
-    return Context(http=FixtureHttp(fixture_dir, all_routes()), repo_root=repo,
-                   out_dir=tmp_path / "raw", now=NOW, env={})
+    return Context(
+        http=FixtureHttp(fixture_dir, all_routes()),
+        repo_root=repo,
+        out_dir=tmp_path / "raw",
+        now=NOW,
+        env={},
+    )

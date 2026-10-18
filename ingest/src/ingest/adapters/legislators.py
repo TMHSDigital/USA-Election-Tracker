@@ -34,8 +34,9 @@ class LegislatorsAdapter(Adapter):
 
     def normalize(self, data: list[dict[str, Any]]) -> Dataset:
         registry = load_registry(self.ctx.repo_root)
-        src = source_record(registry, "congress_legislators", self.ctx.now,
-                            self._resp.last_modified)
+        src = source_record(
+            registry, "congress_legislators", self.ctx.now, self._resp.last_modified
+        )
         rows: list[Incumbent] = []
         for p in data:
             term = p["terms"][-1]

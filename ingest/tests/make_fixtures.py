@@ -47,8 +47,11 @@ def main() -> None:
     # Pad to the adapter's plausibility floor with additional representatives.
     others = [p for p in leg if p["terms"][-1]["type"] == "rep" and p not in reps]
     trimmed = [
-        {"id": {k: p["id"][k] for k in ("bioguide", "fec") if k in p["id"]},
-         "name": p["name"], "terms": [p["terms"][-1]]}
+        {
+            "id": {k: p["id"][k] for k in ("bioguide", "fec") if k in p["id"]},
+            "name": p["name"],
+            "terms": [p["terms"][-1]],
+        }
         for p in senators + reps + others[: max(0, 500 - len(senators) - len(reps))]
     ]
     (OUT / "legislators-current.json").write_text(json.dumps(trimmed), encoding="utf-8")
@@ -57,11 +60,13 @@ def main() -> None:
     sen = http.get(MEDSL_SENATE_URL).text.splitlines()
     (OUT / "history" / "senate.csv").write_text(
         "\n".join([sen[0]] + [ln for ln in sen[1:] if ",AK," in ln or ",GA," in ln]) + "\n",
-        encoding="utf-8")
+        encoding="utf-8",
+    )
     sny = http.get(SNYDER_URL).text.splitlines()
     (OUT / "history" / "snyder.tab").write_text(
         "\n".join([sny[0]] + [ln for ln in sny[1:] if '\t"AK"\t' in ln or '\t"GA"\t' in ln]) + "\n",
-        encoding="utf-8")
+        encoding="utf-8",
+    )
     print("fixtures written to", OUT)
 
 

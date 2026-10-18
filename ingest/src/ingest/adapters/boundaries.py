@@ -58,13 +58,17 @@ def _round(obj: Any, nd: int) -> Any:
 
 def _feature(geom: BaseGeometry, props: dict[str, Any], nd: int) -> dict[str, Any]:
     g = mapping(geom)
-    return {"type": "Feature", "properties": props,
-            "geometry": {"type": g["type"], "coordinates": _round(g["coordinates"], nd)}}
+    return {
+        "type": "Feature",
+        "properties": props,
+        "geometry": {"type": g["type"], "coordinates": _round(g["coordinates"], nd)},
+    }
 
 
 def _fc(features: list[dict[str, Any]], meta: dict[str, Any]) -> bytes:
-    return json.dumps({"type": "FeatureCollection", "metadata": meta, "features": features},
-                      separators=(",", ":")).encode("utf-8")
+    return json.dumps(
+        {"type": "FeatureCollection", "metadata": meta, "features": features}, separators=(",", ":")
+    ).encode("utf-8")
 
 
 def read_districts(sf: StateFile) -> dict[int, BaseGeometry]:
@@ -79,8 +83,9 @@ def read_districts(sf: StateFile) -> dict[int, BaseGeometry]:
 
         reader = shapefile.Reader(shp=member(".shp"), shx=member(".shx"), dbf=member(".dbf"))
         fields = [f[0] for f in reader.fields[1:]]
-        fp_field = next((f for f in fields if f.upper().startswith("CD") and f.upper().endswith("FP")),
-                        None)
+        fp_field = next(
+            (f for f in fields if f.upper().startswith("CD") and f.upper().endswith("FP")), None
+        )
         if fp_field is None:
             raise ValidationFailed(f"{sf.resp.url}: no CDxxxFP field in {fields}")
         out: dict[int, BaseGeometry] = {}
@@ -131,32 +136,52 @@ class BoundariesAdapter(Adapter):
             st = sf.state
             sid = f"census_tiger_{sf.layer}_{sf.year}"
             if sid not in sources:
-                sources[sid] = source_record(registry, "census_tiger_cd", self.ctx.now,
-                                             sf.resp.last_modified,
-                                             url=f"{TIGER}/TIGER{sf.year}/CD/").model_copy(
-                    update={"source_id": sid,
-                            "name": f"Census TIGER/Line {sf.year} congressional districts ({sf.layer})"})
+                sources[sid] = source_record(
+                    registry,
+                    "census_tiger_cd",
+                    self.ctx.now,
+                    sf.resp.last_modified,
+                    url=f"{TIGER}/TIGER{sf.year}/CD/",
+                ).model_copy(
+                    update={
+                        "source_id": sid,
+                        "name": f"Census TIGER/Line {sf.year} congressional districts ({sf.layer})",
+                    }
+                )
             districts = read_districts(sf)
             expected = {0} if st.house_seats == 1 else set(range(1, st.house_seats + 1))
             if set(districts) != expected:
                 errors.append(f"{st.po}: districts {sorted(districts)} != {sorted(expected)}")
                 continue
             set_id = f"cd-2026-{st.po.lower()}"
-            meta = {"boundary_set_id": set_id, "election_year": 2026, "state_po": st.po,
-                    "source_id": sid, "tiger_year": sf.year, "layer": sf.layer}
+            meta = {
+                "boundary_set_id": set_id,
+                "election_year": 2026,
+                "state_po": st.po,
+                "source_id": sid,
+                "tiger_year": sf.year,
+                "layer": sf.layer,
+            }
             disp, look = [], []
             for n in sorted(districts):
                 g = districts[n]
                 props = {"state_po": st.po, "district": n}
-                disp.append(_feature(g.simplify(DISPLAY_TOLERANCE, preserve_topology=True),
-                                     props, 3))
-                look.append(_feature(g.simplify(LOOKUP_TOLERANCE, preserve_topology=True),
-                                     props, 5))
+                disp.append(
+                    _feature(g.simplify(DISPLAY_TOLERANCE, preserve_topology=True), props, 3)
+                )
+                look.append(
+                    _feature(g.simplify(LOOKUP_TOLERANCE, preserve_topology=True), props, 5)
+                )
             extra[f"display/{st.po.lower()}.geojson"] = _fc(disp, meta)
             extra[f"lookup/{st.po.lower()}.geojson"] = _fc(look, meta)
             outline = unary_union(list(districts.values()))
-            outlines.append(_feature(outline.simplify(STATE_TOLERANCE, preserve_topology=True),
-                                     {"state_po": st.po}, 3))
+            outlines.append(
+                _feature(
+                    outline.simplify(STATE_TOLERANCE, preserve_topology=True),
+                    {"state_po": st.po},
+                    3,
+                )
+            )
             sets.append(
                 BoundarySet(
                     boundary_set_id=set_id,
@@ -174,5 +199,9 @@ class BoundariesAdapter(Adapter):
         if errors:
             raise ValidationFailed("boundary validation failed: " + "; ".join(errors))
         extra["states.geojson"] = _fc(outlines, {"election_year": 2026})
-        return Dataset(tables={"boundary_sets": sets}, sources=list(sources.values()),
-                       retrieved_at=self.ctx.now, extra_files=extra)
+        return Dataset(
+            tables={"boundary_sets": sets},
+            sources=list(sources.values()),
+            retrieved_at=self.ctx.now,
+            extra_files=extra,
+        )

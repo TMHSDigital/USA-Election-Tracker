@@ -114,8 +114,10 @@ def write_dataset(ds: Dataset, out: Path, adapter_id: str) -> None:
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":"), sort_keys=False),
-                   encoding="utf-8")
+    tmp.write_text(
+        json.dumps(data, ensure_ascii=False, separators=(",", ":"), sort_keys=False),
+        encoding="utf-8",
+    )
     os.replace(tmp, path)
 
 
@@ -177,12 +179,15 @@ def run_adapters(adapters: list[Adapter], out_dir: Path) -> dict[str, Any]:
             if target.exists():
                 shutil.rmtree(target)
             os.replace(tmp, target)
-            entry.update(ok=True, error=None, last_success_at=now.isoformat(),
-                         retrieved_at=ds.retrieved_at.isoformat())
+            entry.update(
+                ok=True,
+                error=None,
+                last_success_at=now.isoformat(),
+                retrieved_at=ds.retrieved_at.isoformat(),
+            )
             log.info("%s: ok", adapter.id)
         except Exception as e:  # noqa: BLE001 - isolation boundary by design
-            log.error("%s: FAILED, keeping last good data\n%s", adapter.id,
-                      traceback.format_exc())
+            log.error("%s: FAILED, keeping last good data\n%s", adapter.id, traceback.format_exc())
             if tmp.exists():
                 shutil.rmtree(tmp, ignore_errors=True)
             entry.update(ok=False, error=f"{type(e).__name__}: {str(e)[:500]}")

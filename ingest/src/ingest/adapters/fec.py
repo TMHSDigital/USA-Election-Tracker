@@ -29,17 +29,53 @@ CN_HEADER_URL = f"{BULK}/data_dictionaries/cn_header_file.csv"
 # https://www.fec.gov/campaign-finance-data/all-candidates-file-description/
 
 CN_COLUMNS = [
-    "CAND_ID", "CAND_NAME", "CAND_PTY_AFFILIATION", "CAND_ELECTION_YR", "CAND_OFFICE_ST",
-    "CAND_OFFICE", "CAND_OFFICE_DISTRICT", "CAND_ICI", "CAND_STATUS", "CAND_PCC",
-    "CAND_ST1", "CAND_ST2", "CAND_CITY", "CAND_ST", "CAND_ZIP",
+    "CAND_ID",
+    "CAND_NAME",
+    "CAND_PTY_AFFILIATION",
+    "CAND_ELECTION_YR",
+    "CAND_OFFICE_ST",
+    "CAND_OFFICE",
+    "CAND_OFFICE_DISTRICT",
+    "CAND_ICI",
+    "CAND_STATUS",
+    "CAND_PCC",
+    "CAND_ST1",
+    "CAND_ST2",
+    "CAND_CITY",
+    "CAND_ST",
+    "CAND_ZIP",
 ]
 WEBALL_COLUMNS = [
-    "CAND_ID", "CAND_NAME", "CAND_ICI", "PTY_CD", "CAND_PTY_AFFILIATION", "TTL_RECEIPTS",
-    "TRANS_FROM_AUTH", "TTL_DISB", "TRANS_TO_AUTH", "COH_BOP", "COH_COP", "CAND_CONTRIB",
-    "CAND_LOANS", "OTHER_LOANS", "CAND_LOAN_REPAY", "OTHER_LOAN_REPAY", "DEBTS_OWED_BY",
-    "TTL_INDIV_CONTRIB", "CAND_OFFICE_ST", "CAND_OFFICE_DISTRICT", "SPEC_ELECTION",
-    "PRIM_ELECTION", "RUN_ELECTION", "GEN_ELECTION", "GEN_ELECTION_PRECENT",
-    "OTHER_POL_CMTE_CONTRIB", "POL_PTY_CONTRIB", "CVG_END_DT", "INDIV_REFUNDS", "CMTE_REFUNDS",
+    "CAND_ID",
+    "CAND_NAME",
+    "CAND_ICI",
+    "PTY_CD",
+    "CAND_PTY_AFFILIATION",
+    "TTL_RECEIPTS",
+    "TRANS_FROM_AUTH",
+    "TTL_DISB",
+    "TRANS_TO_AUTH",
+    "COH_BOP",
+    "COH_COP",
+    "CAND_CONTRIB",
+    "CAND_LOANS",
+    "OTHER_LOANS",
+    "CAND_LOAN_REPAY",
+    "OTHER_LOAN_REPAY",
+    "DEBTS_OWED_BY",
+    "TTL_INDIV_CONTRIB",
+    "CAND_OFFICE_ST",
+    "CAND_OFFICE_DISTRICT",
+    "SPEC_ELECTION",
+    "PRIM_ELECTION",
+    "RUN_ELECTION",
+    "GEN_ELECTION",
+    "GEN_ELECTION_PRECENT",
+    "OTHER_POL_CMTE_CONTRIB",
+    "POL_PTY_CONTRIB",
+    "CVG_END_DT",
+    "INDIV_REFUNDS",
+    "CMTE_REFUNDS",
 ]
 OFFICE_CODES = {"H": Office.HOUSE, "S": Office.SENATE}
 
@@ -58,8 +94,9 @@ def _rows(resp: Response, columns: list[str]) -> list[dict[str, str]]:
             raise ValidationFailed(f"expected one .txt in {resp.url}, got {names}")
         text = zf.read(names[0]).decode("latin-1")
     out = []
-    for line_no, parts in enumerate(csv.reader(io.StringIO(text), delimiter="|",
-                                               quoting=csv.QUOTE_NONE), 1):
+    for line_no, parts in enumerate(
+        csv.reader(io.StringIO(text), delimiter="|", quoting=csv.QUOTE_NONE), 1
+    ):
         if not parts or parts == [""]:
             continue
         if len(parts) != len(columns):
@@ -102,8 +139,7 @@ class FecAdapter(Adapter):
     def normalize(self, raw: FecRaw) -> Dataset:
         registry = load_registry(self.ctx.repo_root)
         src_cn = source_record(registry, "fec_bulk_cn", self.ctx.now, raw.cn.last_modified)
-        src_wb = source_record(registry, "fec_bulk_weball", self.ctx.now,
-                               raw.weball.last_modified)
+        src_wb = source_record(registry, "fec_bulk_weball", self.ctx.now, raw.weball.last_modified)
 
         master = {r["CAND_ID"]: r for r in _rows(raw.cn, CN_COLUMNS)}
         rows: list[FinanceSummary] = []
@@ -133,12 +169,14 @@ class FecAdapter(Adapter):
         if len(rows) < self.min_rows:
             raise ValidationFailed(f"only {len(rows)} 2026 House/Senate candidates; expected more")
         rows.sort(key=lambda x: (x.state_po, x.office, x.district or 0, x.candidate_name))
-        return Dataset(tables={"finance": rows}, sources=[src_cn, src_wb],
-                       retrieved_at=self.ctx.now)
+        return Dataset(
+            tables={"finance": rows}, sources=[src_cn, src_wb], retrieved_at=self.ctx.now
+        )
 
     @staticmethod
-    def _row(m: dict[str, str], office: Office, po: str, w: dict[str, str] | None,
-             source_ids: list[str]) -> FinanceSummary:
+    def _row(
+        m: dict[str, str], office: Office, po: str, w: dict[str, str] | None, source_ids: list[str]
+    ) -> FinanceSummary:
         district = None
         if office == Office.HOUSE:
             d = m["CAND_OFFICE_DISTRICT"]

@@ -44,8 +44,10 @@ class StateOfficesAdapter(Adapter):
         for s in states:
             for key in ("homepage_url", "voter_info_url", "results_url"):
                 url = s.get(key)
-                if url and not str(url).startswith("https://") and not str(url).startswith(
-                    "http://"
+                if (
+                    url
+                    and not str(url).startswith("https://")
+                    and not str(url).startswith("http://")
                 ):
                     raise ValidationFailed(f"{s['state_po']}.{key} is not a URL: {url}")
         return raw
@@ -157,12 +159,18 @@ class OfficialCandidatesAdapter(Adapter):
                 key = (po, office)
                 if not name:
                     if key not in coverage or coverage[key].status != "official":
-                        coverage[key] = SeedCoverage(state_po=po, office=office,
-                                                     status="not_found", list_url=url,
-                                                     notes=notes, source_ids=[sid])
+                        coverage[key] = SeedCoverage(
+                            state_po=po,
+                            office=office,
+                            status="not_found",
+                            list_url=url,
+                            notes=notes,
+                            source_ids=[sid],
+                        )
                     continue
-                coverage[key] = SeedCoverage(state_po=po, office=office, status="official",
-                                             list_url=url, source_ids=[sid])
+                coverage[key] = SeedCoverage(
+                    state_po=po, office=office, status="official", list_url=url, source_ids=[sid]
+                )
                 order = r.get("ballot_order", "")
                 candidates.append(
                     SeedCandidate(
