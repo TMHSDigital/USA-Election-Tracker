@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cite from '../../components/Cite.astro';
+import { ADAPTERS_FOR, getRaceIndex, getStates } from '../../lib/data';
+import { raceTitle, raceUrl, url, voteGovUrl } from '../../lib/format';
+import { fmtDate, t } from '../../i18n';
+
+export function getStaticPaths() {
+  return getStates().map((s) => ({ params: { state: s.state_po.toLowerCase() } }));
+}
+
+const state = getStates().find((s) => s.state_po.toLowerCase() === Astro.params.state)!;
+const races = getRaceIndex().filter((r) => r.state_po === state.state_po);
+const byOffice = (o: string) => races.filter((r) => r.office === o);
+const o = state.office;
+const groups = [
+  ['governor', 'state.governor', 'state.noGovernor'],
+  ['senate', 'state.senate', 'state.noSenate'],
+  ['house', 'state.house', null],
+] as const;
+const countLabel = (n: number) => (n === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: n }));
+---
+<Base title={state.state_name} adapters={ADAPTERS_FOR.state}>
+  <p class="crumbs"><a href={url('/states/')}>{t('nav.states')}</a></p>
+  <h1>{state.state_name}</h1>
+
+  <section aria-labelledby="h-office">
+    <h2 id="h-office">{t('state.office')}</h2>
+    {o ? (
+      <ul>
+        <li data-figure><strong>{o.office_name}</strong>{o.homepage_url && <>: <a href={o.homepage_url}>{t('state.officeSite')}</a></>}<Cite ids={o.source_ids} /></li>
+        {o.voter_info_url && <li><a href={o.voter_info_url}>{t('state.voterInfo')}</a></li>}
+        {o.results_url && <li><a href={o.results_url}>{t('state.results')}</a></li>}
+        <li><a href={voteGovUrl(state.state_name)}>{t('state.voteGov')}</a><Cite ids={['vote_gov']} /></li>
+      </ul>
+    ) : <p><a href={voteGovUrl(state.state_name)}>{t('state.voteGov')}</a><Cite ids={['vote_gov']} /></p>}
+  </section>
+
+  <section aria-labelledby="h-dates">
+    <h2 id="h-dates">{t('state.keyDates')}</h2>
+    <dl>
+      <dt>{t('state.generalElection')}</dt>
+      <dd data-figure>{fmtDate(o?.general_election_date ?? '2026-11-03')}{o && <Cite ids={o.source_ids} />}</dd>
+    </dl>
+  </section>
+
+  <section aria-labelledby="h-races">
+    <h2 id="h-races">{t('state.races')}</h2>
+    <p class="note">{t('state.raceList')}</p>
+    {groups.map(([office, label, none]) => {
+      const list = byOffice(office);
+      return (
+        <>
+          <h3>{t(label)}</h3>
+          {list.length === 0 && none ? <p>{t(none, { state: state.state_name })}</p> : (
+            <ul>
+              {list.map((r) => (
+                <li>
+                  <a href={raceUrl(r.race_id)}>{raceTitle(r)}</a>
+                  {' '}<span class="note">({r.list_status === 'official' ? countLabel(r.candidate_count) : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable')})</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
+      );
+    })}
+  </section>
+
+  {state.boundary_set && (
+    <section aria-labelledby="h-bounds">
+      <h2 id="h-bounds">{t('state.boundaries')}</h2>
+      <p data-figure>{state.boundary_set.enacting_instrument}{state.boundary_set.enacting_instrument_url && <> (<a href={state.boundary_set.enacting_instrument_url}>{t('sources.link')}</a>)</>}<Cite ids={state.boundary_set.source_ids} /></p>
+    </section>
+  )}
+</Base>

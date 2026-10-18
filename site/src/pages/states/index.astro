@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getStates } from '../../lib/data';
+import { stateUrl } from '../../lib/format';
+import { t } from '../../i18n';
+
+const states = getStates();
+---
+<Base title={t('states.title')}>
+  <h1>{t('states.title')}</h1>
+  <p class="lede">{t('states.intro')}</p>
+  <ul class="grid">
+    {states.map((s) => <li><a href={stateUrl(s.state_po)}>{s.state_name}</a></li>)}
+  </ul>
+</Base>

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import LiveResults from '../components/LiveResults.astro';
+import { ADAPTERS_FOR, getMeta, getStates } from '../lib/data';
+import { t } from '../i18n';
+
+const states = getStates();
+const live = getMeta().live_enabled;
+---
+<Base title={t('night.title')} adapters={live ? [...ADAPTERS_FOR.state, 'live_clarity'] : ADAPTERS_FOR.state}>
+  <h1>{t('night.title')}</h1>
+  <p class="lede">{t('night.intro')}</p>
+  <p><strong>{t('night.noCalls')}</strong></p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">{t('night.col.state')}</th><th scope="col">{t('night.col.results')}</th></tr></thead>
+      <tbody>
+        {states.map((s) => (
+          <tr>
+            <th scope="row">{s.state_name}</th>
+            <td data-figure>{s.office?.results_url ? <a href={s.office.results_url}>{s.office.office_name}</a> : ''}{s.office && <Cite ids={s.office.source_ids} />}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <section aria-labelledby="h-live">
+    <h2 id="h-live">{t('night.liveHeading')}</h2>
+    {live ? <LiveResults /> : <p>{t('night.liveDisabled')}</p>}
+  </section>
+</Base>

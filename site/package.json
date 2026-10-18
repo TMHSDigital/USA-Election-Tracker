@@ -1,0 +1,29 @@
+{
+  "name": "usa-election-tracker-site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "prepare-data": "node scripts/prepare-data.mjs",
+    "dev": "npm run prepare-data && astro dev",
+    "build": "npm run prepare-data && astro build && pagefind --site dist --quiet && node scripts/check-site.mjs",
+    "check": "astro check",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.4.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.19.2",
+    "js-yaml": "^5.5.0",
+    "node-html-parser": "^9.0.4",
+    "pagefind": "^1.5.2",
+    "typescript": "^6.0.3"
+  },
+  "private": true
+}

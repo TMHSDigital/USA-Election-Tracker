@@ -1,0 +1,33 @@
+---
+// "Data last updated" panel with per-source timestamps and stale notices.
+import { getMeta } from '../lib/data';
+import { fmtDateTime, t } from '../i18n';
+
+interface Props {
+  adapters: readonly string[];
+}
+const { adapters } = Astro.props;
+const meta = getMeta();
+const rows = adapters.map((id) => ({ id, s: meta.status.adapters[id] }));
+const stale = rows.filter((r) => r.s && r.s.stale && r.s.has_data);
+---
+{stale.length > 0 && (
+  <div class="notice" role="status">
+    {stale.map((r) => <p><strong>{r.s!.description}.</strong> {t('updated.stale', { date: fmtDateTime(r.s!.retrieved_at) })}</p>)}
+  </div>
+)}
+<details class="updated" open={stale.length > 0}>
+  <summary>{t('updated.heading')}</summary>
+  <table>
+    <thead><tr><th scope="col">{t('updated.col.source')}</th><th scope="col">{t('updated.col.retrieved')}</th></tr></thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <td>{r.s?.description ?? r.id}</td>
+          <td>{r.s?.has_data ? fmtDateTime(r.s.retrieved_at) : t('updated.never')}{r.s?.stale && r.s?.has_data && ' (out of date)'}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="note">{t('updated.siteBuilt', { date: fmtDateTime(meta.generated_at) })}</p>
+</details>

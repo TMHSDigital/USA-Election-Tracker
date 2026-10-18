@@ -1,0 +1,58 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:4321/USA-Election-Tracker/",
+        "http://localhost:4321/USA-Election-Tracker/states/tx/",
+        "http://localhost:4321/USA-Election-Tracker/races/2026-house-tx-07/",
+        "http://localhost:4321/USA-Election-Tracker/races/2026-senate-ga/",
+        "http://localhost:4321/USA-Election-Tracker/lookup/"
+      ],
+      "numberOfRuns": 1,
+      "settings": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        }
+      },
+      "startServerCommand": "npx astro preview --port 4321",
+      "startServerReadyPattern": "localhost:4321"
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.9
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:best-practices": [
+          "warn",
+          {
+            "minScore": 0.9
+          }
+        ],
+        "categories:seo": [
+          "warn",
+          {
+            "minScore": 0.9
+          }
+        ]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./.lighthouseci"
+    }
+  }
+}

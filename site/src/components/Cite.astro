@@ -1,0 +1,24 @@
+---
+// Citation marker. Renders a small numbered-style link per source id, pointing
+// to the Sources page entry. The build-time citation check requires every
+// element marked data-figure to contain at least one of these.
+import { sourceMap } from '../lib/data';
+import { sourceUrl } from '../lib/format';
+import { t } from '../i18n';
+
+interface Props {
+  ids: string[] | undefined;
+  derived?: string; // methodology anchor for computed values
+}
+const { ids = [], derived } = Astro.props;
+const sources = sourceMap();
+const unique = [...new Set(ids)];
+for (const id of unique) {
+  if (!sources.has(id)) throw new Error(`citation to unknown source id: ${id}`);
+}
+const methodology = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/methodology/`;
+---
+<span class="cite">{unique.map((id) => {
+  const s = sources.get(id)!;
+  return <a href={sourceUrl(id)} data-cite={id} title={s.name}>source<span class="visually-hidden">: {s.name}</span></a>;
+})}{derived && <a href={`${methodology}#${derived}`} data-derived={derived} title={t('cite.derived')}>calc<span class="visually-hidden">: {t('cite.derived')}</span></a>}</span>

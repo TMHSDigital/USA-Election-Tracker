@@ -1,0 +1,199 @@
+---
+import Base from '../layouts/Base.astro';
+import { getStates } from '../lib/data';
+import { dataUrl } from '../lib/format';
+import { t } from '../i18n';
+
+const states = getStates();
+// Strings the island needs, taken from the locale file at build time.
+const strings = {
+  locating: t('lookup.locating'),
+  denied: t('lookup.locationDenied'),
+  noGeo: t('lookup.noGeolocation'),
+  outside: t('lookup.outside'),
+  result: t('lookup.result', { district: '{district}' }),
+  selected: t('lookup.selected', { district: '{district}' }),
+  near: t('lookup.nearBoundary'),
+  official: t('lookup.officialLookup', { state: '{state}' }),
+  races: t('lookup.races'),
+  loading: t('lookup.loading'),
+  loadError: t('lookup.loadError'),
+  atLarge: t('race.title.houseAtLarge', { state: '{state}' }),
+  district: t('race.title.house', { state: '{state}', district: '{district}' }),
+  delegate: t('race.title.houseDelegate'),
+  mapHeading: t('lookup.mapHeading'),
+  districtList: t('lookup.districtList'),
+};
+---
+<Base title={t('lookup.title')}>
+  <h1>{t('lookup.title')}</h1>
+  <p class="lede">{t('lookup.intro')}</p>
+  <p class="note">{t('lookup.privacy')}</p>
+  <noscript><p class="notice">{t('lookup.noJs')}</p></noscript>
+
+  <div id="lookup" data-base={dataUrl('')} data-strings={JSON.stringify(strings)} hidden>
+    <p><button type="button" class="button" id="locate">{t('lookup.useLocation')}</button></p>
+    <p>
+      <label for="state">{t('lookup.chooseState')}</label><br />
+      <select id="state">
+        <option value="">{t('lookup.selectState')}</option>
+        {states.map((s) => <option value={s.state_po}>{s.state_name}</option>)}
+      </select>
+    </p>
+    <div id="status" role="status" aria-live="polite"></div>
+    <div id="result" tabindex="-1"></div>
+    <section id="picker" hidden aria-labelledby="h-picker">
+      <h2 id="h-picker">{t('lookup.mapHeading')}</h2>
+      <p class="note">{t('lookup.mapHelp')}</p>
+      <div id="map"></div>
+      <h3>{t('lookup.districtList')}</h3>
+      <ul id="district-list" class="grid"></ul>
+    </section>
+    <p class="note">{t('lookup.accuracy')}</p>
+  </div>
+</Base>
+
+<style is:global>
+  #map svg { width: 100%; max-width: 40rem; height: auto; display: block; }
+  #map path { fill: var(--map-fill); stroke: var(--bg); stroke-width: 1; vector-effect: non-scaling-stroke; cursor: pointer; }
+  #map path:hover, #map path:focus-visible { fill: var(--accent); outline: none; }
+  #map path[aria-pressed="true"] { fill: var(--accent); }
+  #district-list button { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 0.3rem 0.6rem; font: inherit; color: var(--text); cursor: pointer; width: 100%; text-align: left; }
+</style>
+
+<script>
+  import { contains, edgeDistanceMeters, type Feature } from '../scripts/pip';
+
+  type FC = { features: Feature[] };
+  type Link = { office: string; title: string; url: string };
+  type Index = Record<string, { name: string; voter_info_url: string | null; house: Record<string, Link>; statewide: Link[] }>;
+
+  const root = document.getElementById('lookup')!;
+  root.hidden = false;
+  const base = root.dataset.base!;
+  const S = JSON.parse(root.dataset.strings!) as Record<string, string>;
+  const status = document.getElementById('status')!;
+  const result = document.getElementById('result')!;
+  const picker = document.getElementById('picker')!;
+  const mapEl = document.getElementById('map')!;
+  const list = document.getElementById('district-list')!;
+  const select = document.getElementById('state') as HTMLSelectElement;
+  const NEAR_METERS = 150;
+
+  const cache = new Map<string, Promise<unknown>>();
+  function load<T>(path: string): Promise<T> {
+    if (!cache.has(path)) {
+      cache.set(path, fetch(base + path).then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json();
+      }));
+    }
+    return cache.get(path) as Promise<T>;
+  }
+  const fill = (tpl: string, v: Record<string, string>) => tpl.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? '');
+  const el = (tag: string, text?: string) => { const e = document.createElement(tag); if (text) e.textContent = text; return e; };
+
+  function districtLabel(po: string, name: string, d: number): string {
+    if (po === 'DC') return S.delegate;
+    return d === 0 ? fill(S.atLarge, { state: name }) : fill(S.district, { state: name, district: String(d) });
+  }
+
+  async function show(po: string, district: number, near: boolean, picked = false) {
+    const idx = await load<Index>('lookup-index.json');
+    const st = idx[po];
+    result.replaceChildren();
+    result.append(el('p', fill(picked ? S.selected : S.result, { district: districtLabel(po, st.name, district) })));
+    mapEl.querySelectorAll('path').forEach((p) => p.setAttribute('aria-pressed', String(p.dataset.district === String(district))));
+    if (near) { const n = el('p', S.near); n.className = 'notice'; result.append(n); }
+    result.append(el('h2', S.races));
+    const ul = el('ul');
+    const links = [...st.statewide, st.house[String(district)]].filter(Boolean);
+    for (const l of links) {
+      const li = el('li');
+      const a = el('a', `${l.office}: ${l.title}`) as HTMLAnchorElement;
+      a.href = l.url;
+      li.append(a);
+      ul.append(li);
+    }
+    result.append(ul);
+    if (st.voter_info_url) {
+      const a = el('a', fill(S.official, { state: st.name })) as HTMLAnchorElement;
+      a.href = st.voter_info_url;
+      const p = el('p'); p.append(a); result.append(p);
+    }
+    result.focus();
+  }
+
+  async function locate() {
+    if (!('geolocation' in navigator)) { status.textContent = S.noGeo; return; }
+    status.textContent = S.locating;
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const x = pos.coords.longitude, y = pos.coords.latitude;
+      try {
+        status.textContent = S.loading;
+        const states = await load<FC>('boundaries/states.geojson');
+        const sf = states.features.find((f) => contains(f, x, y));
+        if (!sf) { status.textContent = S.outside; return; }
+        const po = String(sf.properties.state_po);
+        const cds = await load<FC>(`boundaries/lookup/${po.toLowerCase()}.geojson`);
+        const hit = cds.features.find((f) => contains(f, x, y));
+        status.textContent = '';
+        if (!hit) { select.value = po; await showPicker(po); status.textContent = S.near; return; }
+        const near = edgeDistanceMeters(hit, x, y) < NEAR_METERS;
+        select.value = po;
+        await show(po, Number(hit.properties.district), near);
+      } catch { status.textContent = S.loadError; }
+    }, () => { status.textContent = S.denied; }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 300000 });
+  }
+
+  async function showPicker(po: string) {
+    picker.hidden = false;
+    mapEl.replaceChildren();
+    list.replaceChildren();
+    status.textContent = S.loading;
+    let fc: FC;
+    try { fc = await load<FC>(`boundaries/display/${po.toLowerCase()}.geojson`); }
+    catch { status.textContent = S.loadError; return; }
+    status.textContent = '';
+    const idx = await load<Index>('lookup-index.json');
+    const name = idx[po].name;
+    // Project with cos(lat) scaling, as the static maps do.
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    const lon = (v: number) => (v > 0 ? v - 360 : v);
+    const rings = (f: Feature) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates as number[][][]] : (f.geometry.coordinates as number[][][][]));
+    for (const f of fc.features) for (const p of rings(f)) for (const r of p) for (const [a, b] of r) {
+      minX = Math.min(minX, lon(a)); maxX = Math.max(maxX, lon(a)); minY = Math.min(minY, b); maxY = Math.max(maxY, b);
+    }
+    const k = Math.cos(((minY + maxY) / 2) * Math.PI / 180), W = 600, sc = W / ((maxX - minX) * k || 1);
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${Math.round((maxY - minY) * sc)}`);
+    svg.setAttribute('role', 'group');
+    svg.setAttribute('aria-label', S.mapHeading);
+    for (const f of fc.features) {
+      const d = Number(f.properties.district);
+      const path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('d', rings(f).flat().map((r) => 'M' + r.map(([a, b]) => `${((lon(a) - minX) * k * sc).toFixed(1)} ${((maxY - b) * sc).toFixed(1)}`).join('L') + 'Z').join(''));
+      const label = districtLabel(po, name, d);
+      path.setAttribute('tabindex', '0');
+      path.setAttribute('role', 'button');
+      path.setAttribute('aria-label', label);
+      const t = document.createElementNS(svgNS, 'title'); t.textContent = label; path.append(t);
+      path.dataset.district = String(d);
+      const choose = () => void show(po, d, false, true);
+      path.addEventListener('click', choose);
+      path.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(); } });
+      svg.append(path);
+      const li = el('li');
+      const b = el('button', label) as HTMLButtonElement;
+      b.type = 'button';
+      b.addEventListener('click', () => void show(po, d, false, true));
+      li.append(b);
+      list.append(li);
+    }
+    mapEl.append(svg);
+  }
+
+  document.getElementById('locate')!.addEventListener('click', () => void locate());
+  select.addEventListener('change', () => { if (select.value) void showPicker(select.value); else picker.hidden = true; });
+</script>

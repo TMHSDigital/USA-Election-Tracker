@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { ADAPTERS_FOR, getRaceIndex, getStates } from '../lib/data';
+import { stateUrl, url } from '../lib/format';
+import { t } from '../i18n';
+
+const races = getRaceIndex();
+const count = (o: string) => races.filter((r) => r.office === o).length;
+const states = getStates();
+---
+<Base title={t('site.name')} adapters={ADAPTERS_FOR.home}>
+  <h1>{t('site.name')}</h1>
+  <p class="lede">{t('site.tagline')}</p>
+
+  <section aria-labelledby="h-lookup" class="card">
+    <h2 id="h-lookup" style="margin-top:0">{t('home.lookupHeading')}</h2>
+    <p>{t('home.lookupBody')}</p>
+    <p><a class="button" href={url('/lookup/')}>{t('home.lookupCta')}</a></p>
+  </section>
+
+  <section aria-labelledby="h-offices">
+    <h2 id="h-offices">{t('home.officesHeading')}</h2>
+    <ul>
+      <li>{t('home.houseCount', { count: count('house') })}</li>
+      <li>{t('home.senateCount', { count: count('senate') })}</li>
+      <li>{t('home.governorCount', { count: count('governor') })}</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-states">
+    <h2 id="h-states">{t('home.statesHeading')}</h2>
+    <ul class="grid">
+      {states.map((s) => <li><a href={stateUrl(s.state_po)}>{s.state_name}</a></li>)}
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-principles">
+    <h2 id="h-principles">{t('home.principles')}</h2>
+    <ul>
+      <li>{t('home.p1')}</li>
+      <li>{t('home.p2')}</li>
+      <li>{t('home.p3')}</li>
+      <li>{t('home.p4')}</li>
+    </ul>
+    <p><a href={url('/methodology/')}>{t('footer.methodology')}</a></p>
+  </section>
+</Base>
