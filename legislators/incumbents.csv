@@ -1,0 +1,535 @@
+bioguide_id,name,office,state_po,district,senate_class,term_end,party,fec_candidate_ids,source_ids
+B001323,Nicholas J. Begich III,house,AK,0,,2027-01-03,Republican,H2AK01083,congress_legislators
+S001198,Dan Sullivan,senate,AK,,2,2027-01-03,Republican,S4AK00214,congress_legislators
+M001153,Lisa Murkowski,senate,AK,,3,2029-01-03,Republican,S4AK00099,congress_legislators
+M001212,Barry Moore,house,AL,1,,2027-01-03,Republican,H8AL02171;S6AL00476,congress_legislators
+F000481,Shomari Figures,house,AL,2,,2027-01-03,Democrat,H4AL02170,congress_legislators
+R000575,Mike Rogers,house,AL,3,,2027-01-03,Republican,H2AL03032,congress_legislators
+A000055,Robert B. Aderholt,house,AL,4,,2027-01-03,Republican,H6AL04098,congress_legislators
+S001220,Dale W. Strong,house,AL,5,,2027-01-03,Republican,H2AL05102,congress_legislators
+P000609,Gary J. Palmer,house,AL,6,,2027-01-03,Republican,H4AL06098,congress_legislators
+S001185,Terri A. Sewell,house,AL,7,,2027-01-03,Democrat,H0AL07086,congress_legislators
+B001319,Katie Boyd Britt,senate,AL,,3,2029-01-03,Republican,S2AL00145,congress_legislators
+T000278,Tommy Tuberville,senate,AL,,2,2027-01-03,Republican,S0AL00230,congress_legislators
+C001087,"Eric A. ""Rick"" Crawford",house,AR,1,,2027-01-03,Republican,H0AR01083,congress_legislators
+H001072,J. French Hill,house,AR,2,,2027-01-03,Republican,H4AR02141,congress_legislators
+W000809,Steve Womack,house,AR,3,,2027-01-03,Republican,H0AR03055,congress_legislators
+W000821,Bruce Westerman,house,AR,4,,2027-01-03,Republican,H4AR04048,congress_legislators
+B001236,John Boozman,senate,AR,,3,2029-01-03,Republican,H2AR03176;S0AR00150,congress_legislators
+C001095,Tom Cotton,senate,AR,,2,2027-01-03,Republican,H2AR04083;S4AR00103,congress_legislators
+S001183,David Schweikert,house,AZ,1,,2027-01-03,Republican,H4AZ06045;H8AZ05097,congress_legislators
+C001132,Elijah Crane,house,AZ,2,,2027-01-03,Republican,H2AZ01354,congress_legislators
+A000381,Yassamin Ansari,house,AZ,3,,2027-01-03,Democrat,H4AZ03109,congress_legislators
+S001211,Greg Stanton,house,AZ,4,,2027-01-03,Democrat,H8AZ09040,congress_legislators
+B001302,Andy Biggs,house,AZ,5,,2027-01-03,Republican,H6AZ05083,congress_legislators
+C001133,Juan Ciscomani,house,AZ,6,,2027-01-03,Republican,H2AZ02360,congress_legislators
+G000606,Adelita S. Grijalva,house,AZ,7,,2027-01-03,Democrat,H6AZ07121,congress_legislators
+H001098,Abraham J. Hamadeh,house,AZ,8,,2027-01-03,Republican,H4AZ08108,congress_legislators
+G000565,Paul A. Gosar,house,AZ,9,,2027-01-03,Republican,H0AZ01259,congress_legislators
+K000377,Mark Kelly,senate,AZ,,3,2029-01-03,Democrat,S0AZ00350,congress_legislators
+G000574,Ruben Gallego,senate,AZ,,1,2031-01-03,Democrat,H4AZ07043;S4AZ00139,congress_legislators
+G000607,James Gallagher,house,CA,1,,2027-01-03,Republican,H6CA01285,congress_legislators
+H001068,Jared Huffman,house,CA,2,,2027-01-03,Democrat,H2CA06259,congress_legislators
+K000401,Kevin Kiley,house,CA,3,,2027-01-03,Independent,H2CA03157,congress_legislators
+T000460,Mike Thompson,house,CA,4,,2027-01-03,Democrat,H8CA01109,congress_legislators
+M001177,Tom McClintock,house,CA,5,,2027-01-03,Republican,H8CA04152;H6CA21135,congress_legislators
+B001287,Ami Bera,house,CA,6,,2027-01-03,Democrat,H0CA03078,congress_legislators
+M001163,Doris O. Matsui,house,CA,7,,2027-01-03,Democrat,H6CA05195,congress_legislators
+G000559,John Garamendi,house,CA,8,,2027-01-03,Democrat,H0CA10149,congress_legislators
+H001090,Josh Harder,house,CA,9,,2027-01-03,Democrat,H8CA10126,congress_legislators
+D000623,Mark DeSaulnier,house,CA,10,,2027-01-03,Democrat,H0CA10073,congress_legislators
+P000197,Nancy Pelosi,house,CA,11,,2027-01-03,Democrat,H8CA05035,congress_legislators
+S001231,Lateefah Simon,house,CA,12,,2027-01-03,Democrat,H4CA12154,congress_legislators
+G000605,Adam Gray,house,CA,13,,2027-01-03,Democrat,H2CA13115,congress_legislators
+W000832,Aisha Wahab,house,CA,14,,2027-01-03,Democrat,H0CA15213,congress_legislators
+M001225,Kevin Mullin,house,CA,15,,2027-01-03,Democrat,H2CA14162,congress_legislators
+L000607,Sam T. Liccardo,house,CA,16,,2027-01-03,Democrat,H4CA16197,congress_legislators
+K000389,Ro Khanna,house,CA,17,,2027-01-03,Democrat,H4CA12055,congress_legislators
+L000397,Zoe Lofgren,house,CA,18,,2027-01-03,Democrat,H4CA16049,congress_legislators
+P000613,Jimmy Panetta,house,CA,19,,2027-01-03,Democrat,H6CA20152,congress_legislators
+F000480,Vince Fong,house,CA,20,,2027-01-03,Republican,H4CA20181,congress_legislators
+C001059,Jim Costa,house,CA,21,,2027-01-03,Democrat,H4CA20082,congress_legislators
+V000129,David G. Valadao,house,CA,22,,2027-01-03,Republican,H2CA20094,congress_legislators
+O000019,Jay Obernolte,house,CA,23,,2027-01-03,Republican,H0CA08135,congress_legislators
+C001112,Salud O. Carbajal,house,CA,24,,2027-01-03,Democrat,H6CA24303,congress_legislators
+R000599,Raul Ruiz,house,CA,25,,2027-01-03,Democrat,H2CA36439,congress_legislators
+B001285,Julia Brownley,house,CA,26,,2027-01-03,Democrat,H2CA00120,congress_legislators
+W000830,George Whitesides,house,CA,27,,2027-01-03,Democrat,H4CA27111,congress_legislators
+C001080,Judy Chu,house,CA,28,,2027-01-03,Democrat,H0CA32101,congress_legislators
+R000620,Luz M. Rivas,house,CA,29,,2027-01-03,Democrat,H4CA29141,congress_legislators
+F000483,Laura Friedman,house,CA,30,,2027-01-03,Democrat,H4CA30149,congress_legislators
+C001123,"Gilbert Ray Cisneros, Jr.",house,CA,31,,2027-01-03,Democrat,H8CA39174;H4CA31170,congress_legislators
+S000344,Brad Sherman,house,CA,32,,2027-01-03,Democrat,H6CA24113,congress_legislators
+A000371,Pete Aguilar,house,CA,33,,2027-01-03,Democrat,H2CA31125,congress_legislators
+G000585,Jimmy Gomez,house,CA,34,,2027-01-03,Democrat,H8CA34266,congress_legislators
+T000474,Norma J. Torres,house,CA,35,,2027-01-03,Democrat,H4CA35031,congress_legislators
+L000582,Ted Lieu,house,CA,36,,2027-01-03,Democrat,H4CA33119,congress_legislators
+K000400,Sydney Kamlager-Dove,house,CA,37,,2027-01-03,Democrat,H2CA37304,congress_legislators
+S001156,Linda T. Sánchez,house,CA,38,,2027-01-03,Democrat,H2CA39078,congress_legislators
+T000472,Mark Takano,house,CA,39,,2027-01-03,Democrat,H2CA43245,congress_legislators
+K000397,Young Kim,house,CA,40,,2027-01-03,Republican,H8CA39240,congress_legislators
+C000059,Ken Calvert,house,CA,41,,2027-01-03,Republican,H2CA37023,congress_legislators
+G000598,Robert Garcia,house,CA,42,,2027-01-03,Democrat,H2CA47188,congress_legislators
+W000187,Maxine Waters,house,CA,43,,2027-01-03,Democrat,H4CA23011,congress_legislators
+B001300,Nanette Diaz Barragán,house,CA,44,,2027-01-03,Democrat,H6CA44103,congress_legislators
+T000491,Derek Tran,house,CA,45,,2027-01-03,Democrat,H4CA45170,congress_legislators
+C001110,J. Luis Correa,house,CA,46,,2027-01-03,Democrat,H6CA46116,congress_legislators
+M001241,Dave Min,house,CA,47,,2027-01-03,Democrat,H4CA47085,congress_legislators
+I000056,Darrell Issa,house,CA,48,,2027-01-03,Republican,H0CA48024;S8CA00135,congress_legislators
+L000593,Mike Levin,house,CA,49,,2027-01-03,Democrat,H8CA49058,congress_legislators
+P000608,Scott H. Peters,house,CA,50,,2027-01-03,Democrat,H2CA52089,congress_legislators
+J000305,Sara Jacobs,house,CA,51,,2027-01-03,Democrat,H8CA49074,congress_legislators
+V000130,Juan Vargas,house,CA,52,,2027-01-03,Democrat,H2CA50026,congress_legislators
+S001150,Adam B. Schiff,senate,CA,,1,2031-01-03,Democrat,H0CA27085;S4CA00555,congress_legislators
+P000145,Alex Padilla,senate,CA,,3,2029-01-03,Democrat,S2CA00955,congress_legislators
+D000197,Diana DeGette,house,CO,1,,2027-01-03,Democrat,H6CO01141,congress_legislators
+N000191,Joe Neguse,house,CO,2,,2027-01-03,Democrat,H8CO02160,congress_legislators
+H001100,Jeff Hurd,house,CO,3,,2027-01-03,Republican,H4CO03357,congress_legislators
+B000825,Lauren Boebert,house,CO,4,,2027-01-03,Republican,H0CO03165,congress_legislators
+C001137,Jeff Crank,house,CO,5,,2027-01-03,Republican,H6CO05142,congress_legislators
+C001121,Jason Crow,house,CO,6,,2027-01-03,Democrat,H8CO06229,congress_legislators
+P000620,Brittany Pettersen,house,CO,7,,2027-01-03,Democrat,H8CO07045,congress_legislators
+E000300,Gabe Evans,house,CO,8,,2027-01-03,Republican,H4CO08034,congress_legislators
+H000273,John W. Hickenlooper,senate,CO,,2,2027-01-03,Democrat,S0CO00575,congress_legislators
+B001267,Michael F. Bennet,senate,CO,,3,2029-01-03,Democrat,S0CO00211,congress_legislators
+L000557,John B. Larson,house,CT,1,,2027-01-03,Democrat,H8CT01046,congress_legislators
+C001069,Joe Courtney,house,CT,2,,2027-01-03,Democrat,H2CT02112,congress_legislators
+D000216,Rosa L. DeLauro,house,CT,3,,2027-01-03,Democrat,H0CT03072,congress_legislators
+H001047,James A. Himes,house,CT,4,,2027-01-03,Democrat,H8CT04172,congress_legislators
+H001081,Jahana Hayes,house,CT,5,,2027-01-03,Democrat,H8CT05245,congress_legislators
+M001169,Christopher Murphy,senate,CT,,1,2031-01-03,Democrat,H6CT05124;S2CT00132,congress_legislators
+B001277,Richard Blumenthal,senate,CT,,3,2029-01-03,Democrat,S0CT00177,congress_legislators
+N000147,Eleanor Holmes Norton,house,DC,0,,2027-01-03,Democrat,H0DC00058,congress_legislators
+M001238,Sarah McBride,house,DE,0,,2027-01-03,Democrat,H4DE00045,congress_legislators
+C001088,Christopher A. Coons,senate,DE,,2,2027-01-03,Democrat,S0DE00092,congress_legislators
+B001303,Lisa Blunt Rochester,senate,DE,,1,2031-01-03,Democrat,H6DE00206;S4DE00060,congress_legislators
+P000622,Jimmy Patronis,house,FL,1,,2027-01-03,Republican,H6FL01390,congress_legislators
+D000628,Neal P. Dunn,house,FL,2,,2027-01-03,Republican,H6FL02208,congress_legislators
+C001039,Kat Cammack,house,FL,3,,2027-01-03,Republican,H0FL03175,congress_legislators
+B001314,Aaron Bean,house,FL,4,,2027-01-03,Republican,H2FL04211,congress_legislators
+R000609,John H. Rutherford,house,FL,5,,2027-01-03,Republican,H6FL04105,congress_legislators
+F000484,Randy Fine,house,FL,6,,2027-01-03,Republican,H6FL06258,congress_legislators
+M001216,Cory Mills,house,FL,7,,2027-01-03,Republican,H2FL07156,congress_legislators
+H001099,Mike Haridopolos,house,FL,8,,2027-01-03,Republican,H4FL08168,congress_legislators
+S001200,Darren Soto,house,FL,9,,2027-01-03,Democrat,H6FL09179,congress_legislators
+F000476,Maxwell Frost,house,FL,10,,2027-01-03,Democrat,H2FL10259,congress_legislators
+W000806,Daniel Webster,house,FL,11,,2027-01-03,Republican,H0FL08208;S4FL00256,congress_legislators
+B001257,Gus M. Bilirakis,house,FL,12,,2027-01-03,Republican,H6FL09070,congress_legislators
+L000596,Anna Paulina Luna,house,FL,13,,2027-01-03,Republican,H0FL13158,congress_legislators
+C001066,Kathy Castor,house,FL,14,,2027-01-03,Democrat,H6FL11126;H6FL11134,congress_legislators
+L000597,Laurel M. Lee,house,FL,15,,2027-01-03,Republican,H2FL15241,congress_legislators
+B001260,Vern Buchanan,house,FL,16,,2027-01-03,Republican,H6FL13148,congress_legislators
+S001214,W. Gregory Steube,house,FL,17,,2027-01-03,Republican,H8FL17053,congress_legislators
+F000472,Scott Franklin,house,FL,18,,2027-01-03,Republican,H0FL15104,congress_legislators
+D000032,Byron Donalds,house,FL,19,,2027-01-03,Republican,H2FL14186,congress_legislators
+M001199,Brian J. Mast,house,FL,21,,2027-01-03,Republican,H6FL18097,congress_legislators
+F000462,Lois Frankel,house,FL,22,,2027-01-03,Democrat,H2FL14053;H2FL22080,congress_legislators
+M001217,Jared Moskowitz,house,FL,23,,2027-01-03,Democrat,H2FL22171,congress_legislators
+W000808,Frederica S. Wilson,house,FL,24,,2027-01-03,Democrat,H0FL17068,congress_legislators
+W000797,Debbie Wasserman Schultz,house,FL,25,,2027-01-03,Democrat,H4FL20023,congress_legislators
+D000600,Mario Diaz-Balart,house,FL,26,,2027-01-03,Republican,H2FL25018,congress_legislators
+S000168,Maria Elvira Salazar,house,FL,27,,2027-01-03,Republican,H8FL27185,congress_legislators
+G000593,Carlos A. Gimenez,house,FL,28,,2027-01-03,Republican,H0FL26036,congress_legislators
+M001244,Ashley Moody,senate,FL,,3,2026-11-03,Republican,S6FL00640,congress_legislators
+S001217,Rick Scott,senate,FL,,1,2031-01-03,Republican,S8FL00273,congress_legislators
+C001103,"Earl L. ""Buddy"" Carter",house,GA,1,,2027-01-03,Republican,H4GA01039;S6GA00374,congress_legislators
+B000490,"Sanford D. Bishop, Jr.",house,GA,2,,2027-01-03,Democrat,H2GA02031,congress_legislators
+J000311,Brian Jack,house,GA,3,,2027-01-03,Republican,H4GA03126,congress_legislators
+J000288,"Henry C. ""Hank"" Johnson, Jr.",house,GA,4,,2027-01-03,Democrat,H6GA04129,congress_legislators
+W000788,Nikema Williams,house,GA,5,,2027-01-03,Democrat,H0GA05301,congress_legislators
+M001208,Lucy McBath,house,GA,6,,2027-01-03,Democrat,H8GA06393,congress_legislators
+M001218,Richard McCormick,house,GA,7,,2027-01-03,Republican,H0GA07273,congress_legislators
+S001189,Austin Scott,house,GA,8,,2027-01-03,Republican,H0GA08099,congress_legislators
+C001116,Andrew S. Clyde,house,GA,9,,2027-01-03,Republican,H0GA09246,congress_legislators
+C001129,Mike Collins,house,GA,10,,2027-01-03,Republican,H4GA10071;S6GA00390,congress_legislators
+L000583,Barry Loudermilk,house,GA,11,,2027-01-03,Republican,H4GA11061,congress_legislators
+A000372,Rick W. Allen,house,GA,12,,2027-01-03,Republican,H2GA12121,congress_legislators
+B001328,Everton Blair Jr.,house,GA,13,,2027-01-03,Democrat,H6GA13062,congress_legislators
+F000485,Clay Fuller,house,GA,14,,2027-01-03,Republican,H0GA14030,congress_legislators
+O000174,Jon Ossoff,senate,GA,,2,2027-01-03,Democrat,H8GA06195;S8GA00180,congress_legislators
+W000790,Raphael G. Warnock,senate,GA,,3,2029-01-03,Democrat,S0GA00559,congress_legislators
+C001055,Ed Case,house,HI,1,,2027-01-03,Democrat,H2HI02128,congress_legislators
+T000487,Jill N. Tokuda,house,HI,2,,2027-01-03,Democrat,H2HI02581,congress_legislators
+S001194,Brian Schatz,senate,HI,,3,2029-01-03,Democrat,S4HI00136;H6HI02244,congress_legislators
+H001042,Mazie K. Hirono,senate,HI,,1,2031-01-03,Democrat,H6HI02251;S2HI00106,congress_legislators
+M001215,Mariannette Miller-Meeks,house,IA,1,,2027-01-03,Republican,H8IA02043,congress_legislators
+H001091,Ashley Hinson,house,IA,2,,2027-01-03,Republican,H0IA01174,congress_legislators
+N000193,Zachary Nunn,house,IA,3,,2027-01-03,Republican,H2IA03119,congress_legislators
+F000446,Randy Feenstra,house,IA,4,,2027-01-03,Republican,H0IA04145,congress_legislators
+G000386,Chuck Grassley,senate,IA,,3,2029-01-03,Republican,S0IA00028,congress_legislators
+E000295,Joni Ernst,senate,IA,,2,2027-01-03,Republican,S4IA00129,congress_legislators
+F000469,Russ Fulcher,house,ID,1,,2027-01-03,Republican,H8ID01124,congress_legislators
+S001148,Michael K. Simpson,house,ID,2,,2027-01-03,Republican,H8ID02064,congress_legislators
+R000584,James E. Risch,senate,ID,,2,2027-01-03,Republican,S8ID00092,congress_legislators
+C000880,Mike Crapo,senate,ID,,3,2029-01-03,Republican,S8ID00027;H2ID02034,congress_legislators
+J000309,Jonathan L. Jackson,house,IL,1,,2027-01-03,Democrat,H2IL01349,congress_legislators
+K000385,Robin L. Kelly,house,IL,2,,2027-01-03,Democrat,H2IL02172;S6IL00474,congress_legislators
+R000617,Delia C. Ramirez,house,IL,3,,2027-01-03,Democrat,H2IL03162,congress_legislators
+G000586,"Jesús G. ""Chuy"" García",house,IL,4,,2027-01-03,Democrat,H8IL04134,congress_legislators
+Q000023,Mike Quigley,house,IL,5,,2027-01-03,Democrat,H0IL05096,congress_legislators
+C001117,Sean Casten,house,IL,6,,2027-01-03,Democrat,H8IL06139,congress_legislators
+D000096,Danny K. Davis,house,IL,7,,2027-01-03,Democrat,H4IL07037,congress_legislators
+K000391,Raja Krishnamoorthi,house,IL,8,,2027-01-03,Democrat,H6IL08147;S6IL00482,congress_legislators
+S001145,Janice D. Schakowsky,house,IL,9,,2027-01-03,Democrat,H8IL09067,congress_legislators
+S001190,Bradley Scott Schneider,house,IL,10,,2027-01-03,Democrat,H2IL10068,congress_legislators
+F000454,Bill Foster,house,IL,11,,2027-01-03,Democrat,H8IL14067;H2IL11124,congress_legislators
+B001295,Mike Bost,house,IL,12,,2027-01-03,Republican,H4IL12060,congress_legislators
+B001315,Nikki Budzinski,house,IL,13,,2027-01-03,Democrat,H2IL13153,congress_legislators
+U000040,Lauren Underwood,house,IL,14,,2027-01-03,Democrat,H8IL14174,congress_legislators
+M001211,Mary E. Miller,house,IL,15,,2027-01-03,Republican,H0IL15129,congress_legislators
+L000585,Darin LaHood,house,IL,16,,2027-01-03,Republican,H6IL18088,congress_legislators
+S001225,Eric Sorensen,house,IL,17,,2027-01-03,Democrat,H2IL17147,congress_legislators
+D000563,Richard J. Durbin,senate,IL,,2,2027-01-03,Democrat,S6IL00151;H2IL20026,congress_legislators
+D000622,Tammy Duckworth,senate,IL,,3,2029-01-03,Democrat,H6IL06141;S6IL00292,congress_legislators
+M001214,Frank J. Mrvan,house,IN,1,,2027-01-03,Democrat,H0IN01150,congress_legislators
+Y000067,Rudy Yakym III,house,IN,2,,2027-01-03,Republican,H2IN02295,congress_legislators
+S001188,Marlin A. Stutzman,house,IN,3,,2027-01-03,Republican,H0IN03198;S0IN00095,congress_legislators
+B001307,James R. Baird,house,IN,4,,2027-01-03,Republican,H8IN04199,congress_legislators
+S000929,Victoria Spartz,house,IN,5,,2027-01-03,Republican,H0IN05326,congress_legislators
+S001229,Jefferson Shreve,house,IN,6,,2027-01-03,Republican,H4IN06185,congress_legislators
+C001072,André Carson,house,IN,7,,2027-01-03,Democrat,H8IN07184,congress_legislators
+M001233,Mark B. Messmer,house,IN,8,,2027-01-03,Republican,H4IN08249,congress_legislators
+H001093,Erin Houchin,house,IN,9,,2027-01-03,Republican,H6IN09143,congress_legislators
+B001299,Jim Banks,senate,IN,,1,2031-01-03,Republican,H6IN03229;S4IN00196,congress_legislators
+Y000064,Todd Young,senate,IN,,3,2029-01-03,Republican,H0IN09070;S6IN00191,congress_legislators
+M000871,Tracey Mann,house,KS,1,,2027-01-03,Republican,H0KS01123,congress_legislators
+S001228,Derek Schmidt,house,KS,2,,2027-01-03,Republican,H4KS02164,congress_legislators
+D000629,Sharice Davids,house,KS,3,,2027-01-03,Democrat,H8KS03155,congress_legislators
+E000298,Ron Estes,house,KS,4,,2027-01-03,Republican,H8KS04112,congress_legislators
+M000934,Jerry Moran,senate,KS,,3,2029-01-03,Republican,H6KS01096;S0KS00091,congress_legislators
+M001198,Roger Marshall,senate,KS,,2,2027-01-03,Republican,H6KS01179;S0KS00315,congress_legislators
+C001108,James Comer,house,KY,1,,2027-01-03,Republican,H6KY01110,congress_legislators
+G000558,Brett Guthrie,house,KY,2,,2027-01-03,Republican,H8KY02031,congress_legislators
+M001220,Morgan McGarvey,house,KY,3,,2027-01-03,Democrat,H2KY03206,congress_legislators
+M001184,Thomas Massie,house,KY,4,,2027-01-03,Republican,H2KY04121,congress_legislators
+R000395,Harold Rogers,house,KY,5,,2027-01-03,Republican,H0KY05015,congress_legislators
+B001282,Andy Barr,house,KY,6,,2027-01-03,Republican,H0KY06104;S6KY00286,congress_legislators
+M000355,Mitch McConnell,senate,KY,,2,2027-01-03,Republican,S2KY00012,congress_legislators
+P000603,Rand Paul,senate,KY,,3,2029-01-03,Republican,S0KY00156,congress_legislators
+S001176,Steve Scalise,house,LA,1,,2027-01-03,Republican,H0LA01087,congress_legislators
+C001125,Troy A. Carter,house,LA,2,,2027-01-03,Democrat,H2LA02149,congress_legislators
+H001077,Clay Higgins,house,LA,3,,2027-01-03,Republican,H6LA03148,congress_legislators
+J000299,Mike Johnson,house,LA,4,,2027-01-03,Republican,H6LA04138,congress_legislators
+L000595,Julia Letlow,house,LA,5,,2027-01-03,Republican,H2LA05126;S6LA00664,congress_legislators
+F000110,Cleo Fields,house,LA,6,,2027-01-03,Democrat,H4LA06211,congress_legislators
+C001075,Bill Cassidy,senate,LA,,2,2027-01-03,Republican,H8LA00017;S4LA00107,congress_legislators
+K000393,John Kennedy,senate,LA,,3,2029-01-03,Republican,S4LA00065,congress_legislators
+N000015,Richard E. Neal,house,MA,1,,2027-01-03,Democrat,H8MA02041,congress_legislators
+M000312,James P. McGovern,house,MA,2,,2027-01-03,Democrat,H4MA03022,congress_legislators
+T000482,Lori Trahan,house,MA,3,,2027-01-03,Democrat,H8MA03106,congress_legislators
+A000148,Jake Auchincloss,house,MA,4,,2027-01-03,Democrat,H0MA04192,congress_legislators
+C001101,Katherine M. Clark,house,MA,5,,2027-01-03,Democrat,H4MA05084,congress_legislators
+M001196,Seth Moulton,house,MA,6,,2027-01-03,Democrat,H4MA06090;S6MA00296,congress_legislators
+P000617,Ayanna Pressley,house,MA,7,,2027-01-03,Democrat,H8MA07032,congress_legislators
+L000562,Stephen F. Lynch,house,MA,8,,2027-01-03,Democrat,H2MA09072;S0MA00083,congress_legislators
+K000375,William R. Keating,house,MA,9,,2027-01-03,Democrat,H0MA10082,congress_legislators
+M000133,Edward J. Markey,senate,MA,,2,2027-01-03,Democrat,H6MA07101;S4MA00028,congress_legislators
+W000817,Elizabeth Warren,senate,MA,,1,2031-01-03,Democrat,S2MA00170,congress_legislators
+H001052,Andy Harris,house,MD,1,,2027-01-03,Republican,H8MD01094,congress_legislators
+O000176,"Johnny Olszewski, Jr.",house,MD,2,,2027-01-03,Democrat,H4MD02232,congress_legislators
+E000301,Sarah Elfreth,house,MD,3,,2027-01-03,Democrat,H4MD03156,congress_legislators
+I000058,Glenn Ivey,house,MD,4,,2027-01-03,Democrat,H2MD04315;H2MD04232,congress_legislators
+H000874,Steny H. Hoyer,house,MD,5,,2027-01-03,Democrat,H2MD05155,congress_legislators
+M001232,April McClain Delaney,house,MD,6,,2027-01-03,Democrat,H4MD06340,congress_legislators
+M000687,Kweisi Mfume,house,MD,7,,2027-01-03,Democrat,S6MD03185;H6MD07020;H0MD07114,congress_legislators
+R000606,Jamie Raskin,house,MD,8,,2027-01-03,Democrat,H6MD08457,congress_legislators
+A000382,Angela D. Alsobrooks,senate,MD,,1,2031-01-03,Democrat,S4MD00327,congress_legislators
+V000128,Chris Van Hollen,senate,MD,,3,2029-01-03,Democrat,H2MD08126;S6MD03441,congress_legislators
+P000597,Chellie Pingree,house,ME,1,,2027-01-03,Democrat,H8ME01120;S0ME00038,congress_legislators
+G000592,Jared F. Golden,house,ME,2,,2027-01-03,Democrat,H8ME02185,congress_legislators
+K000383,"Angus S. King, Jr.",senate,ME,,1,2031-01-03,Independent,S2ME00109,congress_legislators
+C001035,Susan M. Collins,senate,ME,,2,2027-01-03,Republican,S6ME00159,congress_legislators
+B001301,Jack Bergman,house,MI,1,,2027-01-03,Republican,H6MI01226,congress_legislators
+M001194,John R. Moolenaar,house,MI,2,,2027-01-03,Republican,H4MI04126,congress_legislators
+S001221,Hillary J. Scholten,house,MI,3,,2027-01-03,Democrat,H0MI03316,congress_legislators
+H001058,Bill Huizenga,house,MI,4,,2027-01-03,Republican,H0MI02094,congress_legislators
+W000798,Tim Walberg,house,MI,5,,2027-01-03,Republican,H4MI07103,congress_legislators
+D000624,Debbie Dingell,house,MI,6,,2027-01-03,Democrat,H4MI12079,congress_legislators
+B001321,Tom Barrett,house,MI,7,,2027-01-03,Republican,H2MI07123,congress_legislators
+M001237,Kristen McDonald Rivet,house,MI,8,,2027-01-03,Democrat,H4MI08218,congress_legislators
+M001136,Lisa C. McClain,house,MI,9,,2027-01-03,Republican,H0MI10287,congress_legislators
+J000307,John James,house,MI,10,,2027-01-03,Republican,H2MI10150;S8MI00372,congress_legislators
+S001215,Haley M. Stevens,house,MI,11,,2027-01-03,Democrat,H8MI11254;S6MI00426,congress_legislators
+T000481,Rashida Tlaib,house,MI,12,,2027-01-03,Democrat,H8MI13250,congress_legislators
+T000488,Shri Thanedar,house,MI,13,,2027-01-03,Democrat,H2MI13204,congress_legislators
+S001208,Elissa Slotkin,senate,MI,,1,2031-01-03,Democrat,H8MI08102;S4MI00470,congress_legislators
+P000595,Gary C. Peters,senate,MI,,2,2027-01-03,Democrat,H8MI09068;S4MI00355,congress_legislators
+F000475,Brad Finstad,house,MN,1,,2027-01-03,Republican,H2MN01223,congress_legislators
+C001119,Angie Craig,house,MN,2,,2027-01-03,Democrat,H6MN02131;S6MN00499,congress_legislators
+M001234,Kelly Morrison,house,MN,3,,2027-01-03,Democrat,H4MN03118,congress_legislators
+M001143,Betty McCollum,house,MN,4,,2027-01-03,Democrat,H0MN04049,congress_legislators
+O000173,Ilhan Omar,house,MN,5,,2027-01-03,Democrat,H8MN05239,congress_legislators
+E000294,Tom Emmer,house,MN,6,,2027-01-03,Republican,H4MN06087,congress_legislators
+F000470,Michelle Fischbach,house,MN,7,,2027-01-03,Republican,H0MN07091,congress_legislators
+S001212,Pete Stauber,house,MN,8,,2027-01-03,Republican,H8MN08043,congress_legislators
+K000367,Amy Klobuchar,senate,MN,,1,2031-01-03,Democrat,S6MN00267,congress_legislators
+S001203,Tina Smith,senate,MN,,2,2027-01-03,Democrat,S8MN00578,congress_legislators
+B001324,Wesley Bell,house,MO,1,,2027-01-03,Democrat,H4MO01134;S4MO00250,congress_legislators
+W000812,Ann Wagner,house,MO,2,,2027-01-03,Republican,H2MO02102,congress_legislators
+O000177,"Robert F. Onder, Jr.",house,MO,3,,2027-01-03,Republican,H8MO09146;H4MO03221,congress_legislators
+A000379,Mark Alford,house,MO,4,,2027-01-03,Republican,H2MO04207,congress_legislators
+C001061,Emanuel Cleaver,house,MO,5,,2027-01-03,Democrat,H4MO05234,congress_legislators
+G000546,Sam Graves,house,MO,6,,2027-01-03,Republican,H0MO06073,congress_legislators
+B001316,Eric Burlison,house,MO,7,,2027-01-03,Republican,H2MO07143,congress_legislators
+S001195,Jason Smith,house,MO,8,,2027-01-03,Republican,H4MO08162,congress_legislators
+S001227,Eric Schmitt,senate,MO,,3,2029-01-03,Republican,S2MO00544,congress_legislators
+H001089,Josh Hawley,senate,MO,,1,2031-01-03,Republican,S8MO00160,congress_legislators
+K000388,Trent Kelly,house,MS,1,,2027-01-03,Republican,H6MS01131,congress_legislators
+T000193,Bennie G. Thompson,house,MS,2,,2027-01-03,Democrat,H4MS02068,congress_legislators
+G000591,Michael Guest,house,MS,3,,2027-01-03,Republican,H8MS03125,congress_legislators
+E000235,Mike Ezell,house,MS,4,,2027-01-03,Republican,H2MS04258,congress_legislators
+H001079,Cindy Hyde-Smith,senate,MS,,2,2027-01-03,Republican,S8MS00261,congress_legislators
+W000437,Roger F. Wicker,senate,MS,,1,2031-01-03,Republican,H4MS01078;S8MS00196,congress_legislators
+Z000018,Ryan K. Zinke,house,MT,1,,2027-01-03,Republican,H4MT01041,congress_legislators
+D000634,Troy Downing,house,MT,2,,2027-01-03,Republican,H4MT02098,congress_legislators
+D000618,Steve Daines,senate,MT,,2,2027-01-03,Republican,H2MT01060;S2MT00096,congress_legislators
+S001232,Tim Sheehy,senate,MT,,1,2031-01-03,Republican,S4MT00183,congress_legislators
+D000230,Donald G. Davis,house,NC,1,,2027-01-03,Democrat,H2NC02287,congress_legislators
+R000305,Deborah K. Ross,house,NC,2,,2027-01-03,Democrat,H0NC02125,congress_legislators
+M001210,Gregory F. Murphy,house,NC,3,,2027-01-03,Republican,H0NC03172,congress_legislators
+F000477,Valerie P. Foushee,house,NC,4,,2027-01-03,Democrat,H2NC06114,congress_legislators
+F000450,Virginia Foxx,house,NC,5,,2027-01-03,Republican,H4NC05146,congress_legislators
+M001240,Addison P. McDowell,house,NC,6,,2027-01-03,Republican,H4NC06177,congress_legislators
+R000603,David Rouzer,house,NC,7,,2027-01-03,Republican,H2NC07096,congress_legislators
+H001102,Mark Harris,house,NC,8,,2027-01-03,Republican,H6NC09200;H4NC08066,congress_legislators
+H001067,Richard Hudson,house,NC,9,,2027-01-03,Republican,H2NC08185,congress_legislators
+H001101,Pat Harrigan,house,NC,10,,2027-01-03,Republican,H2NC13243,congress_legislators
+E000246,Chuck Edwards,house,NC,11,,2027-01-03,Republican,H2NC14050,congress_legislators
+A000370,Alma S. Adams,house,NC,12,,2027-01-03,Democrat,H4NC12100,congress_legislators
+K000405,Brad Knott,house,NC,13,,2027-01-03,Republican,H4NC13116,congress_legislators
+M001236,Tim Moore,house,NC,14,,2027-01-03,Republican,H4NC14015,congress_legislators
+B001305,Ted Budd,senate,NC,,3,2029-01-03,Republican,H6NC13129;S2NC00505,congress_legislators
+T000476,Thom Tillis,senate,NC,,2,2027-01-03,Republican,S4NC00162,congress_legislators
+F000482,Julie Fedorchak,house,ND,0,,2027-01-03,Republican,H4ND00061,congress_legislators
+H001061,John Hoeven,senate,ND,,3,2029-01-03,Republican,S0ND00093,congress_legislators
+C001096,Kevin Cramer,senate,ND,,1,2031-01-03,Republican,H0ND01026;H6ND00074;S8ND00120,congress_legislators
+F000474,Mike Flood,house,NE,1,,2027-01-03,Republican,H2NE01118,congress_legislators
+B001298,Don Bacon,house,NE,2,,2027-01-03,Republican,H6NE02125,congress_legislators
+S001172,Adrian Smith,house,NE,3,,2027-01-03,Republican,H6NE03115,congress_legislators
+F000463,Deb Fischer,senate,NE,,1,2031-01-03,Republican,S2NE00094,congress_legislators
+R000618,Pete Ricketts,senate,NE,,2,2027-01-03,Republican,S6NE00129,congress_legislators
+P000614,Chris Pappas,house,NH,1,,2027-01-03,Democrat,H8NH01210;S6NH00141,congress_legislators
+G000604,Maggie Goodlander,house,NH,2,,2027-01-03,Democrat,H4NH02399,congress_legislators
+S001181,Jeanne Shaheen,senate,NH,,2,2027-01-03,Democrat,S0NH00219,congress_legislators
+H001076,Margaret Wood Hassan,senate,NH,,3,2029-01-03,Democrat,S6NH00091,congress_legislators
+N000188,Donald Norcross,house,NJ,1,,2027-01-03,Democrat,H4NJ01084,congress_legislators
+V000133,Jefferson Van Drew,house,NJ,2,,2027-01-03,Republican,H8NJ02166,congress_legislators
+C001136,"Herbert C. Conaway, Jr.",house,NJ,3,,2027-01-03,Democrat,H4NJ03080,congress_legislators
+S000522,Christopher H. Smith,house,NJ,4,,2027-01-03,Republican,H8NJ04014,congress_legislators
+G000583,Josh Gottheimer,house,NJ,5,,2027-01-03,Democrat,H6NJ05171,congress_legislators
+P000034,"Frank Pallone, Jr.",house,NJ,6,,2027-01-03,Democrat,H8NJ03073;S6NJ00263,congress_legislators
+K000398,"Thomas H. Kean, Jr.",house,NJ,7,,2027-01-03,Republican,H0NJ07261,congress_legislators
+M001226,Robert Menendez,house,NJ,8,,2027-01-03,Democrat,H2NJ08232,congress_legislators
+P000621,Nellie Pou,house,NJ,9,,2027-01-03,Democrat,H4NJ09194,congress_legislators
+M001229,LaMonica McIver,house,NJ,10,,2027-01-03,Democrat,H4NJ10176,congress_legislators
+M001246,Analilia Mejia,house,NJ,11,,2027-01-03,Democrat,H6NJ11286,congress_legislators
+W000822,Bonnie Watson Coleman,house,NJ,12,,2027-01-03,Democrat,H4NJ12149,congress_legislators
+K000394,Andy Kim,senate,NJ,,1,2031-01-03,Democrat,H8NJ03206;S4NJ00466,congress_legislators
+B001288,Cory A. Booker,senate,NJ,,2,2027-01-03,Democrat,S4NJ00185,congress_legislators
+S001218,Melanie A. Stansbury,house,NM,1,,2027-01-03,Democrat,H2NM01144,congress_legislators
+V000136,Gabe Vasquez,house,NM,2,,2027-01-03,Democrat,H2NM02191,congress_legislators
+L000273,Teresa Leger Fernandez,house,NM,3,,2027-01-03,Democrat,H0NM03102,congress_legislators
+L000570,Ben Ray Luján,senate,NM,,2,2027-01-03,Democrat,H8NM03196;S0NM00058,congress_legislators
+H001046,Martin Heinrich,senate,NM,,1,2031-01-03,Democrat,H8NM01224;S2NM00088,congress_legislators
+T000468,Dina Titus,house,NV,1,,2027-01-03,Democrat,H8NV03036,congress_legislators
+A000369,Mark E. Amodei,house,NV,2,,2027-01-03,Republican,H2NV02395;H1NV02017;S0NV00237,congress_legislators
+L000590,Susie Lee,house,NV,3,,2027-01-03,Democrat,H6NV04020,congress_legislators
+H001066,Steven Horsford,house,NV,4,,2027-01-03,Democrat,H2NV04011,congress_legislators
+C001113,Catherine Cortez Masto,senate,NV,,3,2029-01-03,Democrat,S6NV00200,congress_legislators
+R000608,Jacky Rosen,senate,NV,,1,2031-01-03,Democrat,H6NV03139;S8NV00156,congress_legislators
+L000598,Nick LaLota,house,NY,1,,2027-01-03,Republican,H2NY01190,congress_legislators
+G000597,Andrew R. Garbarino,house,NY,2,,2027-01-03,Republican,H0NY02234,congress_legislators
+S001201,Thomas R. Suozzi,house,NY,3,,2027-01-03,Democrat,H6NY03247,congress_legislators
+G000602,Laura Gillen,house,NY,4,,2027-01-03,Democrat,H4NY04158;H2NY04244,congress_legislators
+M001137,Gregory W. Meeks,house,NY,5,,2027-01-03,Democrat,H8NY06048,congress_legislators
+M001188,Grace Meng,house,NY,6,,2027-01-03,Democrat,H2NY06116,congress_legislators
+V000081,Nydia M. Velázquez,house,NY,7,,2027-01-03,Democrat,H2NY00010,congress_legislators
+J000294,Hakeem S. Jeffries,house,NY,8,,2027-01-03,Democrat,H2NY10092,congress_legislators
+C001067,Yvette D. Clarke,house,NY,9,,2027-01-03,Democrat,H4NY11138,congress_legislators
+G000599,Daniel S. Goldman,house,NY,10,,2027-01-03,Democrat,H2NY10308,congress_legislators
+M000317,Nicole Malliotakis,house,NY,11,,2027-01-03,Republican,H0NY11078,congress_legislators
+N000002,Jerrold Nadler,house,NY,12,,2027-01-03,Democrat,H2NY17071,congress_legislators
+E000297,Adriano Espaillat,house,NY,13,,2027-01-03,Democrat,H2NY13096,congress_legislators
+O000172,Alexandria Ocasio-Cortez,house,NY,14,,2027-01-03,Democrat,H8NY15148,congress_legislators
+T000486,Ritchie Torres,house,NY,15,,2027-01-03,Democrat,H0NY15160,congress_legislators
+L000606,George Latimer,house,NY,16,,2027-01-03,Democrat,H4NY16087,congress_legislators
+L000599,Michael Lawler,house,NY,17,,2027-01-03,Republican,H2NY17162,congress_legislators
+R000579,Patrick Ryan,house,NY,18,,2027-01-03,Democrat,H8NY19223,congress_legislators
+R000622,Josh Riley,house,NY,19,,2027-01-03,Democrat,H8NY22177,congress_legislators
+T000469,Paul Tonko,house,NY,20,,2027-01-03,Democrat,H8NY21203,congress_legislators
+S001196,Elise M. Stefanik,house,NY,21,,2027-01-03,Republican,H4NY21079,congress_legislators
+M001231,John W. Mannion,house,NY,22,,2027-01-03,Democrat,H4NY22085,congress_legislators
+L000600,Nicholas A. Langworthy,house,NY,23,,2027-01-03,Republican,H2NY23228,congress_legislators
+T000478,Claudia Tenney,house,NY,24,,2027-01-03,Republican,H4NY22051,congress_legislators
+M001206,Joseph D. Morelle,house,NY,25,,2027-01-03,Democrat,H8NY25105,congress_legislators
+K000402,Timothy M. Kennedy,house,NY,26,,2027-01-03,Democrat,H4NY26078,congress_legislators
+S000148,Charles E. Schumer,senate,NY,,3,2029-01-03,Democrat,S8NY00082;H0NY16010,congress_legislators
+G000555,Kirsten E. Gillibrand,senate,NY,,1,2031-01-03,Democrat,H6NY20167;S0NY00410,congress_legislators
+L000601,Greg Landsman,house,OH,1,,2027-01-03,Democrat,H2OH01194,congress_legislators
+T000490,David J. Taylor,house,OH,2,,2027-01-03,Republican,H4OH02248,congress_legislators
+B001281,Joyce Beatty,house,OH,3,,2027-01-03,Democrat,H2OH03125,congress_legislators
+J000289,Jim Jordan,house,OH,4,,2027-01-03,Republican,H6OH04082,congress_legislators
+L000566,Robert E. Latta,house,OH,5,,2027-01-03,Republican,H8OH05036,congress_legislators
+R000619,Michael A. Rulli,house,OH,6,,2027-01-03,Republican,H4OH06165,congress_legislators
+M001222,Max L. Miller,house,OH,7,,2027-01-03,Republican,H2OH16051,congress_legislators
+D000626,Warren Davidson,house,OH,8,,2027-01-03,Republican,H6OH08315,congress_legislators
+K000009,Marcy Kaptur,house,OH,9,,2027-01-03,Democrat,H2OH09031,congress_legislators
+T000463,Michael R. Turner,house,OH,10,,2027-01-03,Republican,H2OH03067;H2OH03091,congress_legislators
+B001313,Shontel M. Brown,house,OH,11,,2027-01-03,Democrat,H2OH11169,congress_legislators
+B001306,Troy Balderson,house,OH,12,,2027-01-03,Republican,H8OH12180,congress_legislators
+S001223,Emilia Strong Sykes,house,OH,13,,2027-01-03,Democrat,H2OH13264,congress_legislators
+J000295,David P. Joyce,house,OH,14,,2027-01-03,Republican,H2OH14064,congress_legislators
+C001126,Mike Carey,house,OH,15,,2027-01-03,Republican,H2OH15228,congress_legislators
+M001242,Bernie Moreno,senate,OH,,1,2031-01-03,Republican,S4OH00192,congress_legislators
+H001104,Jon Husted,senate,OH,,3,2026-11-03,Republican,S6OH00304,congress_legislators
+H001082,Kevin Hern,house,OK,1,,2027-01-03,Republican,H8OK01157;S6OK04247,congress_legislators
+B001317,Josh Brecheen,house,OK,2,,2027-01-03,Republican,H2OK02315,congress_legislators
+L000491,Frank D. Lucas,house,OK,3,,2027-01-03,Republican,H4OK06056,congress_legislators
+C001053,Tom Cole,house,OK,4,,2027-01-03,Republican,H2OK04055,congress_legislators
+B000740,Stephanie I. Bice,house,OK,5,,2027-01-03,Republican,H0OK05205,congress_legislators
+A000383,Alan Armstrong,senate,OK,,2,2027-01-03,Republican,,congress_legislators
+L000575,James Lankford,senate,OK,,3,2029-01-03,Republican,H0OK05114;S4OK00232,congress_legislators
+B001278,Suzanne Bonamici,house,OR,1,,2027-01-03,Democrat,H2OR01133,congress_legislators
+B000668,Cliff Bentz,house,OR,2,,2027-01-03,Republican,H0OR02127,congress_legislators
+D000635,Maxine Dexter,house,OR,3,,2027-01-03,Democrat,H4OR03192,congress_legislators
+H001094,Val T. Hoyle,house,OR,4,,2027-01-03,Democrat,H2OR04095,congress_legislators
+B001326,Janelle S. Bynum,house,OR,5,,2027-01-03,Democrat,H4OR05304,congress_legislators
+S001226,Andrea Salinas,house,OR,6,,2027-01-03,Democrat,H2OR06066,congress_legislators
+M001176,Jeff Merkley,senate,OR,,2,2027-01-03,Democrat,S8OR00207,congress_legislators
+W000779,Ron Wyden,senate,OR,,3,2029-01-03,Democrat,S6OR00110;H0OR03026,congress_legislators
+F000466,Brian K. Fitzpatrick,house,PA,1,,2027-01-03,Republican,H6PA08277,congress_legislators
+B001296,Brendan F. Boyle,house,PA,2,,2027-01-03,Democrat,H4PA13199,congress_legislators
+E000296,Dwight Evans,house,PA,3,,2027-01-03,Democrat,H6PA02171,congress_legislators
+D000631,Madeleine Dean,house,PA,4,,2027-01-03,Democrat,H8PA04116,congress_legislators
+S001205,Mary Gay Scanlon,house,PA,5,,2027-01-03,Democrat,H8PA07200,congress_legislators
+H001085,Chrissy Houlahan,house,PA,6,,2027-01-03,Democrat,H8PA06087,congress_legislators
+M001230,Ryan Mackenzie,house,PA,7,,2027-01-03,Republican,H8PA15195,congress_legislators
+B001327,"Robert P. Bresnahan, Jr.",house,PA,8,,2027-01-03,Republican,H4PA08124,congress_legislators
+M001204,Daniel Meuser,house,PA,9,,2027-01-03,Republican,H8PA10147,congress_legislators
+P000605,Scott Perry,house,PA,10,,2027-01-03,Republican,H2PA04135,congress_legislators
+S001199,Lloyd Smucker,house,PA,11,,2027-01-03,Republican,H6PA16320,congress_legislators
+L000602,Summer L. Lee,house,PA,12,,2027-01-03,Democrat,H2PA18200,congress_legislators
+J000302,John Joyce,house,PA,13,,2027-01-03,Republican,H8PA13125,congress_legislators
+R000610,Guy Reschenthaler,house,PA,14,,2027-01-03,Republican,H8PA18199,congress_legislators
+T000467,Glenn Thompson,house,PA,15,,2027-01-03,Republican,H8PA05071,congress_legislators
+K000376,Mike Kelly,house,PA,16,,2027-01-03,Republican,H0PA03271,congress_legislators
+D000530,Christopher R. Deluzio,house,PA,17,,2027-01-03,Democrat,H2PA17103,congress_legislators
+M001243,David McCormick,senate,PA,,1,2031-01-03,Republican,S2PA00661,congress_legislators
+F000479,John Fetterman,senate,PA,,3,2029-01-03,Democrat,S6PA00274,congress_legislators
+A000380,Gabe Amo,house,RI,1,,2027-01-03,Democrat,H4RI01265,congress_legislators
+M001223,Seth Magaziner,house,RI,2,,2027-01-03,Democrat,H2RI02184,congress_legislators
+R000122,Jack Reed,senate,RI,,2,2027-01-03,Democrat,S6RI00163;H0RI02071,congress_legislators
+W000802,Sheldon Whitehouse,senate,RI,,1,2031-01-03,Democrat,S6RI00221,congress_legislators
+M000194,Nancy Mace,house,SC,1,,2027-01-03,Republican,H0SC01394,congress_legislators
+W000795,Joe Wilson,house,SC,2,,2027-01-03,Republican,H2SC02059,congress_legislators
+B001325,Sheri Biggs,house,SC,3,,2027-01-03,Republican,H4SC01313,congress_legislators
+T000480,William R. Timmons IV,house,SC,4,,2027-01-03,Republican,H8SC04250,congress_legislators
+N000190,Ralph Norman,house,SC,5,,2027-01-03,Republican,H8SC05158;S6SC04445,congress_legislators
+C000537,James E. Clyburn,house,SC,6,,2027-01-03,Democrat,H2SC02042,congress_legislators
+F000478,Russell Fry,house,SC,7,,2027-01-03,Republican,H2SC07280;S6SC04403,congress_legislators
+G000608,Darline Graham,senate,SC,,2,2027-01-03,Republican,,congress_legislators
+S001184,Tim Scott,senate,SC,,3,2029-01-03,Republican,H0SC01279;S4SC00240,congress_legislators
+J000301,Dusty Johnson,house,SD,0,,2027-01-03,Republican,H8SD01055,congress_legislators
+T000250,John Thune,senate,SD,,3,2029-01-03,Republican,S2SD00068;H6SD00085,congress_legislators
+R000605,Mike Rounds,senate,SD,,2,2027-01-03,Republican,S4SD00049,congress_legislators
+H001086,Diana Harshbarger,house,TN,1,,2027-01-03,Republican,H0TN01118,congress_legislators
+B001309,Tim Burchett,house,TN,2,,2027-01-03,Republican,H8TN02119,congress_legislators
+F000459,"Charles J. ""Chuck"" Fleischmann",house,TN,3,,2027-01-03,Republican,H0TN03254,congress_legislators
+D000616,Scott DesJarlais,house,TN,4,,2027-01-03,Republican,H0TN04195,congress_legislators
+O000175,Andrew Ogles,house,TN,5,,2027-01-03,Republican,H2TN05446,congress_legislators
+R000612,John W. Rose,house,TN,6,,2027-01-03,Republican,H8TN06094,congress_legislators
+V000139,Matt Van Epps,house,TN,7,,2027-01-03,Republican,H6TN07161,congress_legislators
+K000392,David Kustoff,house,TN,8,,2027-01-03,Republican,H2TN07103,congress_legislators
+C001068,Steve Cohen,house,TN,9,,2027-01-03,Democrat,H6TN09068,congress_legislators
+H000601,Bill Hagerty,senate,TN,,2,2027-01-03,Republican,S0TN00169,congress_legislators
+B001243,Marsha Blackburn,senate,TN,,1,2031-01-03,Republican,H2TN06030;S8TN00337,congress_legislators
+M001224,Nathaniel Moran,house,TX,1,,2027-01-03,Republican,H2TX01112,congress_legislators
+C001120,Dan Crenshaw,house,TX,2,,2027-01-03,Republican,H8TX02166,congress_legislators
+S001224,Keith Self,house,TX,3,,2027-01-03,Republican,H2TX03290;H2TX00064,congress_legislators
+F000246,Pat Fallon,house,TX,4,,2027-01-03,Republican,H0TX04219,congress_legislators
+G000589,Lance Gooden,house,TX,5,,2027-01-03,Republican,H8TX05144,congress_legislators
+E000071,Jake Ellzey,house,TX,6,,2027-01-03,Republican,H8TX06266,congress_legislators
+F000468,Lizzie Fletcher,house,TX,7,,2027-01-03,Democrat,H8TX07140,congress_legislators
+L000603,Morgan Luttrell,house,TX,8,,2027-01-03,Republican,H2TX08182,congress_legislators
+G000553,Al Green,house,TX,9,,2027-01-03,Democrat,H4TX09095,congress_legislators
+M001157,Michael T. McCaul,house,TX,10,,2027-01-03,Republican,H4TX10093,congress_legislators
+P000048,August Pfluger,house,TX,11,,2027-01-03,Republican,H0TX11230,congress_legislators
+G000601,Craig A. Goldman,house,TX,12,,2027-01-03,Republican,H4TX12065,congress_legislators
+J000304,Ronny Jackson,house,TX,13,,2027-01-03,Republican,H0TX13228,congress_legislators
+W000814,"Randy K. Weber, Sr.",house,TX,14,,2027-01-03,Republican,H2TX14149,congress_legislators
+D000594,Monica De La Cruz,house,TX,15,,2027-01-03,Republican,H0TX15124,congress_legislators
+E000299,Veronica Escobar,house,TX,16,,2027-01-03,Democrat,H8TX16109,congress_legislators
+S000250,Pete Sessions,house,TX,17,,2027-01-03,Republican,H2TX03126,congress_legislators
+M001245,Christian D. Menefee,house,TX,18,,2027-01-03,Democrat,H6TX18232,congress_legislators
+A000375,Jodey C. Arrington,house,TX,19,,2027-01-03,Republican,H6TX19099,congress_legislators
+C001091,Joaquin Castro,house,TX,20,,2027-01-03,Democrat,H2TX35011,congress_legislators
+R000614,Chip Roy,house,TX,21,,2027-01-03,Republican,H8TX21307,congress_legislators
+N000026,Troy E. Nehls,house,TX,22,,2027-01-03,Republican,H0TX22302,congress_legislators
+V000134,Beth Van Duyne,house,TX,24,,2027-01-03,Republican,H0TX24209,congress_legislators
+W000816,Roger Williams,house,TX,25,,2027-01-03,Republican,H2TX33040;S2TX00270,congress_legislators
+G000603,Brandon Gill,house,TX,26,,2027-01-03,Republican,H4TX26149,congress_legislators
+C001115,Michael Cloud,house,TX,27,,2027-01-03,Republican,H8TX27049,congress_legislators
+C001063,Henry Cuellar,house,TX,28,,2027-01-03,Democrat,H2TX23082,congress_legislators
+G000587,Sylvia R. Garcia,house,TX,29,,2027-01-03,Democrat,H8TX29052,congress_legislators
+C001130,Jasmine Crockett,house,TX,30,,2027-01-03,Democrat,H2TX30178;S6TX00552,congress_legislators
+C001051,John R. Carter,house,TX,31,,2027-01-03,Republican,H2TX31044,congress_legislators
+J000310,Julie Johnson,house,TX,32,,2027-01-03,Democrat,H4TX32089,congress_legislators
+V000131,Marc A. Veasey,house,TX,33,,2027-01-03,Democrat,H2TX33073,congress_legislators
+G000581,Vicente Gonzalez,house,TX,34,,2027-01-03,Democrat,H6TX15162,congress_legislators
+C001131,Greg Casar,house,TX,35,,2027-01-03,Democrat,H2TX35144,congress_legislators
+B001291,Brian Babin,house,TX,36,,2027-01-03,Republican,H6TX02079,congress_legislators
+D000399,Lloyd Doggett,house,TX,37,,2027-01-03,Democrat,H4TX10028,congress_legislators
+H001095,Wesley Hunt,house,TX,38,,2027-01-03,Republican,H0TX07170;S6TX00511,congress_legislators
+C001056,John Cornyn,senate,TX,,2,2027-01-03,Republican,S2TX00106,congress_legislators
+C001098,Ted Cruz,senate,TX,,1,2031-01-03,Republican,S2TX00312,congress_legislators
+M001213,Blake D. Moore,house,UT,1,,2027-01-03,Republican,H0UT01205,congress_legislators
+M001228,Celeste Maloy,house,UT,2,,2027-01-03,Republican,H4UT02296,congress_legislators
+K000403,Mike Kennedy,house,UT,3,,2027-01-03,Republican,H4UT03260,congress_legislators
+O000086,Burgess Owens,house,UT,4,,2027-01-03,Republican,H0UT04076,congress_legislators
+C001114,John R. Curtis,senate,UT,,1,2031-01-03,Republican,H8UT03238;S4UT00282,congress_legislators
+L000577,Mike Lee,senate,UT,,3,2029-01-03,Republican,S0UT00165,congress_legislators
+W000804,Robert J. Wittman,house,VA,1,,2027-01-03,Republican,H8VA01147,congress_legislators
+K000399,Jennifer A. Kiggans,house,VA,2,,2027-01-03,Republican,H2VA02064,congress_legislators
+S000185,"Robert C. ""Bobby"" Scott",house,VA,3,,2027-01-03,Democrat,H6VA01117,congress_legislators
+M001227,Jennifer L. McClellan,house,VA,4,,2027-01-03,Democrat,H4VA04066,congress_legislators
+M001239,John J. McGuire III,house,VA,5,,2027-01-03,Republican,H2VA07196;H0VA07133,congress_legislators
+C001118,Ben Cline,house,VA,6,,2027-01-03,Republican,H8VA06104,congress_legislators
+V000138,Eugene Simon Vindman,house,VA,7,,2027-01-03,Democrat,H4VA07234,congress_legislators
+B001292,"Donald S. Beyer, Jr.",house,VA,8,,2027-01-03,Democrat,H4VA08224,congress_legislators
+G000568,H. Morgan Griffith,house,VA,9,,2027-01-03,Republican,H0VA09055,congress_legislators
+S001230,Suhas Subramanyam,house,VA,10,,2027-01-03,Democrat,H4VA10279,congress_legislators
+W000831,James R. Walkinshaw,house,VA,11,,2027-01-03,Democrat,H6VA11066,congress_legislators
+W000805,Mark R. Warner,senate,VA,,2,2027-01-03,Democrat,S6VA00093;P80003023,congress_legislators
+K000384,Tim Kaine,senate,VA,,1,2031-01-03,Democrat,S2VA00142,congress_legislators
+B001318,Becca Balint,house,VT,0,,2027-01-03,Democrat,H2VT01076,congress_legislators
+S000033,Bernard Sanders,senate,VT,,1,2031-01-03,Independent,H8VT01016;S4VT00033,congress_legislators
+W000800,Peter Welch,senate,VT,,3,2029-01-03,Democrat,H6VT00160;H8VT00034;S2VT00235,congress_legislators
+D000617,Suzan K. DelBene,house,WA,1,,2027-01-03,Democrat,H0WA08046,congress_legislators
+L000560,Rick Larsen,house,WA,2,,2027-01-03,Democrat,H0WA02080,congress_legislators
+G000600,Marie Gluesenkamp Perez,house,WA,3,,2027-01-03,Democrat,H2WA03217,congress_legislators
+N000189,Dan Newhouse,house,WA,4,,2027-01-03,Republican,H4WA04104,congress_legislators
+B001322,Michael Baumgartner,house,WA,5,,2027-01-03,Republican,H4WA05234,congress_legislators
+R000621,Emily Randall,house,WA,6,,2027-01-03,Democrat,H4WA06117,congress_legislators
+J000298,Pramila Jayapal,house,WA,7,,2027-01-03,Democrat,H6WA07458,congress_legislators
+S001216,Kim Schrier,house,WA,8,,2027-01-03,Democrat,H8WA08189,congress_legislators
+S000510,Adam Smith,house,WA,9,,2027-01-03,Democrat,H6WA09025,congress_legislators
+S001159,Marilyn Strickland,house,WA,10,,2027-01-03,Democrat,H0WA10034,congress_legislators
+C000127,Maria Cantwell,senate,WA,,1,2031-01-03,Democrat,S8WA00194;H2WA01054,congress_legislators
+M001111,Patty Murray,senate,WA,,3,2029-01-03,Democrat,S2WA00189,congress_legislators
+S001213,Bryan Steil,house,WI,1,,2027-01-03,Republican,H8WI01156,congress_legislators
+P000607,Mark Pocan,house,WI,2,,2027-01-03,Democrat,H2WI02124,congress_legislators
+V000135,Derrick Van Orden,house,WI,3,,2027-01-03,Republican,H0WI03175,congress_legislators
+M001160,Gwen Moore,house,WI,4,,2027-01-03,Democrat,H4WI04183,congress_legislators
+F000471,Scott Fitzgerald,house,WI,5,,2027-01-03,Republican,H0WI05113,congress_legislators
+G000576,Glenn Grothman,house,WI,6,,2027-01-03,Republican,H4WI06048,congress_legislators
+T000165,Thomas P. Tiffany,house,WI,7,,2027-01-03,Republican,H0WI07101,congress_legislators
+W000829,Tony Wied,house,WI,8,,2027-01-03,Republican,H4WI08119,congress_legislators
+J000293,Ron Johnson,senate,WI,,3,2029-01-03,Republican,S0WI00197,congress_legislators
+B001230,Tammy Baldwin,senate,WI,,1,2031-01-03,Democrat,H8WI00018;S2WI00219,congress_legislators
+M001205,Carol D. Miller,house,WV,1,,2027-01-03,Republican,H8WV03097,congress_legislators
+M001235,Riley M. Moore,house,WV,2,,2027-01-03,Republican,H4WV02205,congress_legislators
+J000312,James C. Justice,senate,WV,,1,2031-01-03,Republican,S4WV00332,congress_legislators
+C001047,Shelley Moore Capito,senate,WV,,2,2027-01-03,Republican,H0WV02138;S4WV00159,congress_legislators
+H001096,Harriet M. Hageman,house,WY,0,,2027-01-03,Republican,H2WY00166;S6WY00209,congress_legislators
+L000571,Cynthia M. Lummis,senate,WY,,2,2027-01-03,Republican,H8WY00148;S0WY00137,congress_legislators
+B001261,John Barrasso,senate,WY,,1,2031-01-03,Republican,S6WY00068,congress_legislators
