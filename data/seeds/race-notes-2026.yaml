@@ -1,0 +1,16 @@
+# Per-race facts about the type of contest on November 3, 2026, where it is not a
+# plain general election. Rendered on race pages from templates (no free text).
+# Each rule cites an official source. Changes go through PRs.
+#
+# election_type values: open_primary (all candidates on one ballot; a later runoff
+# may decide the seat). runoff_date is the date the official source gives for a
+# runoff if no candidate meets the threshold.
+version: 1
+rules:
+  - match: {state_po: LA, office: house}
+    election_type: open_primary
+    runoff_date: 2026-12-12
+    source_url: https://www.sos.la.gov/media/dcvl5ojl/051426-fall-house-races.pdf
+    source_title: "Louisiana Secretary of State, notice of May 14, 2026 on fall U.S. House races (Act 7, 2026 Regular Session)"
+    publisher: Louisiana Secretary of State
+    retrieved_at: 2026-10-18

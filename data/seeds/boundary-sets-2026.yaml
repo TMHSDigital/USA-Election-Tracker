@@ -1,0 +1,73 @@
+# Congressional district boundary sets used for the November 3, 2026 general election.
+# Reviewed by humans; changes go through PRs. Verified 2026-10-18.
+#
+# Default for every state: Census TIGER/Line 2026 cd120 (per state file
+# https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_<FIPS>_cd120.zip).
+# Census lists the nine states below as changed for the 120th Congress:
+# https://www.census.gov/programs-surveys/decennial-census/about/rdo/congressional-districts.120th_Congress.html
+#
+# Exception: Missouri. The TIGER2026 cd120 Missouri shapefile still contains the 2025
+# map (HB 1), which the U.S. Supreme Court did not allow for 2026 (application 26A388,
+# Sept 25, 2026). Census says the shapefiles "will be regenerated at a later date".
+# Missouri therefore uses TIGER2025 cd119 (the map used in 2022 and 2024).
+version: 1
+election_year: 2026
+verified_at: 2026-10-18
+default:
+  origin: census_tiger
+  tiger_year: 2026
+  layer: cd120
+  enacting_instrument: "District plan in effect for the 2024 election (unchanged for 2026 per U.S. Census Bureau 120th Congress notice)"
+overrides:
+  MO:
+    tiger_year: 2025
+    layer: cd119
+    enacting_instrument: "2022 plan remains in effect; 2025 plan (HB 1) not permitted for 2026, U.S. Supreme Court application 26A388 (Sept 25, 2026)"
+    enacting_instrument_url: "https://www.census.gov/programs-surveys/decennial-census/about/rdo/congressional-districts.120th_Congress.html"
+    notes: "TIGER2026 cd120 file for Missouri contains the non-operative 2025 plan as of 2026-10-18."
+changed_for_2026:
+  TX:
+    enacting_instrument: "Texas HB 4, 89th Legislature, 2nd Called Session (PLANC2333), signed Aug 29, 2025"
+    enacting_instrument_url: "https://capitol.texas.gov/tlodocs/892/billtext/html/HB00004F.htm"
+    official_file_url: "https://data.capitol.texas.gov/dataset/748c952b-e926-4f44-8d01-a738884b3ec8/resource/5712ebe1-d777-4d4a-b836-0534e17bca01/download/planc2333.zip"
+    litigation_note: "LULAC v. Abbott (W.D. Tex.); U.S. Supreme Court stayed the injunction Dec 4, 2025."
+  CA:
+    enacting_instrument: "Proposition 50 (ACA 8) and AB 604 (Ch. 96, Stats. 2025)"
+    enacting_instrument_url: "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB604"
+    official_file_url: "https://aelc.assembly.ca.gov/media/2608"
+    litigation_note: "Tangipa v. Newsom merits pending; injunction denied Jan 14, 2026."
+  NC:
+    enacting_instrument: "SB 249, S.L. 2025-95, ratified Oct 22, 2025"
+    enacting_instrument_url: "https://ncleg.gov/EnactedLegislation/SessionLaws/HTML/2025-2026/SL2025-95.html"
+    official_file_url: "https://webservices.ncleg.gov/ViewBillDocument/2025/7667/0/SL%202025-95%20-%20Shapefile"
+    litigation_note: "Williams v. Hall (M.D.N.C.), relief denied Nov 26, 2025."
+  OH:
+    enacting_instrument: "Ohio Redistricting Commission congressional plan adopted Oct 31, 2025"
+    enacting_instrument_url: "https://redistricting.ohio.gov/api/public/districtmaps/430/download"
+    official_file_url: null
+    litigation_note: "Official release is a block assignment file only; TIGER2026 cd120 used for geometry."
+  UT:
+    enacting_instrument: "Court-ordered plan, League of Women Voters of Utah v. Utah State Legislature, No. 220901712, Utah Third District Court (Nov 10, 2025; final judgment Jan 6, 2026)"
+    enacting_instrument_url: "https://gis.utah.gov/products/sgid/political/us-congressional-districts/"
+    official_file_url: "https://opendata.gis.utah.gov/api/download/v1/items/d3388c1f7d894ab789247f6442855d66/geojson?layers=0"
+    litigation_note: "Remedial and federal proceedings continue; map in use for 2026."
+  FL:
+    enacting_instrument: "HB 1-D (2026 Special Session D), plan EOGPCRP2026, Ch. 2026-229, Laws of Florida, signed May 4, 2026"
+    enacting_instrument_url: "https://www.flsenate.gov/Session/Bill/2026D/1"
+    official_file_url: "https://www.flsenate.gov/PublishedContent/Session/Redistricting/Plans/EOGPCRP2026/Downloads/EOGPCRP2026.zip"
+    litigation_note: "State court litigation pending; preliminary injunction denied May 26, 2026."
+  TN:
+    enacting_instrument: "HB 7003, Public Chapter 3 (2026 Extraordinary Session), May 7, 2026"
+    enacting_instrument_url: "https://capitol.tn.gov/Bills/114/Bill/HB7003.pdf"
+    official_file_url: null
+    litigation_note: "Federal three-judge court denied a preliminary injunction July 23, 2026; other litigation pending."
+  LA:
+    enacting_instrument: "SB 121, Act 2 (2026 Regular Session), May 29, 2026"
+    enacting_instrument_url: "https://www.legis.la.gov/legis/BillInfo.aspx?s=26RS&b=SB121&sbi=y"
+    official_file_url: "https://redist.legis.la.gov/2026_Files/Act2Congress/Shapefile/Shapefile%20-%20Act_2_(2026_RS).zip"
+    litigation_note: "Louisiana v. Callais remand proceedings (W.D. La.) pending; hearing Oct 27, 2026."
+  AL:
+    enacting_instrument: "Act 2023-563 plan, in effect under U.S. Supreme Court stay No. 25A1314 (June 2, 2026)"
+    enacting_instrument_url: null
+    official_file_url: "https://alabamaredistrictingplans-algeohub.hub.arcgis.com/api/download/v1/items/cf6612d18f4f4a97b8f2b1392c70654a/shapefile?layers=0"
+    litigation_note: "Allen v. Milligan proceedings continue."

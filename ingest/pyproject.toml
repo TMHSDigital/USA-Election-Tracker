@@ -1,0 +1,46 @@
+[project]
+name = "ingest"
+version = "0.1.0"
+description = "Data ingestion adapters for USA Election Tracker"
+requires-python = ">=3.12,<3.14"
+license = "MIT"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.8",
+    "pyyaml>=6.0",
+    "pyshp>=2.3",
+    "shapely>=2.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "types-pyyaml",
+]
+
+[project.scripts]
+ingest = "ingest.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ingest"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = false
+ignore_missing_imports = true

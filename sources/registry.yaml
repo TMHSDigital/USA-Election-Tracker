@@ -1,0 +1,324 @@
+# Source registry. Every external source the project uses, considered, or rejected.
+# Each entry records liveness and license as verified on `verified_at`.
+#
+# status: live | partial | dead | rejected | not_used
+#   live/partial sources may be cited; the ingest code refuses any other status.
+# redistribution: allowed | restricted | unknown
+#   "restricted" sources are never ingested or republished.
+#
+# Rules: see docs/adding-a-source.md. Adding a new external source requires
+# maintainer approval before any adapter is written.
+
+sources:
+  # ---------------------------------------------------------------- federal finance
+  - source_id: fec_bulk_cn
+    name: FEC candidate master file, 2025-2026 (cn26)
+    publisher: Federal Election Commission
+    url: https://www.fec.gov/files/bulk-downloads/2026/cn26.zip
+    license: U.S. government work, public domain
+    license_url: https://github.com/fecgov/FEC/blob/master/LICENSE.md
+    terms_url: https://www.fec.gov/updates/sale-or-use-contributor-information/
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: None stated. Served from S3 via 302 redirect. Refreshed daily.
+    notes: >-
+      Pipe-delimited, no header row; columns per cn_header_file.csv. Includes
+      CAND_ELECTION_YR other than 2026, filtered out. Lists every registrant;
+      it does not indicate who qualified for the general election ballot.
+
+  - source_id: fec_bulk_weball
+    name: FEC all candidates financial summary, 2025-2026 (weball26)
+    publisher: Federal Election Commission
+    url: https://www.fec.gov/files/bulk-downloads/2026/weball26.zip
+    license: U.S. government work, public domain
+    license_url: https://github.com/fecgov/FEC/blob/master/LICENSE.md
+    terms_url: https://www.fec.gov/updates/sale-or-use-contributor-information/
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: None stated. Refreshed daily.
+    notes: >-
+      Columns per https://www.fec.gov/campaign-finance-data/all-candidates-file-description/
+      (no header file is published; weball_header_file.csv returns 404). Totals cover
+      the candidate's authorized committees for the two-year cycle through CVG_END_DT.
+
+  - source_id: fec_api
+    name: OpenFEC API
+    publisher: Federal Election Commission
+    url: https://api.open.fec.gov/v1/
+    license: U.S. government work, public domain; terms require identifying openFEC API as the data source
+    license_url: https://github.com/fecgov/FEC/blob/master/LICENSE.md
+    terms_url: https://github.com/fecgov/FEC/blob/master/TERMS-OF-SERVICE.md
+    status: not_used
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: api.data.gov key 1,000 requests/hour (7,200 on request). DEMO_KEY observed at 10/hour.
+    notes: >-
+      Live and healthy, but v0 uses bulk files instead (no key, no rate limit).
+      No field indicates ballot qualification or primary winners. Acceptable use
+      policy forbids commercial use. Reserved for targeted lookups if needed.
+
+  # ---------------------------------------------------------------- incumbents
+  - source_id: congress_legislators
+    name: unitedstates/congress-legislators, current legislators
+    publisher: The @unitedstates project
+    url: https://unitedstates.github.io/congress-legislators/legislators-current.json
+    license: CC0 1.0
+    license_url: https://github.com/unitedstates/congress-legislators/blob/main/LICENSE
+    terms_url: https://github.com/unitedstates/congress-legislators
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: GitHub Pages norms
+    notes: >-
+      Last commit 2026-09-24; 539 members (119th Congress). JSON exists only on the
+      gh-pages site; theunitedstates.io no longer resolves.
+
+  # ---------------------------------------------------------------- candidates (curated)
+  - source_id: project_seeds
+    name: USA Election Tracker curated seed files
+    publisher: USA Election Tracker
+    url: https://github.com/TMHSDigital/USA-Election-Tracker/tree/main/data/seeds
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    terms_url: https://github.com/TMHSDigital/USA-Election-Tracker/blob/main/LICENSE-DATA.md
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: n/a
+    notes: >-
+      Human-reviewed lists compiled from official state certified candidate lists.
+      Every row cites the official page in source_url with retrieved_at. Per-row
+      citations appear on the site as state-list:<hash> sources.
+
+  - source_id: governors_2026_list
+    name: 2026 gubernatorial elections (36 states)
+    publisher: USA Election Tracker (compiled from state election offices)
+    url: https://github.com/TMHSDigital/USA-Election-Tracker/blob/main/data/seeds/governors-2026.csv
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    terms_url: https://github.com/TMHSDigital/USA-Election-Tracker/blob/main/LICENSE-DATA.md
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: n/a
+    notes: Fallback state list used only when the governors seed file is absent.
+
+  # ---------------------------------------------------------------- history
+  - source_id: medsl_senate
+    name: "MIT Election Data and Science Lab, U.S. Senate statewide 1976-2024 (v8.0)"
+    publisher: MIT Election Data and Science Lab, via Harvard Dataverse
+    url: https://doi.org/10.7910/DVN/PEJ5QU
+    license: CC0 1.0
+    license_url: https://creativecommons.org/publicdomain/zero/1.0/
+    terms_url: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: Not stated
+    notes: Released 2026-05-11. File id 13887039 (format=original gives CSV).
+
+  - source_id: medsl_house
+    name: "MIT Election Data and Science Lab, U.S. House 1976-2024 (v15.0)"
+    publisher: MIT Election Data and Science Lab, via Harvard Dataverse
+    url: https://doi.org/10.7910/DVN/IG0UN2
+    license: CC0 1.0
+    license_url: https://creativecommons.org/publicdomain/zero/1.0/
+    terms_url: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2
+    status: partial
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: Not stated
+    notes: >-
+      Download requires a Dataverse guestbook response (guestbook 458); API download
+      returns HTTP 400 without it. Not fetched automatically in v0. House history
+      comes from snyder_candidates instead.
+
+  - source_id: snyder_candidates
+    name: "Candidates in American General Elections (Cha, Kuriwaki, Snyder), v4.1"
+    publisher: Harvard Dataverse
+    url: https://doi.org/10.7910/DVN/DGDRDT
+    license: CC0 1.0
+    license_url: https://creativecommons.org/publicdomain/zero/1.0/
+    terms_url: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DGDRDT
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: Not stated
+    notes: >-
+      President, House, Senate and Governor general elections 2006-2024. File id
+      13461690 (tab). Used for House and Governor history. MEDSL publishes no
+      governor time series.
+
+  # ---------------------------------------------------------------- geography
+  - source_id: census_tiger_cd
+    name: Census TIGER/Line congressional district shapefiles
+    publisher: U.S. Census Bureau
+    url: https://www2.census.gov/geo/tiger/TIGER2026/CD/
+    license: Not copyrighted; acknowledgement of the U.S. Census Bureau as source required
+    license_url: https://www.census.gov/data/developers/about/terms-of-service.html
+    terms_url: https://www.census.gov/data/developers/about/terms-of-service.html
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: None stated
+    notes: >-
+      TIGER2026 cd120 per-state files (posted 2026-10-06) reflect the maps for the
+      2026 election, except Missouri (see data/seeds/boundary-sets-2026.yaml).
+      TIGER2025 cd119 used for Missouri.
+
+  - source_id: census_120th_notice
+    name: Census Bureau, 120th Congressional Districts notice
+    publisher: U.S. Census Bureau
+    url: https://www.census.gov/programs-surveys/decennial-census/about/rdo/congressional-districts.120th_Congress.html
+    license: U.S. government work, public domain
+    license_url: https://www.census.gov/about/policies/open-gov/open-data.html
+    terms_url: https://www.census.gov/about/policies.html
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: n/a
+    notes: Lists the nine states with new maps for 2026 (AL, CA, FL, LA, NC, OH, TN, TX, UT).
+
+  - source_id: census_apportionment_2020
+    name: 2020 Census apportionment results
+    publisher: U.S. Census Bureau
+    url: https://www.census.gov/data/tables/2020/dec/2020-apportionment-data.html
+    license: U.S. government work, public domain
+    license_url: https://www.census.gov/about/policies/open-gov/open-data.html
+    terms_url: https://www.census.gov/about/policies.html
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: n/a
+    notes: House seats per state, encoded in ingest/src/ingest/core/states.py.
+
+  - source_id: redistricting_data_hub
+    name: Redistricting Data Hub
+    publisher: Redistricting Data Hub
+    url: https://redistrictingdatahub.org/
+    license: Custom data license agreement
+    license_url: https://redistrictingdatahub.org/terms-and-conditions/
+    terms_url: https://redistrictingdatahub.org/terms-and-conditions/
+    status: rejected
+    verified_at: 2026-10-18
+    redistribution: restricted
+    rate_limits: Login required
+    notes: Terms forbid making data available to others who have not agreed to the license.
+
+  - source_id: census_acs5
+    name: "Census ACS 5-year estimates (2020-2024), Data API"
+    publisher: U.S. Census Bureau
+    url: https://api.census.gov/data/2024/acs/acs5
+    license: "Public data. Required notice: This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau."
+    license_url: https://www.census.gov/data/developers/about/terms-of-service.html
+    terms_url: https://www.census.gov/data/developers/about/terms-of-service.html
+    status: live
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: API key now mandatory for every request (free). Numeric limits not published.
+    notes: >-
+      Tabulated for 119th Congress districts only. Not shown for the nine states
+      whose maps changed for 2026.
+
+  - source_id: census_geocoder
+    name: Census Geocoder
+    publisher: U.S. Census Bureau
+    url: https://geocoding.geo.census.gov/geocoder/
+    license: U.S. government service; no specific license page found
+    license_url: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
+    terms_url: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
+    status: not_used
+    verified_at: 2026-10-18
+    redistribution: unknown
+    rate_limits: Not stated
+    notes: >-
+      No CORS headers on GET or OPTIONS; documentation says CORS is not supported.
+      JSONP works but would execute a third-party script in our page per visitor.
+      Not used in v0 per spec; lookup uses device location and a map-click fallback.
+
+  # ---------------------------------------------------------------- voter info links
+  - source_id: vote_gov
+    name: Vote.gov state registration pages
+    publisher: U.S. Election Assistance Commission
+    url: https://vote.gov/
+    license: Federal website; linked only, nothing republished
+    license_url: https://vote.gov/about-us
+    terms_url: https://vote.gov/about-us
+    status: live
+    verified_at: 2026-10-18
+    redistribution: unknown
+    rate_limits: Cloudflare bot challenge on non-browser clients
+    notes: State pages follow https://vote.gov/register/<state-slug> (lowercase, hyphens).
+
+  # ---------------------------------------------------------------- live results (experimental)
+  - source_id: clarity_enr
+    name: Clarity Elections ENR (Scytl) official results exports
+    publisher: State election offices via Clarity ENR
+    url: https://results.enr.clarityelections.com/
+    license: Official public election results published by state officials; vendor terms at https://www.scytl.com/terms-of-use
+    license_url: https://www.scytl.com/terms-of-use
+    terms_url: https://www.scytl.com/terms-of-use
+    status: partial
+    verified_at: 2026-10-18
+    redistribution: unknown
+    rate_limits: CloudFront WAF blocks default client user agents (403)
+    notes: >-
+      Statewide use verified only for West Virginia and Colorado. Georgia moved to
+      Enhanced Voting, Arkansas to Tally, Kentucky runs its own site. No robots.txt.
+      Vendor terms need human review before go-live. Experimental, behind
+      LIVE_RESULTS_ENABLED.
+
+  # ---------------------------------------------------------------- considered, not used
+  - source_id: openstates
+    name: Open States (Plural) API v3 and bulk data
+    publisher: Plural Policy
+    url: https://open.pluralpolicy.com/data/
+    license: Public domain dedication unless otherwise noted (bulk data)
+    license_url: https://open.pluralpolicy.com/data/
+    terms_url: https://open.pluralpolicy.com/tos/
+    status: not_used
+    verified_at: 2026-10-18
+    redistribution: allowed
+    rate_limits: API key required; free tier 10 requests/minute, 250/day
+    notes: Planned for v1 state legislative races.
+
+  - source_id: google_civic_representatives
+    name: Google Civic Information API, Representatives
+    publisher: Google
+    url: https://developers.google.com/civic-information
+    license: n/a
+    license_url: https://developers.google.com/terms
+    terms_url: https://developers.google.com/terms
+    status: dead
+    verified_at: 2026-10-18
+    redistribution: unknown
+    rate_limits: n/a
+    notes: Representatives endpoint shut down in 2025.
+
+  - source_id: opensecrets_api
+    name: OpenSecrets API
+    publisher: OpenSecrets
+    url: https://www.opensecrets.org/open-data/api
+    license: n/a
+    license_url: https://www.opensecrets.org/open-data/api
+    terms_url: https://www.opensecrets.org/open-data/api
+    status: dead
+    verified_at: 2026-10-18
+    redistribution: unknown
+    rate_limits: n/a
+    notes: API discontinued in 2025.
+
+  - source_id: ballotpedia
+    name: Ballotpedia
+    publisher: Lucy Burns Institute
+    url: https://ballotpedia.org/
+    license: Proprietary
+    license_url: https://ballotpedia.org/Ballotpedia:Terms_of_service
+    terms_url: https://ballotpedia.org/Ballotpedia:Terms_of_service
+    status: rejected
+    verified_at: 2026-10-18
+    redistribution: restricted
+    rate_limits: n/a
+    notes: Terms prohibit scraping. Not used, not even as a source of record.
