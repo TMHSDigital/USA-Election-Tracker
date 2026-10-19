@@ -1,0 +1,44 @@
+---
+// Facts column for a race page, plus in-page section links on wide screens.
+import Cite from './Cite.astro';
+import type { Race, StateOffice } from '../lib/data';
+import { officeName, stateUrl, url } from '../lib/format';
+import { fmtDate, t } from '../i18n';
+
+interface Props {
+  race: Race;
+  office: StateOffice | null;
+  sections: { id: string; label: string }[];
+}
+const { race, office, sections } = Astro.props;
+const officePath = { house: '/house/', senate: '/senate/', governor: '/governors/' }[race.office];
+const ls = race.candidate_list.status;
+const statusKey = ls === 'official' ? 'race.status.official' : ls === 'fec_registrants' ? 'race.status.fec' : 'race.status.unavailable';
+---
+<aside class="aside" aria-label={t('race.aside.label')}>
+  <dl>
+    <dt>{t('race.aside.office')}</dt>
+    <dd><a href={url(officePath)}>{officeName(race.office)}</a></dd>
+    <dt>{t('race.aside.state')}</dt>
+    <dd><a href={stateUrl(race.state_po)}>{race.state_name}</a></dd>
+    <dt>{t('race.aside.date')}</dt>
+    <dd>{fmtDate(race.election_date)}</dd>
+    <dt>{t('race.aside.list')}</dt>
+    <dd>
+      <span class={`status${ls === 'official' ? '' : ' provisional'}`}>{t(statusKey)}</span>
+      {ls === 'official' && race.candidate_list.url && <><br /><a href={race.candidate_list.url}>{t('race.officialList')}</a></>}
+    </dd>
+    {office?.results_url && (
+      <>
+        <dt>{t('race.aside.results')}</dt>
+        <dd data-figure><a href={office.results_url}>{office.office_name}</a><Cite ids={office.source_ids} /></dd>
+      </>
+    )}
+  </dl>
+  <nav class="toc" aria-label={t('race.aside.onThisPage')}>
+    <strong>{t('race.aside.onThisPage')}</strong>
+    <ul>
+      {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+    </ul>
+  </nav>
+</aside>

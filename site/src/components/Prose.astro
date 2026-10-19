@@ -1,18 +1,34 @@
 ---
 // Renders a long-form page whose text lives in src/content/<locale>/<name>.md.
 import Base from '../layouts/Base.astro';
+import PageHeader from './PageHeader.astro';
+import { t } from '../i18n';
 
 interface Props {
   title: string;
   name: 'methodology' | 'disclaimer' | 'about';
 }
 const { title, name } = Astro.props;
-const pages = import.meta.glob<{ Content: any }>('../content/en/*.md', { eager: true });
+type Md = { Content: any; getHeadings: () => { depth: number; slug: string; text: string }[] };
+const pages = import.meta.glob<Md>('../content/en/*.md', { eager: true });
 const page = pages[`../content/en/${name}.md`];
 if (!page) throw new Error(`missing content page ${name}`);
 const { Content } = page;
+const headings = page.getHeadings().filter((h) => h.depth === 2);
 ---
 <Base title={title}>
-  <h1>{title}</h1>
-  <Content />
+  <PageHeader title={title} />
+  <div class="layout">
+    <aside class="aside">
+      {headings.length > 2 && (
+        <nav class="toc" aria-label={t('race.aside.onThisPage')} style="margin-top:0;padding-top:0;border-top:0">
+          <strong>{t('race.aside.onThisPage')}</strong>
+          <ul>{headings.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+        </nav>
+      )}
+    </aside>
+    <div class="content prose">
+      <Content />
+    </div>
+  </div>
 </Base>

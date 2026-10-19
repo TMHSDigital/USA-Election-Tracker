@@ -1,0 +1,38 @@
+---
+// Index of every race for one office. House races are grouped by state.
+import Base from '../layouts/Base.astro';
+import PageHeader from './PageHeader.astro';
+import { ADAPTERS_FOR, getRaceIndex, type Office, type RaceSummary } from '../lib/data';
+import { officeName, raceTitle, raceUrl, stateUrl } from '../lib/format';
+import { t } from '../i18n';
+
+interface Props {
+  office: Office;
+}
+const { office } = Astro.props;
+const races = getRaceIndex().filter((r) => r.office === office);
+const introKey = { house: 'office.index.house', senate: 'office.index.senate', governor: 'office.index.governors' }[office] as 'office.index.house';
+const byState = new Map<string, RaceSummary[]>();
+for (const r of races) byState.set(r.state_name, [...(byState.get(r.state_name) ?? []), r]);
+const statusText = (r: RaceSummary) =>
+  r.list_status === 'official'
+    ? (r.candidate_count === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: r.candidate_count }))
+    : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
+---
+<Base title={officeName(office)} description={t(introKey, { count: races.length })} adapters={ADAPTERS_FOR.state}>
+  <PageHeader title={officeName(office)} lede={t(introKey, { count: races.length })} />
+  {office === 'house' ? (
+    [...byState.entries()].map(([state, list]) => (
+      <section aria-labelledby={`s-${list[0].state_po}`}>
+        <h2 id={`s-${list[0].state_po}`}><a href={stateUrl(list[0].state_po)}>{state}</a></h2>
+        <ul class="race-list">
+          {list.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+        </ul>
+      </section>
+    ))
+  ) : (
+    <ul class="race-list">
+      {races.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+    </ul>
+  )}
+</Base>

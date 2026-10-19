@@ -1,0 +1,37 @@
+---
+// A state's congressional districts as static SVG, each one a link to its
+// race page. Geography only: one fill, no party or outcome coloring.
+import { getRaceIndex, readGeo } from '../lib/data';
+import { labelPoint, projectFeatures } from '../lib/geo';
+import { raceUrl, raceTitle } from '../lib/format';
+import { t } from '../i18n';
+
+interface Props {
+  statePo: string;
+  stateName: string;
+}
+const { statePo, stateName } = Astro.props;
+const geo = readGeo(`display/${statePo.toLowerCase()}.geojson`);
+const projected = geo ? projectFeatures(geo, 600) : null;
+const races = new Map(getRaceIndex().filter((r) => r.office === 'house' && r.state_po === statePo).map((r) => [r.district ?? 0, r]));
+const shapes = (projected?.shapes ?? []).map((s) => ({ ...s, d: s.d, district: Number(s.key), race: races.get(Number(s.key)) }));
+const labels = shapes
+  .map((s) => ({ d: s.district, p: labelPoint(s.d) }))
+  .filter((l): l is { d: number; p: NonNullable<typeof l.p> } => l.p !== null && l.p.size >= 26 && l.d > 0);
+---
+{projected && (
+  <figure class="map-nav state-map">
+    <svg viewBox={projected.viewBox} role="group" aria-label={t('map.state.label', { state: stateName })}>
+      {shapes.map((s) => s.race ? (
+        <a href={raceUrl(s.race.race_id)} aria-label={raceTitle(s.race)}>
+          <title>{raceTitle(s.race)}</title>
+          <path d={s.d} />
+        </a>
+      ) : <path d={s.d} />)}
+      <g aria-hidden="true">
+        {labels.map((l) => <text x={l.p.x} y={l.p.y} font-size="13">{l.d}</text>)}
+      </g>
+    </svg>
+    <figcaption class="map-caption"><slot /></figcaption>
+  </figure>
+)}

@@ -1,5 +1,7 @@
 ---
+import '@fontsource-variable/public-sans';
 import '../styles/global.css';
+import fontUrl from '@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url';
 import { t } from '../i18n';
 import { url } from '../lib/format';
 import DataUpdated from '../components/DataUpdated.astro';
@@ -20,6 +22,7 @@ const nav = [
   ['/how-to-vote/', 'nav.howToVote'],
   ['/election-night/', 'nav.electionNight'],
   ['/downloads/', 'nav.downloads'],
+  ['/search/', 'nav.search'],
   ['/about/', 'nav.about'],
 ] as const;
 const current = (p: string) => (p === '/' ? path === url('/') : path.startsWith(url(p)));
@@ -34,18 +37,21 @@ const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefine
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f5f2" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141517" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={fontUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
   </head>
   <body>
     <a class="skip" href="#main">{t('skip')}</a>
-    <header class="site">
+    <header class="site-header">
       <div class="wrap">
-        <a class="brand" href={url('/')}>{t('site.name')}</a>
-        <nav class="main" aria-label={t('nav.label')}>
+        <a class="brand" href={url('/')}>{t('site.name')}<span>2026</span></a>
+        <nav class="site-nav" aria-label={t('nav.label')}>
           <ul>
             {nav.map(([href, key]) => (
               <li><a href={url(href)} aria-current={current(href) ? 'page' : undefined}>{t(key)}</a></li>
@@ -56,26 +62,36 @@ const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefine
     </header>
     <main id="main" class="wrap" data-pagefind-body>
       <slot />
-      {adapters.length > 0 && <DataUpdated adapters={adapters} />}
+      {adapters.length > 0 && <div data-pagefind-ignore><DataUpdated adapters={adapters} /></div>}
     </main>
-    <footer class="site">
+    <footer class="site-footer">
       <div class="wrap">
-        <p>{t('footer.notAffiliated')}</p>
-        <p>{t('footer.verify')}</p>
-        <p>{t('footer.unofficial')}</p>
-        <p>{t('footer.privacy')}</p>
+        <div>
+          <h2>{t('footer.aboutHeading')}</h2>
+          <p>{t('footer.notAffiliated')}</p>
+          <p>{t('footer.verify')}</p>
+          <p>{t('footer.unofficial')}</p>
+          <p>{t('footer.privacy')}</p>
+        </div>
         <nav aria-label={t('footer.links')}>
+          <h2>{t('footer.links')}</h2>
           <ul>
             <li><a href={url('/methodology/')}>{t('footer.methodology')}</a></li>
             <li><a href={url('/sources/')}>{t('footer.sources')}</a></li>
-            <li><a href={url('/disclaimer/')}>{t('footer.disclaimer')}</a></li>
             <li><a href={url('/corrections/')}>{t('footer.corrections')}</a></li>
+            <li><a href={url('/disclaimer/')}>{t('footer.disclaimer')}</a></li>
+            <li><a href={url('/about/')}>{t('nav.about')}</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>{t('footer.projectHeading')}</h2>
+          <ul>
             <li><a href={`${repo}/issues/new?template=data-error.yml`}>{t('footer.reportError')}</a></li>
             <li><a href={repo}>{t('footer.code')}</a></li>
             <li><a href={`${repo}/blob/main/LICENSE-DATA.md`}>{t('footer.license')}</a></li>
           </ul>
-        </nav>
-        <p>{t('footer.credit')}</p>
+          <p class="credit">{t('footer.credit')}</p>
+        </div>
       </div>
     </footer>
     {goatcounter && <script is:inline async data-goatcounter={`https://${goatcounter}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}

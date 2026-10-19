@@ -2,7 +2,6 @@
   "site.name": "USA Election Tracker",
   "site.tagline": "Candidates, campaign finance, district maps, and past results for the November 3, 2026 U.S. House, U.S. Senate, and governor elections. Every figure links to its source.",
   "skip": "Skip to main content",
-
   "nav.label": "Main",
   "nav.home": "Home",
   "nav.states": "States",
@@ -12,7 +11,6 @@
   "nav.downloads": "Data",
   "nav.about": "About",
   "nav.search": "Search",
-
   "footer.credit": "A TM Hospitality Strategies project.",
   "footer.notAffiliated": "Not affiliated with any government agency, political party, or campaign. No endorsements.",
   "footer.verify": "Data is compiled from public sources and may contain errors or delays. Official results come only from state and local election officials. Always verify with them.",
@@ -26,14 +24,12 @@
   "footer.corrections": "Corrections",
   "footer.code": "Source code (MIT)",
   "footer.license": "Data license (CC BY 4.0)",
-
   "office.house": "U.S. House",
   "office.senate": "U.S. Senate",
   "office.governor": "Governor",
   "office.house.plural": "U.S. House",
   "office.senate.plural": "U.S. Senate",
   "office.governor.plural": "Governor",
-
   "race.title.house": "{state} District {district}",
   "race.title.houseAtLarge": "{state} At-Large District",
   "race.title.houseDelegate": "District of Columbia Delegate",
@@ -60,7 +56,6 @@
   "race.partyNotListed": "Not listed by source",
   "race.partyFecCode": "{code} (FEC party code)",
   "race.openPrimary": "On {date}, this contest is an open primary: all candidates appear on one ballot regardless of party. If no candidate meets the threshold set by state law, a runoff is scheduled for {runoff}.",
-
   "finance.heading": "Campaign finance",
   "finance.intro": "Totals reported to the Federal Election Commission by each candidate's authorized committees for the 2025 to 2026 cycle, through the coverage end date shown.",
   "finance.receipts": "Total receipts",
@@ -70,13 +65,11 @@
   "finance.noMatch": "No FEC filing matched",
   "finance.notApplicable": "Candidates for governor do not file with the FEC. State campaign finance reports are available from each state.",
   "finance.noMatchNote": "\"No FEC filing matched\" means we could not confidently link this candidate to an FEC record. Some candidates are not required to file. We do not guess.",
-
   "map.heading": "District map",
   "map.caption": "{title} under the boundaries in effect for the 2026 election.",
   "map.enacted": "Boundaries for 2026: {instrument}.",
   "map.unavailable": "A map of this district is not available yet.",
   "map.altTable": "The district outline is described by its boundary file, which you can download from the Data page.",
-
   "history.heading": "Past results for this seat",
   "history.houseNote": "Results for district {district} under the boundaries in effect at the time of each election. District lines change after redistricting, so these may describe different areas than the 2026 district.",
   "history.none": "No historical results are available for this seat in our sources.",
@@ -89,7 +82,6 @@
   "history.total": "Total votes",
   "history.order": "Ordered by votes received, as reported in the certified results.",
   "history.partyCodes": "Party labels are shown as coded in the source dataset (for example D, R, Lbt).",
-
   "demo.heading": "District demographics",
   "demo.vintage": "Census American Community Survey 5-year estimates, 2020 to 2024. Margins of error are at the 90 percent confidence level.",
   "demo.notAvailableChanged": "Not available for this district's 2026 boundaries. The Census Bureau publishes these estimates for the district lines used in 2024. {state} adopted new lines for 2026, so those estimates describe a different area. We do not approximate.",
@@ -98,11 +90,9 @@
   "demo.col.estimate": "Estimate",
   "demo.col.moe": "Margin of error",
   "demo.notice": "This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.",
-
   "results.heading": "Results",
   "results.official": "Official results for this race will be posted by {office}.",
   "results.link": "Official results site",
-
   "state.title": "{state}",
   "state.races": "Races on the 2026 ballot",
   "state.keyDates": "Key dates",
@@ -123,10 +113,8 @@
   "state.noGovernor": "No governor election in {state} in 2026.",
   "state.noSenate": "No U.S. Senate election in {state} in 2026.",
   "state.raceList": "Each link opens the race page.",
-
   "states.title": "States",
   "states.intro": "Choose a state to see every 2026 U.S. House, U.S. Senate, and governor race on its ballot, with links to its official election office.",
-
   "home.lookupHeading": "Find the races on your ballot",
   "home.lookupBody": "Use your location to find your congressional district. Your location stays in your browser.",
   "home.lookupCta": "Find your ballot",
@@ -140,14 +128,12 @@
   "home.p2": "Candidates are listed in ballot order when the official source gives one, otherwise alphabetically by last name.",
   "home.p3": "Party names appear exactly as the official source lists them.",
   "home.p4": "We do not forecast, rate races, or call winners.",
-
   "updated.heading": "Data last updated",
   "updated.stale": "Out of date: the last update attempt for this source failed. Showing the last good data, retrieved {date}.",
   "updated.never": "Not yet available",
   "updated.col.source": "Data",
   "updated.col.retrieved": "Retrieved",
   "updated.siteBuilt": "Page built {date}.",
-
   "lookup.title": "Find your ballot",
   "lookup.intro": "Find your congressional district and the races on your ballot on November 3, 2026.",
   "lookup.privacy": "Your location is used only inside your browser to match it against district boundaries. It is never sent to us or stored.",
@@ -170,14 +156,12 @@
   "lookup.accuracy": "District boundaries are simplified for speed. Results near a boundary may be wrong. Your state's official lookup is the authority.",
   "lookup.loading": "Loading boundaries...",
   "lookup.loadError": "Boundary data could not be loaded. Please try again later or use the States page.",
-
   "howToVote.title": "How to vote",
   "howToVote.intro": "Rules for registering and voting differ by state and can change. We do not restate them here, because errors cause real harm. Use the official links below.",
   "howToVote.voteGov": "Vote.gov, the federal government's registration site, run by the U.S. Election Assistance Commission",
   "howToVote.col.state": "State",
   "howToVote.col.official": "Official state voter information",
   "howToVote.col.voteGov": "Vote.gov",
-
   "night.title": "Election night",
   "night.intro": "Official results come from state and local election officials. Use the links below for each state's official results site.",
   "night.col.state": "State",
@@ -191,12 +175,10 @@
   "night.fetched": "Fetched by us {date}",
   "night.sourceUpdated": "Source updated {date}",
   "night.source": "Source",
-
   "downloads.title": "Data downloads",
   "downloads.intro": "Every dataset this site uses, in CSV and JSON. Our compilation is licensed CC BY 4.0. Underlying sources keep their own licenses, listed on the Sources page.",
   "downloads.rows": "{count} rows",
   "downloads.sources": "Sources",
-
   "sources.title": "Sources",
   "sources.intro": "Every source cited on this site. Citation markers next to figures link here.",
   "sources.publisher": "Publisher",
@@ -205,16 +187,50 @@
   "sources.published": "Published by source",
   "sources.link": "Original source",
   "sources.notes": "Notes",
-
   "corrections.title": "Corrections",
   "corrections.intro": "A public, dated log of errors we have corrected. To report an error, open an issue.",
   "corrections.none": "No corrections have been logged yet.",
-
   "cite.label": "Source: {name}",
   "cite.derived": "How this is calculated",
-
   "notFound.title": "Page not found",
   "notFound.body": "We could not find that page.",
-
-  "date.never": "never"
+  "date.never": "never",
+  "footer.aboutHeading": "About this site",
+  "footer.projectHeading": "Project",
+  "home.title": "Who is on the ballot on November 3, 2026",
+  "home.officesLede": "Choose an office to see every race, or pick a state on the map.",
+  "home.houseSeats": "{count} seats, including the District of Columbia delegate",
+  "home.senateSeats": "{count} seats, including special elections",
+  "home.governorSeats": "{count} seats",
+  "office.index.house": "All {count} U.S. House races on November 3, 2026, grouped by state, including the District of Columbia delegate.",
+  "office.index.senate": "All {count} U.S. Senate races on November 3, 2026, including special elections.",
+  "office.index.governors": "All {count} governor races on November 3, 2026.",
+  "map.us.label": "Map of the United States. Each state links to its page.",
+  "map.us.caption": "Select a state on the map or from the list below.",
+  "map.state.label": "Map of {state} congressional districts. Each district links to its race page.",
+  "map.state.caption": "{state} congressional districts for the 2026 election. Select a district to open its race.",
+  "state.map": "Congressional districts",
+  "state.description": "{count} races on the November 3, 2026 ballot in {state}, with links to the state's official election office.",
+  "state.noOffice": "Not yet compiled.",
+  "state.register": "Register to vote",
+  "race.aside.label": "Race facts",
+  "race.aside.office": "Office",
+  "race.aside.state": "State",
+  "race.aside.date": "Election date",
+  "race.aside.list": "Candidate list",
+  "race.aside.results": "Official results",
+  "race.aside.onThisPage": "On this page",
+  "race.status.official": "Official state list",
+  "race.status.fec": "FEC registrants, not the official ballot",
+  "race.status.unavailable": "Official list not yet compiled",
+  "race.col.source": "Source",
+  "night.officialHeading": "Official results by state",
+  "night.noLink": "Not yet compiled",
+  "search.title": "Search",
+  "search.intro": "Search races, states and candidates by name. The search runs in your browser.",
+  "search.placeholder": "Candidate, state or district",
+  "search.noJs": "Search needs JavaScript. You can browse by state instead.",
+  "search.missing": "Search is not available right now. You can browse by state instead.",
+  "sources.id": "Identifier",
+  "lookup.or": "or"
 }

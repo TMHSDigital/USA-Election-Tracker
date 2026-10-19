@@ -1,0 +1,72 @@
+---
+// National map rendered to static SVG at build time. Every state is a link to
+// its page. One fill for all states: nothing here encodes parties or outcomes.
+// Small northeastern states and DC are listed down the right edge with leader
+// lines, so each of the 51 jurisdictions has a readable text link in the map.
+import { getStates, readGeo } from '../lib/data';
+import { bboxOf, labelPoint, projectUsStates } from '../lib/geo';
+import { stateUrl } from '../lib/format';
+import { t } from '../i18n';
+
+const geo = readGeo('states.geojson');
+const names = new Map(getStates().map((s) => [s.state_po, s.state_name]));
+const shapes = geo ? projectUsStates(geo) : [];
+
+// States too small to label in place, in north-to-south order for the side list.
+const SIDE = ['VT', 'NH', 'MA', 'RI', 'CT', 'NJ', 'DE', 'MD', 'DC'];
+// Nudges for states whose bounding-box center falls on water or an odd lobe.
+const NUDGE: Record<string, [number, number]> = {
+  FL: [22, 10], MI: [26, 30], LA: [-12, -8], ID: [-4, 28], AK: [20, -14], HI: [34, 14],
+  MN: [-6, 10], WI: [0, 10], VA: [10, 6], NY: [6, 8], CA: [-8, 0], MD: [0, 0], WV: [-4, 4],
+  NC: [8, 0], KY: [8, 6], TN: [0, 0], OK: [12, 6], TX: [0, 0], WA: [0, 0], MA: [0, 0],
+};
+const labels = shapes.map((s) => {
+  const p = labelPoint(s.d);
+  const [dx, dy] = NUDGE[s.key] ?? [0, 0];
+  return { po: s.key, x: (p?.x ?? 0) + dx, y: (p?.y ?? 0) + dy, side: SIDE.includes(s.key) };
+});
+const sideItems = labels.filter((l) => l.side).sort((a, b) => a.y - b.y);
+const SIDE_X = 918, SIDE_Y0 = 118, SIDE_STEP = 24;
+// Crop the canvas to the drawn shapes plus the side list.
+const boxes = shapes.map((s) => bboxOf(s.d));
+const minX = Math.min(...boxes.map((b) => b[0])) - 8;
+const minY = Math.min(...boxes.map((b) => b[1])) - 8;
+const maxX = Math.max(SIDE_X + 36, ...boxes.map((b) => b[2])) + 8;
+const maxY = Math.max(...boxes.map((b) => b[3])) + 8;
+const viewBox = `${minX} ${minY} ${maxX - minX} ${maxY - minY}`;
+---
+{shapes.length > 0 && (
+  <figure class="map-nav us-map">
+    <svg viewBox={viewBox} role="group" aria-label={t('map.us.label')}>
+      {shapes.map((s) => (
+        <a href={stateUrl(s.key)} aria-label={names.get(s.key) ?? s.key}>
+          <title>{names.get(s.key) ?? s.key}</title>
+          <path d={s.d} />
+        </a>
+      ))}
+      <g class="labels" aria-hidden="true">
+        {labels.filter((l) => !l.side).map((l) => <text x={l.x} y={l.y} font-size="13">{l.po}</text>)}
+      </g>
+      <g class="side">
+        {sideItems.map((l, i) => {
+          const y = SIDE_Y0 + i * SIDE_STEP;
+          return (
+            <>
+              <a href={stateUrl(l.po)} aria-label={names.get(l.po) ?? l.po}>
+                <title>{names.get(l.po) ?? l.po}</title>
+                <text x={SIDE_X} y={y} font-size="13">{l.po}</text>
+              </a>
+              <line x1={SIDE_X - 6} y1={y} x2={l.x} y2={l.y} />
+            </>
+          );
+        })}
+      </g>
+    </svg>
+    <figcaption class="map-caption">{t('map.us.caption')}</figcaption>
+  </figure>
+)}
+
+<style>
+  /* Labels are unreadable on narrow screens; the full state list follows the map. */
+  @media (max-width: 40rem) { .us-map .labels, .us-map .side { display: none; } }
+</style>
