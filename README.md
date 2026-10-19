@@ -3,6 +3,8 @@
 A free, neutral, static website with data on the November 3, 2026 elections for
 U.S. House, U.S. Senate, and governor. Every figure links to its source.
 
+---
+
 Site: https://tmhsdigital.github.io/USA-Election-Tracker/
 
 A TM Hospitality Strategies project.
