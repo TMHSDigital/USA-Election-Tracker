@@ -10,7 +10,9 @@ interface Props {
   office: Office;
 }
 const { office } = Astro.props;
-const races = getRaceIndex().filter((r) => r.office === office);
+const races = getRaceIndex()
+  .filter((r) => r.office === office)
+  .sort((a, b) => a.state_name.localeCompare(b.state_name) || (a.district ?? 0) - (b.district ?? 0) || Number(a.special) - Number(b.special));
 const introKey = { house: 'office.index.house', senate: 'office.index.senate', governor: 'office.index.governors' }[office] as 'office.index.house';
 const byState = new Map<string, RaceSummary[]>();
 for (const r of races) byState.set(r.state_name, [...(byState.get(r.state_name) ?? []), r]);

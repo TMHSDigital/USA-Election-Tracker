@@ -38,7 +38,7 @@ export function intersects(d: string, viewBox: string): boolean {
 }
 
 /** viewBox framing one shape with padding, clamped to the full extent. */
-export function focusViewBox(full: string, d: string, pad = 0.6): string {
+export function focusViewBox(full: string, d: string, pad = 0.4): string {
   const [, , W, H] = full.split(' ').map(Number);
   const nums = d.match(/-?\d+/g)?.map(Number) ?? [];
   let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;

@@ -22,7 +22,7 @@ const contests: LiveContest[] = fs.existsSync(path.join(dir, 'contests.json'))
   ? JSON.parse(fs.readFileSync(path.join(dir, 'contests.json'), 'utf8'))
   : [];
 ---
-<div class="notice"><p><strong>{t('night.unofficial')}.</strong> {t('night.liveLag')}</p></div>
+<div class="notice"><p><strong>{t('night.unofficial')}.</strong> {t('night.liveLag')} {t('race.partyNote')}</p></div>
 {contests.map((c) => (
   <div class="table-scroll">
     <table>

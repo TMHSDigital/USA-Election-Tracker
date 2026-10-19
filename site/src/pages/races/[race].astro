@@ -86,7 +86,7 @@ const sections = [
                 </tbody>
               </table>
             </div>
-            <p class="note">{race.order_method === 'ballot' ? t('race.order.ballot') : t('race.order.alphabetical')}</p>
+            <p class="note">{race.order_method === 'ballot' ? t('race.order.ballot') : t('race.order.alphabetical')} {t('race.partyNote')}</p>
           </>
         ) : ls === 'official' && <p>{t('race.candidates.none')}</p>}
       </section>
