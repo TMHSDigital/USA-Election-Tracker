@@ -12,8 +12,12 @@ A TM Hospitality Strategies project.
 - A page for every race: candidates as listed by state election officials,
   FEC fundraising totals for federal candidates, the district map for 2026,
   past results for the seat, and citations.
-- A page for every state, with its races and official election office links.
+- A page for every state, with a map of its congressional districts (each one
+  a link to its race), its races, and official election office links.
+- A national map on the home page where every state is a link, plus an index
+  page for each office (U.S. House, U.S. Senate, governor).
 - A ballot lookup that finds your congressional district in your browser.
+- Site search that runs in the browser (Pagefind), with no query sent anywhere.
 - Links to official voting information and official results for every state.
 - Every dataset, downloadable as CSV and JSON.
 

@@ -73,7 +73,15 @@ referenced source id is undefined.
 
 - Astro 7, static output, base path `/USA-Election-Tracker/`.
 - Race and state pages ship zero JavaScript. District maps are inline SVG
-  rendered at build time. Only the ballot lookup page has a script (about 4 KB).
+  rendered at build time. The national map on the home page (Albers equal-area
+  composite, every state an SVG link) and each state's district map (every
+  district an SVG link) are also build-time SVG. Only the ballot lookup page
+  (about 4 KB) and the search page (Pagefind UI, loaded from the site itself)
+  run scripts.
+- Typeface: Public Sans (SIL OFL, the U.S. Web Design System face), self-hosted
+  from the `@fontsource-variable/public-sans` package. One variable woff2 of
+  about 50 KB is preloaded; no third-party font service. One accent color
+  (dark ochre), no party colors, one map fill; dark mode mirrors every token.
 - Every figure is wrapped in an element marked `data-figure` containing a
   citation link (`data-cite`) to the Sources page. `scripts/check-site.mjs`
   fails the build if any figure lacks a citation, any citation points to a
