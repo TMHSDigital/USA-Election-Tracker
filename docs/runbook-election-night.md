@@ -17,7 +17,7 @@ Commands are PowerShell on Windows and work the same in any shell with `gh`.
      and `.../<version>/json/en/summary.json` in a browser; copy each contest
      name we will show exactly into `contests`, mapped to our `race_id`.
    - Read the vendor terms linked in `sources/registry.yaml` (`clarity_enr`)
-     and record the decision in the PR.
+     and record the decision in the decision log below.
 3. Dry run: `gh workflow run live-results.yml -f ignore_window=true` with
    `LIVE_RESULTS_ENABLED` set to `true`, confirm the election night page shows
    the contests with "Unofficial", the reporting text, source link, and fetch
@@ -63,7 +63,7 @@ Run it by hand: `gh workflow run live-results.yml`. Check progress with
 
 The adapter fails validation (for example, a renamed contest), keeps the last
 good live data, and the page shows the out of date notice with the last fetch
-time. Fix the contest mapping in `data/seeds/live-sources-2026.yaml` by PR, or
+time. Fix the contest mapping in `data/seeds/live-sources-2026.yaml` with a commit to `main`, or
 turn the tier off. Never hand-edit vote numbers.
 
 ## Roll back a bad deploy

@@ -171,7 +171,7 @@ FL, LA, NC, OH, TN, TX, UT. Each boundary set names its enacting law, ballot
 measure, or court order. Missouri's attempted 2025 map is not in effect.
 Failed or blocked attempts in VA, IN, NY, and MD did not change 2026 maps.
 Several cases remain pending (TX, CA, FL, TN, LA, AL, UT); the weekly review
-should recheck them, and any change goes through a PR to the boundary plan.
+should recheck them, and any change is committed to the boundary plan on `main`.
 
 ## Neutrality controls in code
 

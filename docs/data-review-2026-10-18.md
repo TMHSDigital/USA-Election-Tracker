@@ -2,7 +2,7 @@
 
 The candidate and election office seeds were compiled from official sources on
 2026-10-18. The items below need a human check before or soon after launch.
-Tick them off in a PR that edits the seeds, and log any published change in
+Tick them off in the commit that edits the seeds, and log any published change in
 `data/corrections.yaml`.
 
 ## Policy decisions

@@ -83,7 +83,7 @@ node scripts/check-copy.mjs           # no em dashes or emoji anywhere
 ## Adding or correcting data
 
 - Candidate or office corrections: edit the seed file in `data/seeds/` with
-  the official `source_url` and `retrieved_at`, and open a pull request.
+  the official `source_url` and `retrieved_at`, and commit it to `main`.
 - Log every published correction in `data/corrections.yaml`.
 - New sources: see [docs/adding-a-source.md](docs/adding-a-source.md). New
   external sources need maintainer approval before any code is written.

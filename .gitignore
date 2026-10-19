@@ -21,3 +21,6 @@ site/.astro/
 *.log
 .env
 .env.*
+
+# local Claude Code notes
+CLAUDE.md
