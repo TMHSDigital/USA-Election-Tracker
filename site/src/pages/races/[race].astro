@@ -77,10 +77,10 @@ const sections = [
                   {race.candidates.map((c) => (
                     <tr data-figure>
                       <th scope="row">{c.name}{c.write_in && <> <span class="badge">{t('race.writeIn')}</span></>}</th>
-                      {anyRunningMate && <td>{c.running_mate ?? ''}</td>}
-                      <td>{party(c)}</td>
-                      <td>{c.incumbent ? t('race.yes') : t('race.no')}</td>
-                      <td class="src"><Cite ids={c.source_ids} /></td>
+                      {anyRunningMate && <td data-label={t('race.col.runningMate')}>{c.running_mate ?? ''}</td>}
+                      <td data-label={t('race.col.party')}>{party(c)}</td>
+                      <td data-label={t('race.col.incumbent')}>{c.incumbent ? t('race.yes') : t('race.no')}</td>
+                      <td class="src" data-label={t('race.col.source')}><Cite ids={c.source_ids} /></td>
                     </tr>
                   ))}
                 </tbody>

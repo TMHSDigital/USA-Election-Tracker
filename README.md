@@ -15,7 +15,8 @@ A TM Hospitality Strategies project.
   FEC fundraising totals for federal candidates, the district map for 2026,
   past results for the seat, and citations.
 - A page for every state, with a map of its congressional districts (each one
-  a link to its race), its races, and official election office links.
+  a link to its race, with the candidate count shown on hover or focus), its
+  races, and official election office links.
 - A national map on the home page where every state is a link and shows the
   offices on its ballot when hovered or focused, plus an index
   page for each office (U.S. House, U.S. Senate, governor).

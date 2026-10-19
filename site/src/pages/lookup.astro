@@ -74,6 +74,7 @@ const strings = {
   #result ul { padding-left: 1.1rem; }
   #map svg { width: 100%; max-width: 44rem; max-height: 60vh; height: auto; display: block; }
   #map path { cursor: pointer; outline: none; }
+  #map text { font-family: var(--display); font-stretch: var(--condensed); font-weight: 700; fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
   #map path:hover, #map path:focus-visible { fill: url(#hatch); stroke: var(--ink); stroke-width: 1.5; }
   #map path:focus-visible { stroke: var(--focus); stroke-width: 3; }
   #map path[aria-pressed="true"] { fill: var(--accent-tint); stroke: var(--ink); stroke-width: 2.5; }
@@ -192,10 +193,30 @@ const strings = {
     svg.setAttribute('viewBox', `0 0 ${W} ${Math.round((maxY - minY) * sc)}`);
     svg.setAttribute('role', 'group');
     svg.setAttribute('aria-label', S.mapHeading);
+    const px = (a: number) => (lon(a) - minX) * k * sc;
+    const py = (b: number) => (maxY - b) * sc;
+    const labels = document.createElementNS(svgNS, 'g');
+    labels.setAttribute('aria-hidden', 'true');
     for (const f of fc.features) {
       const d = Number(f.properties.district);
       const path = document.createElementNS(svgNS, 'path');
-      path.setAttribute('d', rings(f).flat().map((r) => 'M' + r.map(([a, b]) => `${((lon(a) - minX) * k * sc).toFixed(1)} ${((maxY - b) * sc).toFixed(1)}`).join('L') + 'Z').join(''));
+      path.setAttribute('d', rings(f).flat().map((r) => 'M' + r.map(([a, b]) => `${px(a).toFixed(1)} ${py(b).toFixed(1)}`).join('L') + 'Z').join(''));
+      // Number the district at the center of its largest outer ring when there is room.
+      let best: { x: number; y: number; size: number; area: number } | null = null;
+      for (const poly of rings(f)) {
+        let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        for (const [a, b] of poly[0]) { const X = px(a), Y = py(b); x0 = Math.min(x0, X); y0 = Math.min(y0, Y); x1 = Math.max(x1, X); y1 = Math.max(y1, Y); }
+        const w = x1 - x0, h = y1 - y0;
+        if (!best || w * h > best.area) best = { x: (x0 + x1) / 2, y: (y0 + y1) / 2, size: Math.min(w, h), area: w * h };
+      }
+      if (d > 0 && best && best.size >= 26) {
+        const text = document.createElementNS(svgNS, 'text');
+        text.setAttribute('x', best.x.toFixed(1));
+        text.setAttribute('y', best.y.toFixed(1));
+        text.setAttribute('font-size', '14');
+        text.textContent = String(d);
+        labels.append(text);
+      }
       const label = districtLabel(po, name, d);
       path.setAttribute('tabindex', '0');
       path.setAttribute('role', 'button');
@@ -213,6 +234,7 @@ const strings = {
       li.append(b);
       list.append(li);
     }
+    svg.append(labels);
     mapEl.append(svg);
   }
 

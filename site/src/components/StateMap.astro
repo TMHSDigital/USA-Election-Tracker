@@ -1,7 +1,11 @@
 ---
 // A state's congressional districts as static SVG, each one a link to its
 // race page. Geography only: one fill, no party or outcome coloring.
-import { getRaceIndex, readGeo } from '../lib/data';
+//
+// Hover or keyboard focus on a district reveals a tip with the race title
+// and its candidate count or list status, drawn after every district and
+// shown with CSS sibling selectors (no script).
+import { getRaceIndex, readGeo, type RaceSummary } from '../lib/data';
 import { labelPoint, projectFeatures } from '../lib/geo';
 import { raceUrl, raceTitle } from '../lib/format';
 import { t } from '../i18n';
@@ -16,16 +20,36 @@ const geo = readGeo(`display/${statePo.toLowerCase()}.geojson`);
 const projected = geo ? projectFeatures(geo, 600) : null;
 const races = new Map(getRaceIndex().filter((r) => r.office === 'house' && r.state_po === statePo).map((r) => [r.district ?? 0, r]));
 const shapes = (projected?.shapes ?? []).map((s) => ({ ...s, d: s.d, district: Number(s.key), race: races.get(Number(s.key)) }));
-const labels = shapes
-  .map((s) => ({ d: s.district, p: labelPoint(s.d) }))
+const points = shapes.map((s) => ({ s, p: labelPoint(s.d) }));
+const labels = points
+  .map(({ s, p }) => ({ d: s.district, p }))
   .filter((l): l is { d: number; p: NonNullable<typeof l.p> } => l.p !== null && l.p.size >= 26 && l.d > 0);
+const statusText = (r: RaceSummary) =>
+  r.list_status === 'official'
+    ? (r.candidate_count === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: r.candidate_count }))
+    : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
+
+const [vx, vy, vw, vh] = (projected?.viewBox ?? '0 0 600 600').split(' ').map(Number);
+const TIP_W = 190, TIP_H = 42;
+const tips = points
+  .filter((x): x is { s: (typeof shapes)[number] & { race: RaceSummary }; p: NonNullable<typeof x.p> } => x.p !== null && x.s.race !== undefined)
+  .map(({ s, p }) => {
+    let x = p.x + 12, y = p.y - TIP_H - 8;
+    if (x + TIP_W > vx + vw - 2) x = p.x - TIP_W - 12;
+    if (x < vx + 2) x = vx + 2;
+    if (y < vy + 2) y = p.y + 12;
+    return { d: s.district, x: Math.round(x), y: Math.round(y), title: raceTitle(s.race), status: statusText(s.race) };
+  });
+const tipCss = tips
+  .map((tip) => `.state-map a[data-d="${tip.d}"]:hover ~ .tips .tip[data-d="${tip.d}"],.state-map a[data-d="${tip.d}"]:focus-visible ~ .tips .tip[data-d="${tip.d}"]{display:block}`)
+  .join('');
 ---
 {projected && (
   <figure class="map-nav state-map">
     <svg viewBox={projected.viewBox} role="group" aria-label={t('map.state.label', { state: stateName })}>
       <MapDefs />
       {shapes.map((s) => s.race ? (
-        <a href={raceUrl(s.race.race_id)} aria-label={raceTitle(s.race)}>
+        <a href={raceUrl(s.race.race_id)} aria-label={raceTitle(s.race)} data-d={s.district}>
           <title>{raceTitle(s.race)}</title>
           <path d={s.d} />
         </a>
@@ -33,11 +57,24 @@ const labels = shapes
       <g aria-hidden="true">
         {labels.map((l) => <text x={l.p.x} y={l.p.y} font-size="14">{l.d}</text>)}
       </g>
+      <g class="tips" aria-hidden="true">
+        {tips.map((tip) => (
+          <g class="tip" data-d={tip.d}>
+            <rect x={tip.x} y={tip.y} width={TIP_W} height={TIP_H} />
+            <text class="tip-name" x={tip.x + 9} y={tip.y + 17}>{tip.title}</text>
+            <text class="tip-seats" x={tip.x + 9} y={tip.y + 33}>{tip.status}</text>
+          </g>
+        ))}
+      </g>
     </svg>
     <figcaption class="map-caption"><slot /></figcaption>
+    <Fragment set:html={`<style>${tipCss}</style>`} />
   </figure>
 )}
 
 <style is:global>
   .state-map svg { max-height: 70vh; margin: 0 auto; }
+  .state-map .tip .tip-name { font-size: 14px; }
+  .state-map .tip .tip-seats { font-size: 11px; }
+  @media (max-width: 40rem) { .state-map .tips { display: none; } }
 </style>
