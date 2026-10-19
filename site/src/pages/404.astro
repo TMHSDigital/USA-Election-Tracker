@@ -1,9 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { url } from '../lib/format';
 import { t } from '../i18n';
 ---
 <Base title={t('notFound.title')} noindex>
-  <h1>{t('notFound.title')}</h1>
-  <p>{t('notFound.body')} <a href={url('/')}>{t('nav.home')}</a></p>
+  <PageHeader title={t('notFound.title')} lede={t('notFound.body')} />
+  <ul>
+    <li><a href={url('/')}>{t('nav.home')}</a></li>
+    <li><a href={url('/states/')}>{t('nav.states')}</a></li>
+    <li><a href={url('/search/')}>{t('nav.search')}</a></li>
+  </ul>
 </Base>

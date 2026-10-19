@@ -1,0 +1,53 @@
+---
+// Site search over the static index Pagefind builds after `astro build`.
+// Runs entirely in the browser: no query leaves the page.
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { url } from '../lib/format';
+import { t } from '../i18n';
+
+const bundle = url('/pagefind/');
+---
+<Base title={t('search.title')} description={t('search.intro')}>
+  <PageHeader title={t('search.title')} lede={t('search.intro')} />
+  <noscript><p class="notice">{t('search.noJs')} <a href={url('/states/')}>{t('nav.states')}</a></p></noscript>
+  <div id="search" data-bundle={bundle} data-placeholder={t('search.placeholder')} data-missing={t('search.missing')}></div>
+  <link rel="stylesheet" href={`${bundle}pagefind-ui.css`} />
+  <script is:inline define:vars={{ bundle }}>
+    const root = document.getElementById('search');
+    const s = document.createElement('script');
+    s.src = bundle + 'pagefind-ui.js';
+    s.onload = () => {
+      new PagefindUI({
+        element: '#search',
+        bundlePath: bundle,
+        showImages: false,
+        showSubResults: true,
+        excerptLength: 20,
+        translations: { placeholder: root.dataset.placeholder },
+      });
+      const input = root.querySelector('input');
+      if (input) input.focus();
+    };
+    s.onerror = () => { root.textContent = root.dataset.missing; };
+    document.head.append(s);
+  </script>
+</Base>
+
+<style is:global>
+  #search { max-width: 46rem; }
+  #search .pagefind-ui {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: var(--ink);
+    --pagefind-ui-text: var(--ink);
+    --pagefind-ui-background: var(--paper);
+    --pagefind-ui-border: var(--graphite);
+    --pagefind-ui-tag: var(--stone-2);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 3px;
+    --pagefind-ui-font: var(--font);
+  }
+  #search .pagefind-ui__result-link { text-decoration-color: var(--seal); }
+  #search .pagefind-ui__result-title { font-weight: 600; }
+  #search mark { background: var(--seal-tint); color: inherit; }
+</style>

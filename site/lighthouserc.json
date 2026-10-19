@@ -6,7 +6,9 @@
         "http://localhost:4321/USA-Election-Tracker/states/tx/",
         "http://localhost:4321/USA-Election-Tracker/races/2026-house-tx-07/",
         "http://localhost:4321/USA-Election-Tracker/races/2026-senate-ga/",
-        "http://localhost:4321/USA-Election-Tracker/lookup/"
+        "http://localhost:4321/USA-Election-Tracker/lookup/",
+        "http://localhost:4321/USA-Election-Tracker/search/",
+        "http://localhost:4321/USA-Election-Tracker/house/"
       ],
       "numberOfRuns": 1,
       "settings": {

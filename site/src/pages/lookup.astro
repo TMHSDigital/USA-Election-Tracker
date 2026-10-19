@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { getStates } from '../lib/data';
-import { dataUrl } from '../lib/format';
+import { dataUrl, url } from '../lib/format';
 import { t } from '../i18n';
 
 const states = getStates();
@@ -25,40 +26,53 @@ const strings = {
   districtList: t('lookup.districtList'),
 };
 ---
-<Base title={t('lookup.title')}>
-  <h1>{t('lookup.title')}</h1>
-  <p class="lede">{t('lookup.intro')}</p>
-  <p class="note">{t('lookup.privacy')}</p>
-  <noscript><p class="notice">{t('lookup.noJs')}</p></noscript>
+<Base title={t('lookup.title')} description={t('lookup.intro')}>
+  <PageHeader title={t('lookup.title')} lede={t('lookup.intro')}>
+    <p class="note" style="margin-top:0.75rem">{t('lookup.privacy')}</p>
+  </PageHeader>
+  <noscript><p class="notice">{t('lookup.noJs')} <a href={url('/states/')}>{t('nav.states')}</a></p></noscript>
 
   <div id="lookup" data-base={dataUrl('')} data-strings={JSON.stringify(strings)} hidden>
-    <p><button type="button" class="button" id="locate">{t('lookup.useLocation')}</button></p>
-    <p>
-      <label for="state">{t('lookup.chooseState')}</label><br />
-      <select id="state">
-        <option value="">{t('lookup.selectState')}</option>
-        {states.map((s) => <option value={s.state_po}>{s.state_name}</option>)}
-      </select>
-    </p>
-    <div id="status" role="status" aria-live="polite"></div>
+    <div class="panel lookup-controls">
+      <p><button type="button" class="button" id="locate">{t('lookup.useLocation')}</button></p>
+      <p class="or">{t('lookup.or')}</p>
+      <p>
+        <label for="state">{t('lookup.chooseState')}</label><br />
+        <select id="state">
+          <option value="">{t('lookup.selectState')}</option>
+          {states.map((s) => <option value={s.state_po}>{s.state_name}</option>)}
+        </select>
+      </p>
+    </div>
+    <div id="status" role="status" aria-live="polite" class="note"></div>
     <div id="result" tabindex="-1"></div>
     <section id="picker" hidden aria-labelledby="h-picker">
       <h2 id="h-picker">{t('lookup.mapHeading')}</h2>
       <p class="note">{t('lookup.mapHelp')}</p>
-      <div id="map"></div>
+      <div id="map" class="map-nav"></div>
       <h3>{t('lookup.districtList')}</h3>
-      <ul id="district-list" class="grid"></ul>
+      <ul id="district-list" class="chips"></ul>
     </section>
     <p class="note">{t('lookup.accuracy')}</p>
   </div>
 </Base>
 
 <style is:global>
+  .lookup-controls { max-width: 34rem; }
+  .lookup-controls p { margin: 0; }
+  .lookup-controls .or { margin: 0.75rem 0; color: var(--graphite); font-size: 0.875rem; }
+  .lookup-controls select { min-width: 16rem; margin-top: 0.3rem; }
+  #result { max-width: var(--measure); margin-top: 1.5rem; }
+  #result h2 { margin-top: 1.5rem; }
   #map svg { width: 100%; max-width: 40rem; height: auto; display: block; }
-  #map path { fill: var(--map-fill); stroke: var(--bg); stroke-width: 1; vector-effect: non-scaling-stroke; cursor: pointer; }
-  #map path:hover, #map path:focus-visible { fill: var(--accent); outline: none; }
-  #map path[aria-pressed="true"] { fill: var(--accent); }
-  #district-list button { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 0.3rem 0.6rem; font: inherit; color: var(--text); cursor: pointer; width: 100%; text-align: left; }
+  #map path { cursor: pointer; outline: none; }
+  #map path:hover, #map path:focus-visible { fill: var(--map-fill-active); stroke: var(--ink); stroke-width: 1.5; }
+  #map path:focus-visible { stroke: var(--seal); stroke-width: 3; }
+  #map path[aria-pressed="true"] { fill: var(--seal-tint); stroke: var(--ink); stroke-width: 1.5; }
+  .chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: 40rem; }
+  .chips li { max-width: none; }
+  .chips button { background: none; border: 1px solid var(--graphite); border-radius: var(--radius); padding: 0.4rem 0.75rem; font: inherit; font-size: 0.9375rem; color: var(--ink); cursor: pointer; }
+  .chips button:hover { background: var(--stone-2); border-color: var(--ink); }
 </style>
 
 <script>

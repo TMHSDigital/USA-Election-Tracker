@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import UsMap from '../components/UsMap.astro';
 import { ADAPTERS_FOR, getRaceIndex, getStates } from '../lib/data';
 import { stateUrl, url } from '../lib/format';
 import { t } from '../i18n';
@@ -7,23 +9,25 @@ import { t } from '../i18n';
 const races = getRaceIndex();
 const count = (o: string) => races.filter((r) => r.office === o).length;
 const states = getStates();
+const offices = [
+  ['/house/', 'office.house', 'home.houseSeats', count('house')],
+  ['/senate/', 'office.senate', 'home.senateSeats', count('senate')],
+  ['/governors/', 'office.governor', 'home.governorSeats', count('governor')],
+] as const;
 ---
 <Base title={t('site.name')} adapters={ADAPTERS_FOR.home}>
-  <h1>{t('site.name')}</h1>
-  <p class="lede">{t('site.tagline')}</p>
-
-  <section aria-labelledby="h-lookup" class="card">
-    <h2 id="h-lookup" style="margin-top:0">{t('home.lookupHeading')}</h2>
-    <p>{t('home.lookupBody')}</p>
-    <p><a class="button" href={url('/lookup/')}>{t('home.lookupCta')}</a></p>
-  </section>
+  <div class="hero">
+    <PageHeader title={t('home.title')} lede={t('site.tagline')} />
+    <UsMap />
+  </div>
 
   <section aria-labelledby="h-offices">
     <h2 id="h-offices">{t('home.officesHeading')}</h2>
-    <ul>
-      <li>{t('home.houseCount', { count: count('house') })}</li>
-      <li>{t('home.senateCount', { count: count('senate') })}</li>
-      <li>{t('home.governorCount', { count: count('governor') })}</li>
+    <p class="note">{t('home.officesLede')}</p>
+    <ul class="offices">
+      {offices.map(([href, name, seats, n]) => (
+        <li><a href={url(href)}>{t(name)}</a><p>{t(seats, { count: n })}</p></li>
+      ))}
     </ul>
   </section>
 

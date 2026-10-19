@@ -1,22 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cite from '../components/Cite.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { ADAPTERS_FOR, getDownloads } from '../lib/data';
 import { dataUrl } from '../lib/format';
 import { t } from '../i18n';
 
 const downloads = getDownloads();
 ---
-<Base title={t('downloads.title')} adapters={ADAPTERS_FOR.home}>
-  <h1>{t('downloads.title')}</h1>
-  <p class="lede">{t('downloads.intro')}</p>
-  <ul class="cards">
+<Base title={t('downloads.title')} description={t('downloads.intro')} adapters={ADAPTERS_FOR.home}>
+  <PageHeader title={t('downloads.title')} lede={t('downloads.intro')} />
+  <ul class="downloads">
     {downloads.map((d) => (
-      <li class="card">
-        <h2 style="margin-top:0;font-size:1.1rem">{d.name}</h2>
+      <li>
+        <h2>{d.name}</h2>
         <p>{d.description}</p>
         <p class="note">{t('downloads.rows', { count: d.rows.toLocaleString('en-US') })}. {d.license}.</p>
-        <p>{d.files.map((f, i) => <>{i > 0 && ' | '}<a href={dataUrl(`downloads/${f}`)} download>{f}</a></>)}</p>
+        <p class="files">{d.files.map((f) => <a href={dataUrl(`downloads/${f}`)} download>{f}</a>)}</p>
         {d.source_ids.length > 0 && <p class="note">{t('downloads.sources')}: <Cite ids={d.source_ids.slice(0, 8)} />{d.source_ids.length > 8 && ` +${d.source_ids.length - 8}`}</p>}
       </li>
     ))}

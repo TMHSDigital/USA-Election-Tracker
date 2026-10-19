@@ -1,26 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { getSources } from '../lib/data';
 import { sourceAnchor } from '../lib/format';
 import { fmtDateTime, t } from '../i18n';
 
 const sources = getSources();
 ---
-<Base title={t('sources.title')}>
-  <h1>{t('sources.title')}</h1>
-  <p class="lede">{t('sources.intro')}</p>
-  <ul style="list-style:none;padding:0">
+<Base title={t('sources.title')} description={t('sources.intro')}>
+  <PageHeader title={t('sources.title')} lede={t('sources.intro')} />
+  <ul class="sources-list">
     {sources.map((s) => (
-      <li id={sourceAnchor(s.source_id)} class="card" style="margin-bottom:0.75rem">
-        <h2 style="margin:0 0 0.4rem;font-size:1.05rem">{s.name}</h2>
-        <dl style="margin:0">
-          <dt class="note">{t('sources.publisher')}</dt><dd>{s.publisher}</dd>
-          <dt class="note">{t('sources.license')}</dt><dd>{s.license}</dd>
-          <dt class="note">{t('sources.retrieved')}</dt><dd>{fmtDateTime(s.retrieved_at)}</dd>
-          {s.source_published_at && <><dt class="note">{t('sources.published')}</dt><dd>{fmtDateTime(s.source_published_at)}</dd></>}
-          {s.notes && <><dt class="note">{t('sources.notes')}</dt><dd>{s.notes}</dd></>}
+      <li id={sourceAnchor(s.source_id)}>
+        <h2>{s.name}</h2>
+        <dl>
+          <dt>{t('sources.publisher')}</dt><dd>{s.publisher}</dd>
+          <dt>{t('sources.license')}</dt><dd>{s.license}</dd>
+          <dt>{t('sources.retrieved')}</dt><dd>{fmtDateTime(s.retrieved_at)}</dd>
+          {s.source_published_at && <><dt>{t('sources.published')}</dt><dd>{fmtDateTime(s.source_published_at)}</dd></>}
+          {s.notes && <><dt>{t('sources.notes')}</dt><dd>{s.notes}</dd></>}
+          <dt>{t('sources.id')}</dt><dd><code>{s.source_id}</code></dd>
         </dl>
-        <p style="margin:0.4rem 0 0"><a href={s.url}>{t('sources.link')}</a> <span class="note">({s.source_id})</span></p>
+        <p style="margin:0"><a href={s.url}>{t('sources.link')}</a></p>
       </li>
     ))}
   </ul>

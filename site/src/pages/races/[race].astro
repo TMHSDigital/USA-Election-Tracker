@@ -2,8 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import Cite from '../../components/Cite.astro';
 import DistrictMap from '../../components/DistrictMap.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import RaceAside from '../../components/RaceAside.astro';
 import { ADAPTERS_FOR, getRace, getRaceIndex, getStates, type Candidate } from '../../lib/data';
-import { raceHeading, raceTitle, stateUrl, url } from '../../lib/format';
+import { officeName, raceHeading, raceTitle, stateUrl, url } from '../../lib/format';
 import { fmtDate, fmtInt, fmtMoney, fmtPct, t } from '../../i18n';
 
 export function getStaticPaths() {
@@ -27,171 +29,195 @@ function party(c: Candidate): string {
 const moneyCite = (ids: string[]) => (ids.includes('fec_bulk_weball') ? ['fec_bulk_weball'] : ids);
 const anyRunningMate = race.candidates.some((c) => c.running_mate);
 const changedBoundaries = race.demographics && !race.demographics.available && race.demographics.reason === 'boundaries_changed';
+const hasCandidates = race.candidates.length > 0;
+
+const sections = [
+  { id: 'h-candidates', label: t('race.candidates') },
+  ...(hasCandidates ? [{ id: 'h-finance', label: t('finance.heading') }] : []),
+  ...(race.office === 'house' ? [{ id: 'h-map', label: t('map.heading') }] : []),
+  ...(race.demographics ? [{ id: 'h-demo', label: t('demo.heading') }] : []),
+  { id: 'h-history', label: t('history.heading') },
+  { id: 'h-results', label: t('results.heading') },
+];
 ---
 <Base title={heading} description={`${heading}. ${t('race.electionDate', { date: fmtDate(race.election_date) })}`} adapters={ADAPTERS_FOR.race}>
-  <p class="crumbs"><a href={url('/states/')}>{t('nav.states')}</a> / <a href={stateUrl(race.state_po)}>{race.state_name}</a></p>
-  <h1>{heading}</h1>
-  <p>{t('race.electionDate', { date: fmtDate(race.election_date) })}</p>
+  <PageHeader title={raceTitle(race)} kicker={officeName(race.office)}>
+    <Fragment slot="crumbs"><a href={url('/states/')}>{t('nav.states')}</a> / <a href={stateUrl(race.state_po)}>{race.state_name}</a></Fragment>
+  </PageHeader>
 
-  {race.notes?.election_type === 'open_primary' && (
-    <p class="notice" data-figure>{t('race.openPrimary', { date: fmtDate(race.election_date), runoff: fmtDate(race.notes.runoff_date) })}<Cite ids={race.notes.source_ids} /></p>
-  )}
+  <div class="layout">
+    <RaceAside race={race} office={office} sections={sections} />
 
-  <section aria-labelledby="h-candidates">
-    <h2 id="h-candidates">{t('race.candidates')}</h2>
-    {ls === 'official' && <p>{t('race.candidates.official')}{race.candidate_list.url && <> <a href={race.candidate_list.url}>{t('race.officialList')}</a></>}<Cite ids={race.candidate_list.source_ids} /></p>}
-    {ls === 'fec_registrants' && <div class="notice"><p>{t('race.candidates.fecFallback')}</p>{office?.homepage_url && <p><a href={office.homepage_url}>{office.office_name}</a></p>}</div>}
-    {ls === 'unavailable' && <div class="notice"><p>{t('race.candidates.unavailable')}</p>{office?.homepage_url && <p><a href={office.homepage_url}>{office.office_name}</a><Cite ids={office.source_ids} /></p>}</div>}
+    <div class="content">
+      {race.notes?.election_type === 'open_primary' && (
+        <div class="notice" data-figure><p>{t('race.openPrimary', { date: fmtDate(race.election_date), runoff: fmtDate(race.notes.runoff_date) })}<Cite ids={race.notes.source_ids} /></p></div>
+      )}
 
-    {race.candidates.length > 0 ? (
-      <>
-        <p class="note">{race.order_method === 'ballot' ? t('race.order.ballot') : t('race.order.alphabetical')}</p>
-        <div class="table-scroll">
-          <table>
-            <caption class="visually-hidden">{t('race.candidates')}: {raceTitle(race)}</caption>
-            <thead>
-              <tr>
-                <th scope="col">{t('race.col.name')}</th>
-                {anyRunningMate && <th scope="col">{t('race.col.runningMate')}</th>}
-                <th scope="col">{t('race.col.party')}</th>
-                <th scope="col">{t('race.col.incumbent')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {race.candidates.map((c) => (
-                <tr data-figure>
-                  <th scope="row">{c.name}{c.write_in && <> <span class="badge">{t('race.writeIn')}</span></>}<Cite ids={c.source_ids} /></th>
-                  {anyRunningMate && <td>{c.running_mate ?? ''}</td>}
-                  <td>{party(c)}</td>
-                  <td>{c.incumbent ? t('race.yes') : t('race.no')}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </>
-    ) : ls === 'official' && <p>{t('race.candidates.none')}</p>}
-  </section>
+      <section aria-labelledby="h-candidates">
+        <h2 id="h-candidates">{t('race.candidates')}</h2>
+        {ls === 'official' && <p class="note">{t('race.candidates.official')}{race.candidate_list.url && <> <a href={race.candidate_list.url}>{t('race.officialList')}</a></>}<Cite ids={race.candidate_list.source_ids} /></p>}
+        {ls === 'fec_registrants' && <div class="notice"><p>{t('race.candidates.fecFallback')}</p>{office?.homepage_url && <p><a href={office.homepage_url}>{office.office_name}</a></p>}</div>}
+        {ls === 'unavailable' && <div class="notice"><p>{t('race.candidates.unavailable')}</p>{office?.homepage_url && <p><a href={office.homepage_url}>{office.office_name}</a><Cite ids={office.source_ids} /></p>}</div>}
 
-  {race.candidates.length > 0 && (
-    <section aria-labelledby="h-finance">
-      <h2 id="h-finance">{t('finance.heading')}</h2>
-      {federal ? (
-        <>
-          <p class="note">{t('finance.intro')}</p>
+        {hasCandidates ? (
+          <>
+            <div class="table-scroll">
+              <table class="candidates">
+                <caption class="visually-hidden">{t('race.candidates')}: {raceTitle(race)}</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">{t('race.col.name')}</th>
+                    {anyRunningMate && <th scope="col">{t('race.col.runningMate')}</th>}
+                    <th scope="col">{t('race.col.party')}</th>
+                    <th scope="col">{t('race.col.incumbent')}</th>
+                    <th scope="col" class="src">{t('race.col.source')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {race.candidates.map((c) => (
+                    <tr data-figure>
+                      <th scope="row">{c.name}{c.write_in && <> <span class="badge">{t('race.writeIn')}</span></>}</th>
+                      {anyRunningMate && <td>{c.running_mate ?? ''}</td>}
+                      <td>{party(c)}</td>
+                      <td>{c.incumbent ? t('race.yes') : t('race.no')}</td>
+                      <td class="src"><Cite ids={c.source_ids} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="note">{race.order_method === 'ballot' ? t('race.order.ballot') : t('race.order.alphabetical')}</p>
+          </>
+        ) : ls === 'official' && <p>{t('race.candidates.none')}</p>}
+      </section>
+
+      {hasCandidates && (
+        <section aria-labelledby="h-finance">
+          <h2 id="h-finance">{t('finance.heading')}</h2>
+          {federal ? (
+            <>
+              <p class="note">{t('finance.intro')}</p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">{t('race.col.name')}</th>
+                      <th scope="col" class="num">{t('finance.receipts')}</th>
+                      <th scope="col" class="num">{t('finance.disbursements')}</th>
+                      <th scope="col" class="num">{t('finance.cashOnHand')}</th>
+                      <th scope="col">{t('finance.coverageEnd')}</th>
+                      <th scope="col" class="src">{t('race.col.source')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {race.candidates.map((c) => c.finance ? (
+                      <tr data-figure>
+                        <th scope="row">{c.name}</th>
+                        <td class="num">{fmtMoney(c.finance.receipts)}</td>
+                        <td class="num">{fmtMoney(c.finance.disbursements)}</td>
+                        <td class="num">{fmtMoney(c.finance.cash_on_hand)}</td>
+                        <td>{fmtDate(c.finance.coverage_end_date)}</td>
+                        <td class="src"><Cite ids={moneyCite(c.finance.source_ids)} /></td>
+                      </tr>
+                    ) : (
+                      <tr>
+                        <th scope="row">{c.name}</th>
+                        <td colspan="5">{t('finance.noMatch')}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {race.candidates.some((c) => !c.finance) && <p class="note">{t('finance.noMatchNote')}</p>}
+            </>
+          ) : <p>{t('finance.notApplicable')}</p>}
+        </section>
+      )}
+
+      {race.office === 'house' && (
+        <section aria-labelledby="h-map">
+          <h2 id="h-map">{t('map.heading')}</h2>
+          {race.boundary ? (
+            <figure>
+              <DistrictMap displayPath={race.boundary.display_path} district={race.district ?? 0} label={t('map.caption', { title: raceTitle(race) })} />
+              <figcaption class="map-caption" data-figure>
+                {t('map.caption', { title: raceTitle(race) })} {t('map.enacted', { instrument: race.boundary.enacting_instrument })}
+                {race.boundary.enacting_instrument_url && <> <a href={race.boundary.enacting_instrument_url}>{race.boundary.enacting_instrument_url.replace(/^https?:\/\//, '').split('/')[0]}</a></>}
+                <Cite ids={race.boundary.source_ids} />
+              </figcaption>
+            </figure>
+          ) : <p>{t('map.unavailable')}</p>}
+        </section>
+      )}
+
+      {race.demographics && (
+        <section aria-labelledby="h-demo">
+          <h2 id="h-demo">{t('demo.heading')}</h2>
+          {race.demographics.available ? (
+            <>
+              <p class="note">{t('demo.vintage')}</p>
+              <table>
+                <thead><tr><th scope="col">{t('demo.col.measure')}</th><th scope="col" class="num">{t('demo.col.estimate')}</th><th scope="col" class="num">{t('demo.col.moe')}</th><th scope="col" class="src">{t('race.col.source')}</th></tr></thead>
+                <tbody>
+                  {race.demographics.rows.map((d) => (
+                    <tr data-figure>
+                      <th scope="row">{d.label}</th>
+                      <td class="num">{d.variable === 'B19013_001' ? fmtMoney(d.estimate) : fmtInt(d.estimate)}</td>
+                      <td class="num">{d.moe == null ? '' : `+/- ${d.variable === 'B19013_001' ? fmtMoney(d.moe) : fmtInt(d.moe)}`}</td>
+                      <td class="src"><Cite ids={d.source_ids} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p class="note">{t('demo.notice')}</p>
+            </>
+          ) : <p>{changedBoundaries ? t('demo.notAvailableChanged', { state: race.state_name }) : t('demo.notAvailable')}</p>}
+        </section>
+      )}
+
+      <section aria-labelledby="h-history">
+        <h2 id="h-history">{t('history.heading')}</h2>
+        {race.office === 'house' && race.history.length > 0 && <p class="note">{t('history.houseNote', { district: race.district === 0 ? 'At-Large' : String(race.district) })}</p>}
+        {race.history.length === 0 && <p>{t('history.none')}</p>}
+        {race.history.length > 0 && <p class="note">{t('history.order')} {t('history.partyCodes')}</p>}
+        {race.history.map((h) => (
           <div class="table-scroll">
             <table>
+              <caption>{h.special ? t('history.yearSpecial', { year: h.year }) : t('history.year', { year: h.year })}</caption>
               <thead>
                 <tr>
-                  <th scope="col">{t('race.col.name')}</th>
-                  <th scope="col" class="num">{t('finance.receipts')}</th>
-                  <th scope="col" class="num">{t('finance.disbursements')}</th>
-                  <th scope="col" class="num">{t('finance.cashOnHand')}</th>
-                  <th scope="col">{t('finance.coverageEnd')}</th>
+                  <th scope="col">{t('history.col.candidate')}</th>
+                  <th scope="col">{t('history.col.party')}</th>
+                  <th scope="col" class="num">{t('history.col.votes')}</th>
+                  <th scope="col" class="num">{t('history.col.pct')}</th>
+                  <th scope="col" class="src">{t('race.col.source')}</th>
                 </tr>
               </thead>
               <tbody>
-                {race.candidates.map((c) => c.finance ? (
-                  <tr>
+                {h.candidates.map((c) => (
+                  <tr data-figure>
                     <th scope="row">{c.name}</th>
-                    <td class="num" data-figure>{fmtMoney(c.finance.receipts)}<Cite ids={moneyCite(c.finance.source_ids)} /></td>
-                    <td class="num" data-figure>{fmtMoney(c.finance.disbursements)}<Cite ids={moneyCite(c.finance.source_ids)} /></td>
-                    <td class="num" data-figure>{fmtMoney(c.finance.cash_on_hand)}<Cite ids={moneyCite(c.finance.source_ids)} /></td>
-                    <td data-figure>{fmtDate(c.finance.coverage_end_date)}<Cite ids={moneyCite(c.finance.source_ids)} /></td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <th scope="row">{c.name}</th>
-                    <td colspan="4">{t('finance.noMatch')}</td>
+                    <td>{c.party_label || t('race.partyNotListed')}</td>
+                    <td class="num">{fmtInt(c.votes)}</td>
+                    <td class="num">{fmtPct(c.pct)}</td>
+                    <td class="src"><Cite ids={h.source_ids} derived="share-of-total" /></td>
                   </tr>
                 ))}
               </tbody>
+              {h.total_votes && (
+                <tfoot><tr data-figure><th scope="row" colspan="2">{t('history.total')}</th><td class="num">{fmtInt(h.total_votes)}</td><td></td><td class="src"><Cite ids={h.source_ids} /></td></tr></tfoot>
+              )}
             </table>
           </div>
-          {race.candidates.some((c) => !c.finance) && <p class="note">{t('finance.noMatchNote')}</p>}
-        </>
-      ) : <p>{t('finance.notApplicable')}</p>}
-    </section>
-  )}
+        ))}
+      </section>
 
-  {race.office === 'house' && (
-    <section aria-labelledby="h-map">
-      <h2 id="h-map">{t('map.heading')}</h2>
-      {race.boundary ? (
-        <figure>
-          <DistrictMap displayPath={race.boundary.display_path} district={race.district ?? 0} label={t('map.caption', { title: raceTitle(race) })} />
-          <figcaption data-figure>
-            {t('map.caption', { title: raceTitle(race) })} {t('map.enacted', { instrument: race.boundary.enacting_instrument })}
-            {race.boundary.enacting_instrument_url && <> <a href={race.boundary.enacting_instrument_url}>{race.boundary.enacting_instrument_url.replace(/^https?:\/\//, '').split('/')[0]}</a></>}
-            <Cite ids={race.boundary.source_ids} />
-          </figcaption>
-        </figure>
-      ) : <p>{t('map.unavailable')}</p>}
-    </section>
-  )}
-
-  {race.demographics && (
-    <section aria-labelledby="h-demo">
-      <h2 id="h-demo">{t('demo.heading')}</h2>
-      {race.demographics.available ? (
-        <>
-          <p class="note">{t('demo.vintage')}</p>
-          <table>
-            <thead><tr><th scope="col">{t('demo.col.measure')}</th><th scope="col" class="num">{t('demo.col.estimate')}</th><th scope="col" class="num">{t('demo.col.moe')}</th></tr></thead>
-            <tbody>
-              {race.demographics.rows.map((d) => (
-                <tr>
-                  <th scope="row">{d.label}</th>
-                  <td class="num" data-figure>{d.variable === 'B19013_001' ? fmtMoney(d.estimate) : fmtInt(d.estimate)}<Cite ids={d.source_ids} /></td>
-                  <td class="num" data-figure>{d.moe == null ? '' : `+/- ${d.variable === 'B19013_001' ? fmtMoney(d.moe) : fmtInt(d.moe)}`}<Cite ids={d.source_ids} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p class="note">{t('demo.notice')}</p>
-        </>
-      ) : <p>{changedBoundaries ? t('demo.notAvailableChanged', { state: race.state_name }) : t('demo.notAvailable')}</p>}
-    </section>
-  )}
-
-  <section aria-labelledby="h-history">
-    <h2 id="h-history">{t('history.heading')}</h2>
-    {race.office === 'house' && race.history.length > 0 && <p class="note">{t('history.houseNote', { district: race.district === 0 ? 'At-Large' : String(race.district) })}</p>}
-    {race.history.length === 0 && <p>{t('history.none')}</p>}
-    {race.history.length > 0 && <p class="note">{t('history.order')} {t('history.partyCodes')}</p>}
-    {race.history.map((h) => (
-      <div class="table-scroll">
-        <table>
-          <caption>{h.special ? t('history.yearSpecial', { year: h.year }) : t('history.year', { year: h.year })}</caption>
-          <thead>
-            <tr>
-              <th scope="col">{t('history.col.candidate')}</th>
-              <th scope="col">{t('history.col.party')}</th>
-              <th scope="col" class="num">{t('history.col.votes')}</th>
-              <th scope="col" class="num">{t('history.col.pct')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {h.candidates.map((c) => (
-              <tr>
-                <th scope="row">{c.name}</th>
-                <td>{c.party_label || t('race.partyNotListed')}</td>
-                <td class="num" data-figure>{fmtInt(c.votes)}<Cite ids={h.source_ids} /></td>
-                <td class="num" data-figure>{fmtPct(c.pct)}<Cite ids={h.source_ids} derived="share-of-total" /></td>
-              </tr>
-            ))}
-          </tbody>
-          {h.total_votes && (
-            <tfoot><tr><th scope="row" colspan="2">{t('history.total')}</th><td class="num" data-figure>{fmtInt(h.total_votes)}<Cite ids={h.source_ids} /></td><td></td></tr></tfoot>
-          )}
-        </table>
-      </div>
-    ))}
-  </section>
-
-  <section aria-labelledby="h-results">
-    <h2 id="h-results">{t('results.heading')}</h2>
-    {office && <p>{t('results.official', { office: office.office_name })}</p>}
-    {office?.results_url && <p><a href={office.results_url}>{t('results.link')}: {office.office_name}</a><Cite ids={office.source_ids} /></p>}
-  </section>
+      <section aria-labelledby="h-results">
+        <h2 id="h-results">{t('results.heading')}</h2>
+        <p>{t('night.noCalls')}</p>
+        {office && <p>{t('results.official', { office: office.office_name })}</p>}
+        {office?.results_url && <p data-figure><a href={office.results_url}>{t('results.link')}: {office.office_name}</a><Cite ids={office.source_ids} /></p>}
+      </section>
+    </div>
+  </div>
 </Base>
