@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCorrections } from '../lib/data';
+import { fmtDateTime, t } from '../i18n';
+
+const corrections = getCorrections();
+const repo = 'https://github.com/TMHSDigital/USA-Election-Tracker';
+---
+<Base title={t('corrections.title')}>
+  <h1>{t('corrections.title')}</h1>
+  <p class="lede">{t('corrections.intro')} <a href={`${repo}/issues/new?template=data-error.yml`}>{t('footer.reportError')}</a></p>
+  {corrections.length === 0 ? <p>{t('corrections.none')}</p> : (
+    <ol reversed>
+      {corrections.map((c) => (
+        <li id={c.id}>
+          <p><strong><time datetime={c.date}>{fmtDateTime(c.date)}</time></strong>: {c.summary}</p>
+          {c.details && <p class="note">{c.details}</p>}
+        </li>
+      ))}
+    </ol>
+  )}
+</Base>

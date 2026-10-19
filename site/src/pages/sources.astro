@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSources } from '../lib/data';
+import { sourceAnchor } from '../lib/format';
+import { fmtDateTime, t } from '../i18n';
+
+const sources = getSources();
+---
+<Base title={t('sources.title')}>
+  <h1>{t('sources.title')}</h1>
+  <p class="lede">{t('sources.intro')}</p>
+  <ul style="list-style:none;padding:0">
+    {sources.map((s) => (
+      <li id={sourceAnchor(s.source_id)} class="card" style="margin-bottom:0.75rem">
+        <h2 style="margin:0 0 0.4rem;font-size:1.05rem">{s.name}</h2>
+        <dl style="margin:0">
+          <dt class="note">{t('sources.publisher')}</dt><dd>{s.publisher}</dd>
+          <dt class="note">{t('sources.license')}</dt><dd>{s.license}</dd>
+          <dt class="note">{t('sources.retrieved')}</dt><dd>{fmtDateTime(s.retrieved_at)}</dd>
+          {s.source_published_at && <><dt class="note">{t('sources.published')}</dt><dd>{fmtDateTime(s.source_published_at)}</dd></>}
+          {s.notes && <><dt class="note">{t('sources.notes')}</dt><dd>{s.notes}</dd></>}
+        </dl>
+        <p style="margin:0.4rem 0 0"><a href={s.url}>{t('sources.link')}</a> <span class="note">({s.source_id})</span></p>
+      </li>
+    ))}
+  </ul>
+</Base>

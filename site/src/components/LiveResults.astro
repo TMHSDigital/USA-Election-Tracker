@@ -1,0 +1,43 @@
+---
+// Experimental unofficial results, rendered at build time from data/live/*.json.
+// Shows only what the official source reports: no winners, no projections.
+import fs from 'node:fs';
+import path from 'node:path';
+import Cite from './Cite.astro';
+import { DATA_DIR } from '../lib/data';
+import { fmtDateTime, fmtInt, t } from '../i18n';
+
+interface LiveContest {
+  state_po: string;
+  source_contest_name: string;
+  reporting_text: string | null;
+  source_updated_at: string | null;
+  fetched_at: string;
+  source_url: string;
+  source_ids: string[];
+  candidates: { candidate_name: string; party_label: string | null; votes: number }[];
+}
+const dir = path.join(DATA_DIR, 'live');
+const contests: LiveContest[] = fs.existsSync(path.join(dir, 'contests.json'))
+  ? JSON.parse(fs.readFileSync(path.join(dir, 'contests.json'), 'utf8'))
+  : [];
+---
+<div class="notice"><p><strong>{t('night.unofficial')}.</strong> {t('night.liveLag')}</p></div>
+{contests.map((c) => (
+  <div class="table-scroll">
+    <table>
+      <caption><span class="badge">{t('night.unofficial')}</span> {c.state_po}: {c.source_contest_name}</caption>
+      <thead><tr><th scope="col">{t('race.col.name')}</th><th scope="col">{t('race.col.party')}</th><th scope="col" class="num">{t('history.col.votes')}</th></tr></thead>
+      <tbody>
+        {c.candidates.map((x) => (
+          <tr><th scope="row">{x.candidate_name}</th><td>{x.party_label ?? ''}</td><td class="num" data-figure>{fmtInt(x.votes)}<Cite ids={c.source_ids} /></td></tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="note">
+      {c.reporting_text && <>{t('night.reporting', { text: c.reporting_text })}. </>}
+      {c.source_updated_at && <>{t('night.sourceUpdated', { date: fmtDateTime(c.source_updated_at) })}. </>}
+      {t('night.fetched', { date: fmtDateTime(c.fetched_at) })}. <a href={c.source_url}>{t('night.source')}</a>
+    </p>
+  </div>
+))}

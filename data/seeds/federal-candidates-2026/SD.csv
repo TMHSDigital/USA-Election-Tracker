@@ -1,0 +1,5 @@
+state_po,office,district,special,candidate_name,ballot_name,party_ballot_label,incumbent,ballot_order,source_url,source_title,retrieved_at,notes
+SD,US Senate,,false,Mike Rounds,Mike Rounds,REP,true,1,https://vip.sdsos.gov/candidatelist.aspx?eid=774,South Dakota Secretary of State - 2026 General Election Candidate List,2026-10-18,
+SD,US Senate,,false,Brian L Bengs,Brian L Bengs,IND,false,2,https://vip.sdsos.gov/candidatelist.aspx?eid=774,South Dakota Secretary of State - 2026 General Election Candidate List,2026-10-18,"withdrawn candidate Julian Beaudion (DEM, withdrawn 08/04/2026) omitted"
+SD,US House,0,false,Marty Jackley,Marty Jackley,REP,false,1,https://vip.sdsos.gov/candidatelist.aspx?eid=774,South Dakota Secretary of State - 2026 General Election Candidate List,2026-10-18,at-large
+SD,US House,0,false,"Nicole ""Nikki"" Gronli","Nicole ""Nikki"" Gronli",DEM,false,2,https://vip.sdsos.gov/candidatelist.aspx?eid=774,South Dakota Secretary of State - 2026 General Election Candidate List,2026-10-18,at-large

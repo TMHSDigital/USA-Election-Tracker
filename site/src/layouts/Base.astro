@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import { t } from '../i18n';
+import { url } from '../lib/format';
+import DataUpdated from '../components/DataUpdated.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  adapters?: readonly string[];
+  noindex?: boolean;
+}
+const { title, description = t('site.tagline'), adapters = [], noindex = false } = Astro.props;
+const fullTitle = title === t('site.name') ? title : `${title} | ${t('site.name')}`;
+const path = Astro.url.pathname;
+const nav = [
+  ['/', 'nav.home'],
+  ['/states/', 'nav.states'],
+  ['/lookup/', 'nav.lookup'],
+  ['/how-to-vote/', 'nav.howToVote'],
+  ['/election-night/', 'nav.electionNight'],
+  ['/downloads/', 'nav.downloads'],
+  ['/about/', 'nav.about'],
+] as const;
+const current = (p: string) => (p === '/' ? path === url('/') : path.startsWith(url(p)));
+const repo = 'https://github.com/TMHSDigital/USA-Election-Tracker';
+const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefined;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <a class="skip" href="#main">{t('skip')}</a>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href={url('/')}>{t('site.name')}</a>
+        <nav class="main" aria-label={t('nav.label')}>
+          <ul>
+            {nav.map(([href, key]) => (
+              <li><a href={url(href)} aria-current={current(href) ? 'page' : undefined}>{t(key)}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap" data-pagefind-body>
+      <slot />
+      {adapters.length > 0 && <DataUpdated adapters={adapters} />}
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <p>{t('footer.notAffiliated')}</p>
+        <p>{t('footer.verify')}</p>
+        <p>{t('footer.unofficial')}</p>
+        <p>{t('footer.privacy')}</p>
+        <nav aria-label={t('footer.links')}>
+          <ul>
+            <li><a href={url('/methodology/')}>{t('footer.methodology')}</a></li>
+            <li><a href={url('/sources/')}>{t('footer.sources')}</a></li>
+            <li><a href={url('/disclaimer/')}>{t('footer.disclaimer')}</a></li>
+            <li><a href={url('/corrections/')}>{t('footer.corrections')}</a></li>
+            <li><a href={`${repo}/issues/new?template=data-error.yml`}>{t('footer.reportError')}</a></li>
+            <li><a href={repo}>{t('footer.code')}</a></li>
+            <li><a href={`${repo}/blob/main/LICENSE-DATA.md`}>{t('footer.license')}</a></li>
+          </ul>
+        </nav>
+        <p>{t('footer.credit')}</p>
+      </div>
+    </footer>
+    {goatcounter && <script is:inline async data-goatcounter={`https://${goatcounter}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}
+  </body>
+</html>

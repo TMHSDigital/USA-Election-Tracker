@@ -1,0 +1,32 @@
+---
+// Static, zero-JS SVG of a district, framed with its neighbors for context.
+// Geography only: no colors encode parties or outcomes.
+import { readGeo } from '../lib/data';
+import { focusViewBox, intersects, projectFeatures } from '../lib/geo';
+
+interface Props {
+  displayPath: string;
+  district: number;
+  label: string;
+}
+const { displayPath, district, label } = Astro.props;
+const geo = readGeo(displayPath);
+// First pass finds the framed area; second pass reprojects so that area is
+// about 600 units wide, keeping integer coordinates precise for small districts.
+const first = geo ? projectFeatures(geo) : null;
+const firstTarget = first?.shapes.find((s) => Number(s.key) === district);
+const zoom = first && firstTarget
+  ? Math.min(40, 600 / Number(focusViewBox(first.viewBox, firstTarget.d).split(' ')[2]))
+  : 1;
+const projected = geo && zoom > 1.2 ? projectFeatures(geo, Math.round(600 * zoom)) : first;
+const target = projected?.shapes.find((s) => Number(s.key) === district);
+const viewBox = projected && target ? focusViewBox(projected.viewBox, target.d) : projected?.viewBox;
+const id = `map-${displayPath.replace(/\W/g, '')}-${district}`;
+---
+{projected && (
+  <svg class="district-map" viewBox={viewBox} role="img" aria-labelledby={id} preserveAspectRatio="xMidYMid meet">
+    <title id={id}>{label}</title>
+    {projected.shapes.filter((s) => s !== target && intersects(s.d, viewBox!)).map((s) => <path class="other" d={s.d} />)}
+    {target && <path class="this" d={target.d} />}
+  </svg>
+)}

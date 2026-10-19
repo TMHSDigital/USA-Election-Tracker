@@ -1,0 +1,81 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: No em dashes or emoji
+        run: node scripts/check-copy.mjs
+
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ingest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
+      - run: uv sync
+      - name: Lint
+        run: uv run ruff check src tests
+      - name: Unit, schema, adapter, citation-coverage tests (fixtures only)
+        run: uv run pytest -q
+      - name: Validate curated seeds
+        run: uv run ingest check-seeds
+
+  site:
+    # Smoke test: start from the last good data, make every source fail, and
+    # confirm the site still builds, passes citation checks, and renders data.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check out last good data
+        run: |
+          git fetch --depth=1 origin data
+          git worktree add .data/raw FETCH_HEAD
+      - uses: astral-sh/setup-uv@v10.3.0
+      - name: All sources fail
+        working-directory: ingest
+        run: |
+          uv run ingest run --offline --out ../.data/raw
+          jq -e '[.adapters[] | select(.ok == false and .has_data == true)] | length > 0' ../.data/raw/status.json
+      - name: Compose from last good data
+        working-directory: ingest
+        run: uv run ingest compose --in ../.data/raw --out ../.data/site
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Typecheck and build (includes citation, neutrality, JS budget checks)
+        working-directory: site
+        env:
+          DATA_DIR: ../.data/site
+        run: |
+          npm ci
+          npx astro check
+          npm run build
+      - name: Rendered data present and marked out of date
+        run: |
+          test -f site/dist/races/2026-house-tx-07/index.html
+          grep -q "data-figure" site/dist/races/2026-house-tx-07/index.html
+          grep -q "Out of date" site/dist/races/2026-house-tx-07/index.html
+      - name: Lighthouse and accessibility
+        working-directory: site
+        run: npx --yes @lhci/cli@0.15.1 autorun --config=./lighthouserc.json

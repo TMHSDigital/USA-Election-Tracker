@@ -1,0 +1,23 @@
+# local data working dirs (generated data lives on the `data` branch)
+.data/
+site/public/data/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# node
+node_modules/
+site/dist/
+site/.astro/
+.lighthouseci/
+
+# tools
+.playwright-mcp/
+*.log
+.env
+.env.*

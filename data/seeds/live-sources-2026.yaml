@@ -1,0 +1,20 @@
+# Experimental live results sources for November 3, 2026 (Clarity ENR only).
+# A jurisdiction is fetched only when election_id is set. Set it once the state
+# publishes its 2026 general election results site, verify the URL by hand,
+# and map each contest name exactly as Clarity spells it to our race_id.
+# Contests not listed here are ignored. We never read Clarity's winner fields.
+#
+# Statewide Clarity use verified 2026-10-18 for WV and CO only
+# (see sources/registry.yaml, clarity_enr).
+version: 1
+jurisdictions:
+  - state_po: WV
+    platform: clarity
+    election_id: null  # 2026 general not yet published; 2024 general was 122766
+    official_page: https://sos.wv.gov/elections/Pages/default.aspx
+    contests: {}
+  - state_po: CO
+    platform: clarity
+    election_id: null  # 2026 general not yet published
+    official_page: https://www.coloradosos.gov/pubs/elections/main.html
+    contests: {}

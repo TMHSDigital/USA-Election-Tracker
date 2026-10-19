@@ -1,0 +1,90 @@
+name: live-results
+
+# Experimental. Election night only. Fetches unofficial results from configured
+# Clarity ENR sites, commits them to the `data` branch, and redeploys.
+# Kill switch: set repository variable LIVE_RESULTS_ENABLED to false.
+# See docs/runbook-election-night.md.
+on:
+  schedule:
+    # Every 5 minutes, offset from the top of the hour, on Nov 3 and 4 (UTC).
+    # The time window below narrows this to the hours results are reported.
+    - cron: "2-59/5 * 3,4 11 *"
+  workflow_dispatch:
+    inputs:
+      ignore_window:
+        description: "Run outside the scheduled window (for testing)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: data-branch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    if: vars.LIVE_RESULTS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - name: Check time window (2026-11-03 23:00 UTC to 2026-11-05 12:00 UTC)
+        id: window
+        env:
+          IGNORE: ${{ github.event.inputs.ignore_window || 'false' }}
+        run: |
+          now=$(date -u +%s)
+          start=$(date -u -d "2026-11-03T23:00:00Z" +%s)
+          end=$(date -u -d "2026-11-05T12:00:00Z" +%s)
+          if [ "$IGNORE" = "true" ] || { [ "$now" -ge "$start" ] && [ "$now" -le "$end" ]; }; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "outside window"; echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.window.outputs.run == 'true'
+
+      - name: Check out data branch
+        if: steps.window.outputs.run == 'true'
+        run: |
+          git config user.name "election-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --depth=1 origin data
+          git worktree add -B data .data/raw FETCH_HEAD
+
+      - uses: astral-sh/setup-uv@v10.3.0
+        if: steps.window.outputs.run == 'true'
+
+      - name: Fetch live results
+        if: steps.window.outputs.run == 'true'
+        working-directory: ingest
+        run: uv run ingest run live_clarity --out ../.data/raw
+
+      - name: Commit
+        id: commit
+        if: steps.window.outputs.run == 'true'
+        working-directory: .data/raw
+        run: |
+          git add -A
+          if git diff --cached --quiet -- live_clarity; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -q -m "Live results $(date -u +%H:%MZ)"
+            git push origin data
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    needs: fetch
+    if: needs.fetch.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

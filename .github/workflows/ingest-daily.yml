@@ -1,0 +1,87 @@
+name: ingest-daily
+
+# Runs every adapter. Adapters that fail keep their last good data and are
+# reported in an issue; the rest are committed to the `data` branch, then a
+# deploy is requested. A failing source never blocks the others.
+on:
+  schedule:
+    - cron: "17 10 * * *" # 10:17 UTC daily, off the top of the hour
+  workflow_dispatch:
+    inputs:
+      adapters:
+        description: "Space-separated adapter ids (blank for all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: data-branch
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check out data branch
+        run: |
+          git config user.name "election-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch --depth=1 origin data; then
+            git worktree add -B data .data/raw FETCH_HEAD
+          else
+            git worktree add --orphan -b data .data/raw
+          fi
+
+      - uses: astral-sh/setup-uv@v10.3.0
+      - name: Run adapters
+        id: run
+        working-directory: ingest
+        env:
+          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+        run: |
+          uv run ingest run ${{ github.event.inputs.adapters }} --out ../.data/raw
+          echo "failed=$(jq -r '.failed | join(" ")' ../.data/raw/last-run.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Compose (validates the joined bundle)
+        working-directory: ingest
+        run: uv run ingest compose --in ../.data/raw --out ../.data/site
+
+      - name: Commit data
+        working-directory: .data/raw
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no data changes"
+          else
+            git commit -q -m "Data update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin data
+          fi
+
+      - name: Report failures
+        if: steps.run.outputs.failed != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILED: ${{ steps.run.outputs.failed }}
+        run: |
+          title="Ingest failure: ${FAILED}"
+          body=$(jq -r '.adapters | to_entries[] | select(.value.ok == false) | "- **\(.key)**: \(.value.error)\n  Last success: \(.value.last_success_at // "never")"' .data/raw/status.json)
+          body="$body"$'\n\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"$'\n'"The site keeps serving the last good data and shows an out of date notice."
+          existing=$(gh issue list --state open --label ingest-failure --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh label create ingest-failure --color B60205 --force >/dev/null
+            gh issue create --title "$title" --label ingest-failure --body "$body"
+          fi
+
+      - name: Request deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main

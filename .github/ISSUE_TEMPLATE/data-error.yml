@@ -1,0 +1,33 @@
+name: Data error
+description: Report incorrect, missing, or outdated information on the site
+title: "Data error: "
+labels: ["data-error"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep this site accurate. Please include a link to an
+        official source (a state or local election office, the FEC, or the Census
+        Bureau) that shows the correct information. Do not include personal
+        information such as your address.
+  - type: input
+    id: page
+    attributes:
+      label: Page with the error
+      description: Paste the address of the page on this site.
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong
+      description: Quote what the page says and what it should say.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official source showing the correct information
+      placeholder: https://
+    validations:
+      required: true

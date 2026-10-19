@@ -1,0 +1,18 @@
+---
+// Renders a long-form page whose text lives in src/content/<locale>/<name>.md.
+import Base from '../layouts/Base.astro';
+
+interface Props {
+  title: string;
+  name: 'methodology' | 'disclaimer' | 'about';
+}
+const { title, name } = Astro.props;
+const pages = import.meta.glob<{ Content: any }>('../content/en/*.md', { eager: true });
+const page = pages[`../content/en/${name}.md`];
+if (!page) throw new Error(`missing content page ${name}`);
+const { Content } = page;
+---
+<Base title={title}>
+  <h1>{title}</h1>
+  <Content />
+</Base>

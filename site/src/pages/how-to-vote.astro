@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import { ADAPTERS_FOR, getStates } from '../lib/data';
+import { voteGovUrl } from '../lib/format';
+import { t } from '../i18n';
+
+const states = getStates();
+---
+<Base title={t('howToVote.title')} adapters={ADAPTERS_FOR.state}>
+  <h1>{t('howToVote.title')}</h1>
+  <p class="lede">{t('howToVote.intro')}</p>
+  <p><a href="https://vote.gov/">{t('howToVote.voteGov')}</a><Cite ids={['vote_gov']} /></p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">{t('howToVote.col.state')}</th>
+          <th scope="col">{t('howToVote.col.official')}</th>
+          <th scope="col">{t('howToVote.col.voteGov')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {states.map((s) => (
+          <tr>
+            <th scope="row">{s.state_name}</th>
+            <td data-figure>{s.office?.voter_info_url ? <a href={s.office.voter_info_url}>{s.office.office_name}</a> : s.office?.homepage_url ? <a href={s.office.homepage_url}>{s.office.office_name}</a> : ''}{s.office && <Cite ids={s.office.source_ids} />}</td>
+            <td><a href={voteGovUrl(s.state_name)}>{`Vote.gov: ${s.state_name}`}</a></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>
