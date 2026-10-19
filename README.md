@@ -16,10 +16,14 @@ A TM Hospitality Strategies project.
   past results for the seat, and citations.
 - A page for every state, with a map of its congressional districts (each one
   a link to its race), its races, and official election office links.
-- A national map on the home page where every state is a link, plus an index
+- A national map on the home page where every state is a link and shows the
+  offices on its ballot when hovered or focused, plus an index
   page for each office (U.S. House, U.S. Senate, governor).
 - A ballot lookup that finds your congressional district in your browser.
 - Site search that runs in the browser (Pagefind), with no query sent anywhere.
+  The search box in the header opens the search page with your query.
+- A light or dark theme control in the header. The choice is stored only in
+  your browser.
 - Links to official voting information and official results for every state.
 - Every dataset, downloadable as CSV and JSON.
 

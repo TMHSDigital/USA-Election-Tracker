@@ -78,10 +78,24 @@ referenced source id is undefined.
   district an SVG link) are also build-time SVG. Only the ballot lookup page
   (about 4 KB) and the search page (Pagefind UI, loaded from the site itself)
   run scripts.
-- Typeface: Public Sans (SIL OFL, the U.S. Web Design System face), self-hosted
-  from the `@fontsource-variable/public-sans` package. One variable woff2 of
-  about 50 KB is preloaded; no third-party font service. One accent color
-  (dark ochre), no party colors, one map fill; dark mode mirrors every token.
+- Typefaces: Public Sans (SIL OFL, the U.S. Web Design System face) for body
+  and interface text, and Archivo (SIL OFL) set condensed through its width
+  axis for titles, map labels and candidate names. Both are self-hosted from
+  `@fontsource-variable` packages; one latin woff2 of each is preloaded and no
+  third-party font service is used. One accent color (verdigris), no party
+  colors, one map fill; dark mode mirrors every token, and a theme control in
+  the header (light, dark, or follow the system) stores its choice only in
+  the browser.
+- Design: every page is a sheet in an atlas of the ballot. The national map
+  is the hero and the primary navigation. Hover and keyboard focus on any map
+  shape fill it with a hatch pattern (an SVG `<pattern>` in `MapDefs.astro`)
+  on top of the tint, so the active shape never depends on color alone. On
+  the home map each state also reveals a tip with its name and the offices on
+  its ballot; the tips are drawn after every state and shown by CSS sibling
+  selectors, so no script is involved and browsers without that support still
+  get the `<title>` tooltip. Race and state pages carry a legend column (facts
+  and in-page links) beside the content. Race lists are grids of identical
+  tiles.
 - Every figure is wrapped in an element marked `data-figure` containing a
   citation link (`data-cite`) to the Sources page. `scripts/check-site.mjs`
   fails the build if any figure lacks a citation, any citation points to a
