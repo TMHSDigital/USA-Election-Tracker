@@ -1,0 +1,790 @@
+state_po,district,boundary_vintage,variable,label,estimate,margin_of_error,source_ids
+AK,0,cd119,B01002_001,Median age (years),35.8,0.1,census_acs5
+AK,0,cd119,B01003_001,Total population,735706.0,,census_acs5
+AK,0,cd119,B19013_001,Median household income (dollars),92788.0,1232.0,census_acs5
+AR,1,cd119,B01002_001,Median age (years),40.1,0.2,census_acs5
+AR,1,cd119,B01003_001,Total population,752719.0,1300.0,census_acs5
+AR,1,cd119,B19013_001,Median household income (dollars),52771.0,886.0,census_acs5
+AR,2,cd119,B01002_001,Median age (years),38.3,0.2,census_acs5
+AR,2,cd119,B01003_001,Total population,761775.0,2921.0,census_acs5
+AR,2,cd119,B19013_001,Median household income (dollars),65200.0,1151.0,census_acs5
+AR,3,cd119,B01002_001,Median age (years),35.7,0.1,census_acs5
+AR,3,cd119,B01003_001,Total population,786435.0,894.0,census_acs5
+AR,3,cd119,B19013_001,Median household income (dollars),74552.0,1299.0,census_acs5
+AR,4,cd119,B01002_001,Median age (years),40.7,0.2,census_acs5
+AR,4,cd119,B01003_001,Total population,748462.0,2704.0,census_acs5
+AR,4,cd119,B19013_001,Median household income (dollars),52605.0,781.0,census_acs5
+AZ,1,cd119,B01002_001,Median age (years),43.7,0.4,census_acs5
+AZ,1,cd119,B01003_001,Total population,804578.0,7021.0,census_acs5
+AZ,1,cd119,B19013_001,Median household income (dollars),99999.0,1648.0,census_acs5
+AZ,2,cd119,B01002_001,Median age (years),42.3,0.3,census_acs5
+AZ,2,cd119,B01003_001,Total population,826257.0,3110.0,census_acs5
+AZ,2,cd119,B19013_001,Median household income (dollars),67729.0,1070.0,census_acs5
+AZ,3,cd119,B01002_001,Median age (years),31.2,0.3,census_acs5
+AZ,3,cd119,B01003_001,Total population,815927.0,9161.0,census_acs5
+AZ,3,cd119,B19013_001,Median household income (dollars),68202.0,1303.0,census_acs5
+AZ,4,cd119,B01002_001,Median age (years),35.3,0.3,census_acs5
+AZ,4,cd119,B01003_001,Total population,804739.0,5528.0,census_acs5
+AZ,4,cd119,B19013_001,Median household income (dollars),82587.0,1355.0,census_acs5
+AZ,5,cd119,B01002_001,Median age (years),38.9,0.3,census_acs5
+AZ,5,cd119,B01003_001,Total population,840221.0,5563.0,census_acs5
+AZ,5,cd119,B19013_001,Median household income (dollars),109252.0,1557.0,census_acs5
+AZ,6,cd119,B01002_001,Median age (years),44.4,0.4,census_acs5
+AZ,6,cd119,B01003_001,Total population,812709.0,6545.0,census_acs5
+AZ,6,cd119,B19013_001,Median household income (dollars),77758.0,1061.0,census_acs5
+AZ,7,cd119,B01002_001,Median age (years),34.3,0.3,census_acs5
+AZ,7,cd119,B01003_001,Total population,808224.0,5964.0,census_acs5
+AZ,7,cd119,B19013_001,Median household income (dollars),59811.0,1196.0,census_acs5
+AZ,8,cd119,B01002_001,Median age (years),42.9,0.5,census_acs5
+AZ,8,cd119,B01003_001,Total population,802956.0,6689.0,census_acs5
+AZ,8,cd119,B19013_001,Median household income (dollars),82925.0,1227.0,census_acs5
+AZ,9,cd119,B01002_001,Median age (years),41.0,0.4,census_acs5
+AZ,9,cd119,B01003_001,Total population,863227.0,5117.0,census_acs5
+AZ,9,cd119,B19013_001,Median household income (dollars),78678.0,1131.0,census_acs5
+CO,1,cd119,B01002_001,Median age (years),35.2,0.1,census_acs5
+CO,1,cd119,B01003_001,Total population,724976.0,454.0,census_acs5
+CO,1,cd119,B19013_001,Median household income (dollars),94592.0,1718.0,census_acs5
+CO,2,cd119,B01002_001,Median age (years),37.8,0.2,census_acs5
+CO,2,cd119,B01003_001,Total population,725063.0,2113.0,census_acs5
+CO,2,cd119,B19013_001,Median household income (dollars),100908.0,1573.0,census_acs5
+CO,3,cd119,B01002_001,Median age (years),41.9,0.2,census_acs5
+CO,3,cd119,B01003_001,Total population,728794.0,954.0,census_acs5
+CO,3,cd119,B19013_001,Median household income (dollars),70890.0,1256.0,census_acs5
+CO,4,cd119,B01002_001,Median age (years),39.4,0.3,census_acs5
+CO,4,cd119,B01003_001,Total population,756186.0,3086.0,census_acs5
+CO,4,cd119,B19013_001,Median household income (dollars),115239.0,1535.0,census_acs5
+CO,5,cd119,B01002_001,Median age (years),35.0,0.1,census_acs5
+CO,5,cd119,B01003_001,Total population,734906.0,850.0,census_acs5
+CO,5,cd119,B19013_001,Median household income (dollars),90465.0,1388.0,census_acs5
+CO,6,cd119,B01002_001,Median age (years),37.5,0.2,census_acs5
+CO,6,cd119,B01003_001,Total population,728750.0,2583.0,census_acs5
+CO,6,cd119,B19013_001,Median household income (dollars),100168.0,1352.0,census_acs5
+CO,7,cd119,B01002_001,Median age (years),41.3,0.2,census_acs5
+CO,7,cd119,B01003_001,Total population,723678.0,1754.0,census_acs5
+CO,7,cd119,B19013_001,Median household income (dollars),103971.0,1460.0,census_acs5
+CO,8,cd119,B01002_001,Median age (years),35.0,0.2,census_acs5
+CO,8,cd119,B01003_001,Total population,739836.0,1929.0,census_acs5
+CO,8,cd119,B19013_001,Median household income (dollars),94617.0,1499.0,census_acs5
+CT,1,cd119,B01002_001,Median age (years),40.3,0.3,census_acs5
+CT,1,cd119,B01003_001,Total population,721392.0,1691.0,census_acs5
+CT,1,cd119,B19013_001,Median household income (dollars),87708.0,1634.0,census_acs5
+CT,2,cd119,B01002_001,Median age (years),42.6,0.2,census_acs5
+CT,2,cd119,B01003_001,Total population,722183.0,887.0,census_acs5
+CT,2,cd119,B19013_001,Median household income (dollars),97479.0,1465.0,census_acs5
+CT,3,cd119,B01002_001,Median age (years),40.7,0.3,census_acs5
+CT,3,cd119,B01003_001,Total population,724297.0,2391.0,census_acs5
+CT,3,cd119,B19013_001,Median household income (dollars),90395.0,1302.0,census_acs5
+CT,4,cd119,B01002_001,Median age (years),40.4,0.3,census_acs5
+CT,4,cd119,B01003_001,Total population,728656.0,1211.0,census_acs5
+CT,4,cd119,B19013_001,Median household income (dollars),119442.0,2424.0,census_acs5
+CT,5,cd119,B01002_001,Median age (years),42.0,0.4,census_acs5
+CT,5,cd119,B01003_001,Total population,727980.0,2260.0,census_acs5
+CT,5,cd119,B19013_001,Median household income (dollars),91081.0,1378.0,census_acs5
+DC,0,cd119,B01002_001,Median age (years),34.9,0.1,census_acs5
+DC,0,cd119,B01003_001,Total population,681294.0,,census_acs5
+DC,0,cd119,B19013_001,Median household income (dollars),109870.0,1937.0,census_acs5
+DE,0,cd119,B01002_001,Median age (years),41.6,0.2,census_acs5
+DE,0,cd119,B01003_001,Total population,1021191.0,,census_acs5
+DE,0,cd119,B19013_001,Median household income (dollars),84954.0,1251.0,census_acs5
+GA,1,cd119,B01002_001,Median age (years),37.0,0.2,census_acs5
+GA,1,cd119,B01003_001,Total population,787122.0,1394.0,census_acs5
+GA,1,cd119,B19013_001,Median household income (dollars),68956.0,1163.0,census_acs5
+GA,2,cd119,B01002_001,Median age (years),37.4,0.3,census_acs5
+GA,2,cd119,B01003_001,Total population,754620.0,3962.0,census_acs5
+GA,2,cd119,B19013_001,Median household income (dollars),52535.0,1153.0,census_acs5
+GA,3,cd119,B01002_001,Median age (years),39.2,0.3,census_acs5
+GA,3,cd119,B01003_001,Total population,785402.0,3469.0,census_acs5
+GA,3,cd119,B19013_001,Median household income (dollars),78956.0,1049.0,census_acs5
+GA,4,cd119,B01002_001,Median age (years),36.1,0.3,census_acs5
+GA,4,cd119,B01003_001,Total population,765448.0,5775.0,census_acs5
+GA,4,cd119,B19013_001,Median household income (dollars),71556.0,1238.0,census_acs5
+GA,5,cd119,B01002_001,Median age (years),34.3,0.3,census_acs5
+GA,5,cd119,B01003_001,Total population,764559.0,7237.0,census_acs5
+GA,5,cd119,B19013_001,Median household income (dollars),76330.0,2057.0,census_acs5
+GA,6,cd119,B01002_001,Median age (years),36.0,0.3,census_acs5
+GA,6,cd119,B01003_001,Total population,778880.0,7004.0,census_acs5
+GA,6,cd119,B19013_001,Median household income (dollars),89755.0,1819.0,census_acs5
+GA,7,cd119,B01002_001,Median age (years),40.5,0.3,census_acs5
+GA,7,cd119,B01003_001,Total population,790971.0,3737.0,census_acs5
+GA,7,cd119,B19013_001,Median household income (dollars),126823.0,2151.0,census_acs5
+GA,8,cd119,B01002_001,Median age (years),37.6,0.2,census_acs5
+GA,8,cd119,B01003_001,Total population,774685.0,3241.0,census_acs5
+GA,8,cd119,B19013_001,Median household income (dollars),61494.0,958.0,census_acs5
+GA,9,cd119,B01002_001,Median age (years),39.7,0.3,census_acs5
+GA,9,cd119,B01003_001,Total population,800737.0,7143.0,census_acs5
+GA,9,cd119,B19013_001,Median household income (dollars),82224.0,1449.0,census_acs5
+GA,10,cd119,B01002_001,Median age (years),37.5,0.3,census_acs5
+GA,10,cd119,B01003_001,Total population,801805.0,3901.0,census_acs5
+GA,10,cd119,B19013_001,Median household income (dollars),75887.0,1081.0,census_acs5
+GA,11,cd119,B01002_001,Median age (years),38.9,0.3,census_acs5
+GA,11,cd119,B01003_001,Total population,784112.0,5089.0,census_acs5
+GA,11,cd119,B19013_001,Median household income (dollars),97878.0,2180.0,census_acs5
+GA,12,cd119,B01002_001,Median age (years),37.0,0.2,census_acs5
+GA,12,cd119,B01003_001,Total population,774597.0,1412.0,census_acs5
+GA,12,cd119,B19013_001,Median household income (dollars),61779.0,1012.0,census_acs5
+GA,13,cd119,B01002_001,Median age (years),36.8,0.4,census_acs5
+GA,13,cd119,B01003_001,Total population,794711.0,8902.0,census_acs5
+GA,13,cd119,B19013_001,Median household income (dollars),81466.0,1352.0,census_acs5
+GA,14,cd119,B01002_001,Median age (years),38.8,0.2,census_acs5
+GA,14,cd119,B01003_001,Total population,782758.0,3517.0,census_acs5
+GA,14,cd119,B19013_001,Median household income (dollars),79676.0,1496.0,census_acs5
+HI,1,cd119,B01002_001,Median age (years),41.0,0.3,census_acs5
+HI,1,cd119,B01003_001,Total population,719645.0,3558.0,census_acs5
+HI,1,cd119,B19013_001,Median household income (dollars),104305.0,1558.0,census_acs5
+HI,2,cd119,B01002_001,Median age (years),40.8,0.3,census_acs5
+HI,2,cd119,B01003_001,Total population,725590.0,3558.0,census_acs5
+HI,2,cd119,B19013_001,Median household income (dollars),95891.0,1684.0,census_acs5
+IA,1,cd119,B01002_001,Median age (years),38.9,0.2,census_acs5
+IA,1,cd119,B01003_001,Total population,800735.0,,census_acs5
+IA,1,cd119,B19013_001,Median household income (dollars),73680.0,909.0,census_acs5
+IA,2,cd119,B01002_001,Median age (years),40.0,0.2,census_acs5
+IA,2,cd119,B01003_001,Total population,795370.0,,census_acs5
+IA,2,cd119,B19013_001,Median household income (dollars),73764.0,850.0,census_acs5
+IA,3,cd119,B01002_001,Median age (years),37.3,0.1,census_acs5
+IA,3,cd119,B01003_001,Total population,816359.0,,census_acs5
+IA,3,cd119,B19013_001,Median household income (dollars),80844.0,1044.0,census_acs5
+IA,4,cd119,B01002_001,Median age (years),38.6,0.2,census_acs5
+IA,4,cd119,B01003_001,Total population,798043.0,,census_acs5
+IA,4,cd119,B19013_001,Median household income (dollars),72711.0,695.0,census_acs5
+ID,1,cd119,B01002_001,Median age (years),39.1,0.2,census_acs5
+ID,1,cd119,B01003_001,Total population,986280.0,1744.0,census_acs5
+ID,1,cd119,B19013_001,Median household income (dollars),79577.0,933.0,census_acs5
+ID,2,cd119,B01002_001,Median age (years),35.4,0.2,census_acs5
+ID,2,cd119,B01003_001,Total population,947982.0,1743.0,census_acs5
+ID,2,cd119,B19013_001,Median household income (dollars),75805.0,1009.0,census_acs5
+IL,1,cd119,B01002_001,Median age (years),39.9,0.4,census_acs5
+IL,1,cd119,B01003_001,Total population,739958.0,7185.0,census_acs5
+IL,1,cd119,B19013_001,Median household income (dollars),71465.0,1508.0,census_acs5
+IL,2,cd119,B01002_001,Median age (years),39.2,0.4,census_acs5
+IL,2,cd119,B01003_001,Total population,742590.0,4317.0,census_acs5
+IL,2,cd119,B19013_001,Median household income (dollars),64304.0,1130.0,census_acs5
+IL,3,cd119,B01002_001,Median age (years),36.6,0.3,census_acs5
+IL,3,cd119,B01003_001,Total population,739663.0,7449.0,census_acs5
+IL,3,cd119,B19013_001,Median household income (dollars),88650.0,1719.0,census_acs5
+IL,4,cd119,B01002_001,Median age (years),36.9,0.4,census_acs5
+IL,4,cd119,B01003_001,Total population,729797.0,8723.0,census_acs5
+IL,4,cd119,B19013_001,Median household income (dollars),75931.0,1558.0,census_acs5
+IL,5,cd119,B01002_001,Median age (years),37.6,0.3,census_acs5
+IL,5,cd119,B01003_001,Total population,751305.0,7781.0,census_acs5
+IL,5,cd119,B19013_001,Median household income (dollars),114146.0,1772.0,census_acs5
+IL,6,cd119,B01002_001,Median age (years),41.4,0.4,census_acs5
+IL,6,cd119,B01003_001,Total population,747517.0,4467.0,census_acs5
+IL,6,cd119,B19013_001,Median household income (dollars),99953.0,1256.0,census_acs5
+IL,7,cd119,B01002_001,Median age (years),35.1,0.4,census_acs5
+IL,7,cd119,B01003_001,Total population,744315.0,7998.0,census_acs5
+IL,7,cd119,B19013_001,Median household income (dollars),83208.0,1950.0,census_acs5
+IL,8,cd119,B01002_001,Median age (years),39.9,0.3,census_acs5
+IL,8,cd119,B01003_001,Total population,746772.0,4247.0,census_acs5
+IL,8,cd119,B19013_001,Median household income (dollars),99637.0,1448.0,census_acs5
+IL,9,cd119,B01002_001,Median age (years),40.8,0.3,census_acs5
+IL,9,cd119,B01003_001,Total population,745003.0,5730.0,census_acs5
+IL,9,cd119,B19013_001,Median household income (dollars),92513.0,1655.0,census_acs5
+IL,10,cd119,B01002_001,Median age (years),39.6,0.3,census_acs5
+IL,10,cd119,B01003_001,Total population,753708.0,2135.0,census_acs5
+IL,10,cd119,B19013_001,Median household income (dollars),107371.0,1525.0,census_acs5
+IL,11,cd119,B01002_001,Median age (years),39.4,0.3,census_acs5
+IL,11,cd119,B01003_001,Total population,754751.0,3625.0,census_acs5
+IL,11,cd119,B19013_001,Median household income (dollars),109255.0,1718.0,census_acs5
+IL,12,cd119,B01002_001,Median age (years),41.6,0.2,census_acs5
+IL,12,cd119,B01003_001,Total population,746831.0,1762.0,census_acs5
+IL,12,cd119,B19013_001,Median household income (dollars),68540.0,976.0,census_acs5
+IL,13,cd119,B01002_001,Median age (years),37.4,0.3,census_acs5
+IL,13,cd119,B01003_001,Total population,747221.0,2529.0,census_acs5
+IL,13,cd119,B19013_001,Median household income (dollars),63106.0,952.0,census_acs5
+IL,14,cd119,B01002_001,Median age (years),37.3,0.2,census_acs5
+IL,14,cd119,B01003_001,Total population,763833.0,2120.0,census_acs5
+IL,14,cd119,B19013_001,Median household income (dollars),95523.0,1377.0,census_acs5
+IL,15,cd119,B01002_001,Median age (years),42.3,0.3,census_acs5
+IL,15,cd119,B01003_001,Total population,746652.0,2389.0,census_acs5
+IL,15,cd119,B19013_001,Median household income (dollars),73993.0,890.0,census_acs5
+IL,16,cd119,B01002_001,Median age (years),41.7,0.3,census_acs5
+IL,16,cd119,B01003_001,Total population,748860.0,3399.0,census_acs5
+IL,16,cd119,B19013_001,Median household income (dollars),84411.0,1060.0,census_acs5
+IL,17,cd119,B01002_001,Median age (years),38.5,0.2,census_acs5
+IL,17,cd119,B01003_001,Total population,746022.0,3112.0,census_acs5
+IL,17,cd119,B19013_001,Median household income (dollars),59364.0,892.0,census_acs5
+IN,1,cd119,B01002_001,Median age (years),40.1,0.2,census_acs5
+IN,1,cd119,B01003_001,Total population,757919.0,586.0,census_acs5
+IN,1,cd119,B19013_001,Median household income (dollars),73983.0,1055.0,census_acs5
+IN,2,cd119,B01002_001,Median age (years),37.9,0.3,census_acs5
+IN,2,cd119,B01003_001,Total population,752547.0,888.0,census_acs5
+IN,2,cd119,B19013_001,Median household income (dollars),68107.0,996.0,census_acs5
+IN,3,cd119,B01002_001,Median age (years),37.5,0.2,census_acs5
+IN,3,cd119,B01003_001,Total population,762957.0,430.0,census_acs5
+IN,3,cd119,B19013_001,Median household income (dollars),70696.0,758.0,census_acs5
+IN,4,cd119,B01002_001,Median age (years),37.0,0.2,census_acs5
+IN,4,cd119,B01003_001,Total population,772003.0,741.0,census_acs5
+IN,4,cd119,B19013_001,Median household income (dollars),78449.0,1246.0,census_acs5
+IN,5,cd119,B01002_001,Median age (years),38.8,0.2,census_acs5
+IN,5,cd119,B01003_001,Total population,773191.0,366.0,census_acs5
+IN,5,cd119,B19013_001,Median household income (dollars),81223.0,1421.0,census_acs5
+IN,6,cd119,B01002_001,Median age (years),38.2,0.3,census_acs5
+IN,6,cd119,B01003_001,Total population,763862.0,784.0,census_acs5
+IN,6,cd119,B19013_001,Median household income (dollars),76875.0,1054.0,census_acs5
+IN,7,cd119,B01002_001,Median age (years),34.2,0.2,census_acs5
+IN,7,cd119,B01003_001,Total population,752682.0,424.0,census_acs5
+IN,7,cd119,B19013_001,Median household income (dollars),64147.0,1032.0,census_acs5
+IN,8,cd119,B01002_001,Median age (years),39.9,0.2,census_acs5
+IN,8,cd119,B01003_001,Total population,755776.0,294.0,census_acs5
+IN,8,cd119,B19013_001,Median household income (dollars),65139.0,801.0,census_acs5
+IN,9,cd119,B01002_001,Median age (years),39.4,0.2,census_acs5
+IN,9,cd119,B01003_001,Total population,760136.0,529.0,census_acs5
+IN,9,cd119,B19013_001,Median household income (dollars),71567.0,1153.0,census_acs5
+KS,1,cd119,B01002_001,Median age (years),36.0,0.2,census_acs5
+KS,1,cd119,B01003_001,Total population,731585.0,522.0,census_acs5
+KS,1,cd119,B19013_001,Median household income (dollars),66270.0,852.0,census_acs5
+KS,2,cd119,B01002_001,Median age (years),37.7,0.2,census_acs5
+KS,2,cd119,B01003_001,Total population,732657.0,1674.0,census_acs5
+KS,2,cd119,B19013_001,Median household income (dollars),65594.0,1108.0,census_acs5
+KS,3,cd119,B01002_001,Median age (years),38.5,0.2,census_acs5
+KS,3,cd119,B01003_001,Total population,744760.0,1641.0,census_acs5
+KS,3,cd119,B19013_001,Median household income (dollars),101979.0,1250.0,census_acs5
+KS,4,cd119,B01002_001,Median age (years),37.2,0.2,census_acs5
+KS,4,cd119,B01003_001,Total population,738195.0,332.0,census_acs5
+KS,4,cd119,B19013_001,Median household income (dollars),69200.0,1061.0,census_acs5
+KY,1,cd119,B01002_001,Median age (years),39.7,0.3,census_acs5
+KY,1,cd119,B01003_001,Total population,753971.0,725.0,census_acs5
+KY,1,cd119,B19013_001,Median household income (dollars),58027.0,1086.0,census_acs5
+KY,2,cd119,B01002_001,Median age (years),39.0,0.2,census_acs5
+KY,2,cd119,B01003_001,Total population,765661.0,2416.0,census_acs5
+KY,2,cd119,B19013_001,Median household income (dollars),66796.0,978.0,census_acs5
+KY,3,cd119,B01002_001,Median age (years),38.1,0.1,census_acs5
+KY,3,cd119,B01003_001,Total population,748522.0,1941.0,census_acs5
+KY,3,cd119,B19013_001,Median household income (dollars),68047.0,1280.0,census_acs5
+KY,4,cd119,B01002_001,Median age (years),39.3,0.2,census_acs5
+KY,4,cd119,B01003_001,Total population,762319.0,1170.0,census_acs5
+KY,4,cd119,B19013_001,Median household income (dollars),80457.0,1051.0,census_acs5
+KY,5,cd119,B01002_001,Median age (years),41.3,0.2,census_acs5
+KY,5,cd119,B01003_001,Total population,742663.0,748.0,census_acs5
+KY,5,cd119,B19013_001,Median household income (dollars),45798.0,930.0,census_acs5
+KY,6,cd119,B01002_001,Median age (years),37.2,0.2,census_acs5
+KY,6,cd119,B01003_001,Total population,761688.0,693.0,census_acs5
+KY,6,cd119,B19013_001,Median household income (dollars),68266.0,1092.0,census_acs5
+MA,1,cd119,B01002_001,Median age (years),41.9,0.3,census_acs5
+MA,1,cd119,B01003_001,Total population,777981.0,792.0,census_acs5
+MA,1,cd119,B19013_001,Median household income (dollars),75663.0,1359.0,census_acs5
+MA,2,cd119,B01002_001,Median age (years),39.5,0.3,census_acs5
+MA,2,cd119,B01003_001,Total population,787021.0,920.0,census_acs5
+MA,2,cd119,B19013_001,Median household income (dollars),97592.0,1277.0,census_acs5
+MA,3,cd119,B01002_001,Median age (years),39.2,0.3,census_acs5
+MA,3,cd119,B01003_001,Total population,785403.0,1202.0,census_acs5
+MA,3,cd119,B19013_001,Median household income (dollars),99663.0,1758.0,census_acs5
+MA,4,cd119,B01002_001,Median age (years),40.9,0.4,census_acs5
+MA,4,cd119,B01003_001,Total population,787020.0,1035.0,census_acs5
+MA,4,cd119,B19013_001,Median household income (dollars),116055.0,1620.0,census_acs5
+MA,5,cd119,B01002_001,Median age (years),39.2,0.3,census_acs5
+MA,5,cd119,B01003_001,Total population,778640.0,1762.0,census_acs5
+MA,5,cd119,B19013_001,Median household income (dollars),130807.0,1726.0,census_acs5
+MA,6,cd119,B01002_001,Median age (years),43.1,0.2,census_acs5
+MA,6,cd119,B01003_001,Total population,784690.0,1248.0,census_acs5
+MA,6,cd119,B19013_001,Median household income (dollars),118476.0,2167.0,census_acs5
+MA,7,cd119,B01002_001,Median age (years),32.7,0.2,census_acs5
+MA,7,cd119,B01003_001,Total population,773502.0,3856.0,census_acs5
+MA,7,cd119,B19013_001,Median household income (dollars),91370.0,1755.0,census_acs5
+MA,8,cd119,B01002_001,Median age (years),39.3,0.3,census_acs5
+MA,8,cd119,B01003_001,Total population,781306.0,3591.0,census_acs5
+MA,8,cd119,B19013_001,Median household income (dollars),118565.0,2099.0,census_acs5
+MA,9,cd119,B01002_001,Median age (years),46.8,0.3,census_acs5
+MA,9,cd119,B01003_001,Total population,788493.0,798.0,census_acs5
+MA,9,cd119,B19013_001,Median household income (dollars),100749.0,1274.0,census_acs5
+MD,1,cd119,B01002_001,Median age (years),41.7,0.2,census_acs5
+MD,1,cd119,B01003_001,Total population,781616.0,2099.0,census_acs5
+MD,1,cd119,B19013_001,Median household income (dollars),94639.0,1416.0,census_acs5
+MD,2,cd119,B01002_001,Median age (years),40.2,0.3,census_acs5
+MD,2,cd119,B01003_001,Total population,771118.0,4092.0,census_acs5
+MD,2,cd119,B19013_001,Median household income (dollars),99849.0,1822.0,census_acs5
+MD,3,cd119,B01002_001,Median age (years),39.8,0.2,census_acs5
+MD,3,cd119,B01003_001,Total population,781479.0,4026.0,census_acs5
+MD,3,cd119,B19013_001,Median household income (dollars),133046.0,1888.0,census_acs5
+MD,4,cd119,B01002_001,Median age (years),37.1,0.2,census_acs5
+MD,4,cd119,B01003_001,Total population,758679.0,4447.0,census_acs5
+MD,4,cd119,B19013_001,Median household income (dollars),91987.0,1690.0,census_acs5
+MD,5,cd119,B01002_001,Median age (years),39.8,0.3,census_acs5
+MD,5,cd119,B01003_001,Total population,791419.0,4693.0,census_acs5
+MD,5,cd119,B19013_001,Median household income (dollars),130777.0,1966.0,census_acs5
+MD,6,cd119,B01002_001,Median age (years),39.4,0.3,census_acs5
+MD,6,cd119,B01003_001,Total population,796669.0,3809.0,census_acs5
+MD,6,cd119,B19013_001,Median household income (dollars),102585.0,1366.0,census_acs5
+MD,7,cd119,B01002_001,Median age (years),36.5,0.2,census_acs5
+MD,7,cd119,B01003_001,Total population,753868.0,3939.0,census_acs5
+MD,7,cd119,B19013_001,Median household income (dollars),63952.0,994.0,census_acs5
+MD,8,cd119,B01002_001,Median age (years),41.1,0.2,census_acs5
+MD,8,cd119,B01003_001,Total population,771163.0,4417.0,census_acs5
+MD,8,cd119,B19013_001,Median household income (dollars),138349.0,2510.0,census_acs5
+ME,1,cd119,B01002_001,Median age (years),44.3,0.1,census_acs5
+ME,1,cd119,B01003_001,Total population,695717.0,401.0,census_acs5
+ME,1,cd119,B19013_001,Median household income (dollars),88029.0,1512.0,census_acs5
+ME,2,cd119,B01002_001,Median age (years),45.2,0.2,census_acs5
+ME,2,cd119,B01003_001,Total population,692100.0,401.0,census_acs5
+ME,2,cd119,B19013_001,Median household income (dollars),64428.0,983.0,census_acs5
+MI,1,cd119,B01002_001,Median age (years),47.4,0.1,census_acs5
+MI,1,cd119,B01003_001,Total population,783000.0,350.0,census_acs5
+MI,1,cd119,B19013_001,Median household income (dollars),64546.0,557.0,census_acs5
+MI,2,cd119,B01002_001,Median age (years),41.5,0.2,census_acs5
+MI,2,cd119,B01003_001,Total population,784314.0,900.0,census_acs5
+MI,2,cd119,B19013_001,Median household income (dollars),67585.0,829.0,census_acs5
+MI,3,cd119,B01002_001,Median age (years),35.8,0.2,census_acs5
+MI,3,cd119,B01003_001,Total population,779539.0,1023.0,census_acs5
+MI,3,cd119,B19013_001,Median household income (dollars),78245.0,1122.0,census_acs5
+MI,4,cd119,B01002_001,Median age (years),37.7,0.2,census_acs5
+MI,4,cd119,B01003_001,Total population,778930.0,901.0,census_acs5
+MI,4,cd119,B19013_001,Median household income (dollars),74722.0,1022.0,census_acs5
+MI,5,cd119,B01002_001,Median age (years),42.3,0.1,census_acs5
+MI,5,cd119,B01003_001,Total population,773657.0,733.0,census_acs5
+MI,5,cd119,B19013_001,Median household income (dollars),70618.0,807.0,census_acs5
+MI,6,cd119,B01002_001,Median age (years),39.0,0.3,census_acs5
+MI,6,cd119,B01003_001,Total population,771301.0,908.0,census_acs5
+MI,6,cd119,B19013_001,Median household income (dollars),97063.0,1186.0,census_acs5
+MI,7,cd119,B01002_001,Median age (years),39.0,0.2,census_acs5
+MI,7,cd119,B01003_001,Total population,778561.0,783.0,census_acs5
+MI,7,cd119,B19013_001,Median household income (dollars),80357.0,1088.0,census_acs5
+MI,8,cd119,B01002_001,Median age (years),41.3,0.2,census_acs5
+MI,8,cd119,B01003_001,Total population,770294.0,449.0,census_acs5
+MI,8,cd119,B19013_001,Median household income (dollars),63195.0,902.0,census_acs5
+MI,9,cd119,B01002_001,Median age (years),43.4,0.3,census_acs5
+MI,9,cd119,B01003_001,Total population,778989.0,1627.0,census_acs5
+MI,9,cd119,B19013_001,Median household income (dollars),85269.0,923.0,census_acs5
+MI,10,cd119,B01002_001,Median age (years),41.1,0.3,census_acs5
+MI,10,cd119,B01003_001,Total population,771566.0,1341.0,census_acs5
+MI,10,cd119,B19013_001,Median household income (dollars),76410.0,1164.0,census_acs5
+MI,11,cd119,B01002_001,Median age (years),40.9,0.3,census_acs5
+MI,11,cd119,B01003_001,Total population,775896.0,1088.0,census_acs5
+MI,11,cd119,B19013_001,Median household income (dollars),93271.0,1128.0,census_acs5
+MI,12,cd119,B01002_001,Median age (years),37.9,0.4,census_acs5
+MI,12,cd119,B01003_001,Total population,761609.0,4755.0,census_acs5
+MI,12,cd119,B19013_001,Median household income (dollars),59614.0,1025.0,census_acs5
+MI,13,cd119,B01002_001,Median age (years),36.4,0.3,census_acs5
+MI,13,cd119,B01003_001,Total population,770105.0,4793.0,census_acs5
+MI,13,cd119,B19013_001,Median household income (dollars),50833.0,1031.0,census_acs5
+MN,1,cd119,B01002_001,Median age (years),39.2,0.1,census_acs5
+MN,1,cd119,B01003_001,Total population,715713.0,413.0,census_acs5
+MN,1,cd119,B19013_001,Median household income (dollars),79637.0,995.0,census_acs5
+MN,2,cd119,B01002_001,Median age (years),38.1,0.3,census_acs5
+MN,2,cd119,B01003_001,Total population,730253.0,1283.0,census_acs5
+MN,2,cd119,B19013_001,Median household income (dollars),108849.0,1075.0,census_acs5
+MN,3,cd119,B01002_001,Median age (years),40.7,0.3,census_acs5
+MN,3,cd119,B01003_001,Total population,708294.0,785.0,census_acs5
+MN,3,cd119,B19013_001,Median household income (dollars),109478.0,1763.0,census_acs5
+MN,4,cd119,B01002_001,Median age (years),37.2,0.2,census_acs5
+MN,4,cd119,B01003_001,Total population,705537.0,1339.0,census_acs5
+MN,4,cd119,B19013_001,Median household income (dollars),89186.0,1223.0,census_acs5
+MN,5,cd119,B01002_001,Median age (years),34.9,0.2,census_acs5
+MN,5,cd119,B01003_001,Total population,707022.0,799.0,census_acs5
+MN,5,cd119,B19013_001,Median household income (dollars),83858.0,1140.0,census_acs5
+MN,6,cd119,B01002_001,Median age (years),37.6,0.2,census_acs5
+MN,6,cd119,B01003_001,Total population,734184.0,725.0,census_acs5
+MN,6,cd119,B19013_001,Median household income (dollars),104536.0,1081.0,census_acs5
+MN,7,cd119,B01002_001,Median age (years),41.3,0.2,census_acs5
+MN,7,cd119,B01003_001,Total population,716373.0,626.0,census_acs5
+MN,7,cd119,B19013_001,Median household income (dollars),74383.0,701.0,census_acs5
+MN,8,cd119,B01002_001,Median age (years),42.9,0.2,census_acs5
+MN,8,cd119,B01003_001,Total population,722069.0,433.0,census_acs5
+MN,8,cd119,B19013_001,Median household income (dollars),75433.0,721.0,census_acs5
+MO,1,cd119,B01002_001,Median age (years),37.0,0.2,census_acs5
+MO,1,cd119,B01003_001,Total population,752720.0,2912.0,census_acs5
+MO,1,cd119,B19013_001,Median household income (dollars),61097.0,971.0,census_acs5
+MO,2,cd119,B01002_001,Median age (years),42.2,0.3,census_acs5
+MO,2,cd119,B01003_001,Total population,771008.0,4180.0,census_acs5
+MO,2,cd119,B19013_001,Median household income (dollars),102169.0,1397.0,census_acs5
+MO,3,cd119,B01002_001,Median age (years),39.4,0.3,census_acs5
+MO,3,cd119,B01003_001,Total population,780389.0,3790.0,census_acs5
+MO,3,cd119,B19013_001,Median household income (dollars),81928.0,1119.0,census_acs5
+MO,4,cd119,B01002_001,Median age (years),38.7,0.3,census_acs5
+MO,4,cd119,B01003_001,Total population,782304.0,2508.0,census_acs5
+MO,4,cd119,B19013_001,Median household income (dollars),67043.0,1057.0,census_acs5
+MO,5,cd119,B01002_001,Median age (years),36.8,0.2,census_acs5
+MO,5,cd119,B01003_001,Total population,772256.0,2018.0,census_acs5
+MO,5,cd119,B19013_001,Median household income (dollars),67634.0,1024.0,census_acs5
+MO,6,cd119,B01002_001,Median age (years),39.7,0.2,census_acs5
+MO,6,cd119,B01003_001,Total population,775000.0,1763.0,census_acs5
+MO,6,cd119,B19013_001,Median household income (dollars),73975.0,733.0,census_acs5
+MO,7,cd119,B01002_001,Median age (years),38.5,0.2,census_acs5
+MO,7,cd119,B01003_001,Total population,785302.0,923.0,census_acs5
+MO,7,cd119,B19013_001,Median household income (dollars),63127.0,841.0,census_acs5
+MO,8,cd119,B01002_001,Median age (years),40.3,0.2,census_acs5
+MO,8,cd119,B01003_001,Total population,772835.0,2080.0,census_acs5
+MO,8,cd119,B19013_001,Median household income (dollars),60159.0,998.0,census_acs5
+MS,1,cd119,B01002_001,Median age (years),38.0,0.2,census_acs5
+MS,1,cd119,B01003_001,Total population,746893.0,714.0,census_acs5
+MS,1,cd119,B19013_001,Median household income (dollars),62385.0,1099.0,census_acs5
+MS,2,cd119,B01002_001,Median age (years),38.9,0.3,census_acs5
+MS,2,cd119,B01003_001,Total population,713085.0,2098.0,census_acs5
+MS,2,cd119,B19013_001,Median household income (dollars),44511.0,897.0,census_acs5
+MS,3,cd119,B01002_001,Median age (years),38.6,0.2,census_acs5
+MS,3,cd119,B01003_001,Total population,738402.0,2833.0,census_acs5
+MS,3,cd119,B19013_001,Median household income (dollars),60128.0,972.0,census_acs5
+MS,4,cd119,B01002_001,Median age (years),38.8,0.3,census_acs5
+MS,4,cd119,B01003_001,Total population,748399.0,1525.0,census_acs5
+MS,4,cd119,B19013_001,Median household income (dollars),60376.0,937.0,census_acs5
+MT,1,cd119,B01002_001,Median age (years),40.3,0.2,census_acs5
+MT,1,cd119,B01003_001,Total population,564861.0,215.0,census_acs5
+MT,1,cd119,B19013_001,Median household income (dollars),73598.0,1048.0,census_acs5
+MT,2,cd119,B01002_001,Median age (years),40.6,0.2,census_acs5
+MT,2,cd119,B01003_001,Total population,552014.0,217.0,census_acs5
+MT,2,cd119,B19013_001,Median household income (dollars),71501.0,921.0,census_acs5
+ND,0,cd119,B01002_001,Median age (years),35.9,0.2,census_acs5
+ND,0,cd119,B01003_001,Total population,784841.0,,census_acs5
+ND,0,cd119,B19013_001,Median household income (dollars),76657.0,1163.0,census_acs5
+NE,1,cd119,B01002_001,Median age (years),35.9,0.1,census_acs5
+NE,1,cd119,B01003_001,Total population,662376.0,1645.0,census_acs5
+NE,1,cd119,B19013_001,Median household income (dollars),79326.0,1375.0,census_acs5
+NE,2,cd119,B01002_001,Median age (years),35.8,0.1,census_acs5
+NE,2,cd119,B01003_001,Total population,664272.0,1644.0,census_acs5
+NE,2,cd119,B19013_001,Median household income (dollars),83942.0,1248.0,census_acs5
+NE,3,cd119,B01002_001,Median age (years),40.2,0.2,census_acs5
+NE,3,cd119,B01003_001,Total population,652059.0,214.0,census_acs5
+NE,3,cd119,B19013_001,Median household income (dollars),68556.0,709.0,census_acs5
+NH,1,cd119,B01002_001,Median age (years),42.9,0.2,census_acs5
+NH,1,cd119,B01003_001,Total population,698446.0,320.0,census_acs5
+NH,1,cd119,B19013_001,Median household income (dollars),100838.0,1542.0,census_acs5
+NH,2,cd119,B01002_001,Median age (years),43.7,0.3,census_acs5
+NH,2,cd119,B01003_001,Total population,696422.0,320.0,census_acs5
+NH,2,cd119,B19013_001,Median household income (dollars),97382.0,1594.0,census_acs5
+NJ,1,cd119,B01002_001,Median age (years),39.1,0.2,census_acs5
+NJ,1,cd119,B01003_001,Total population,778642.0,588.0,census_acs5
+NJ,1,cd119,B19013_001,Median household income (dollars),90796.0,1397.0,census_acs5
+NJ,2,cd119,B01002_001,Median age (years),43.0,0.3,census_acs5
+NJ,2,cd119,B01003_001,Total population,783815.0,1219.0,census_acs5
+NJ,2,cd119,B19013_001,Median household income (dollars),85261.0,1036.0,census_acs5
+NJ,3,cd119,B01002_001,Median age (years),42.3,0.2,census_acs5
+NJ,3,cd119,B01003_001,Total population,783491.0,675.0,census_acs5
+NJ,3,cd119,B19013_001,Median household income (dollars),116959.0,1476.0,census_acs5
+NJ,4,cd119,B01002_001,Median age (years),40.8,0.3,census_acs5
+NJ,4,cd119,B01003_001,Total population,788486.0,1482.0,census_acs5
+NJ,4,cd119,B19013_001,Median household income (dollars),99155.0,1516.0,census_acs5
+NJ,5,cd119,B01002_001,Median age (years),43.3,0.3,census_acs5
+NJ,5,cd119,B01003_001,Total population,778374.0,555.0,census_acs5
+NJ,5,cd119,B19013_001,Median household income (dollars),132937.0,1853.0,census_acs5
+NJ,6,cd119,B01002_001,Median age (years),38.7,0.3,census_acs5
+NJ,6,cd119,B01003_001,Total population,780307.0,1662.0,census_acs5
+NJ,6,cd119,B19013_001,Median household income (dollars),105178.0,1873.0,census_acs5
+NJ,7,cd119,B01002_001,Median age (years),43.6,0.3,census_acs5
+NJ,7,cd119,B01003_001,Total population,783203.0,1718.0,census_acs5
+NJ,7,cd119,B19013_001,Median household income (dollars),136541.0,1843.0,census_acs5
+NJ,8,cd119,B01002_001,Median age (years),35.7,0.2,census_acs5
+NJ,8,cd119,B01003_001,Total population,763596.0,4361.0,census_acs5
+NJ,8,cd119,B19013_001,Median household income (dollars),84356.0,1814.0,census_acs5
+NJ,9,cd119,B01002_001,Median age (years),38.8,0.3,census_acs5
+NJ,9,cd119,B01003_001,Total population,767600.0,1325.0,census_acs5
+NJ,9,cd119,B19013_001,Median household income (dollars),88416.0,2155.0,census_acs5
+NJ,10,cd119,B01002_001,Median age (years),36.8,0.3,census_acs5
+NJ,10,cd119,B01003_001,Total population,777942.0,4373.0,census_acs5
+NJ,10,cd119,B19013_001,Median household income (dollars),72784.0,1249.0,census_acs5
+NJ,11,cd119,B01002_001,Median age (years),41.6,0.2,census_acs5
+NJ,11,cd119,B01003_001,Total population,779403.0,1093.0,census_acs5
+NJ,11,cd119,B19013_001,Median household income (dollars),137244.0,2595.0,census_acs5
+NJ,12,cd119,B01002_001,Median age (years),40.0,0.3,census_acs5
+NJ,12,cd119,B01003_001,Total population,778950.0,1559.0,census_acs5
+NJ,12,cd119,B19013_001,Median household income (dollars),113235.0,2299.0,census_acs5
+NM,1,cd119,B01002_001,Median age (years),41.3,0.3,census_acs5
+NM,1,cd119,B01003_001,Total population,711799.0,4606.0,census_acs5
+NM,1,cd119,B19013_001,Median household income (dollars),71236.0,1149.0,census_acs5
+NM,2,cd119,B01002_001,Median age (years),37.0,0.3,census_acs5
+NM,2,cd119,B01003_001,Total population,707320.0,5441.0,census_acs5
+NM,2,cd119,B19013_001,Median household income (dollars),57932.0,1259.0,census_acs5
+NM,3,cd119,B01002_001,Median age (years),40.0,0.2,census_acs5
+NM,3,cd119,B01003_001,Total population,701127.0,2800.0,census_acs5
+NM,3,cd119,B19013_001,Median household income (dollars),62557.0,1321.0,census_acs5
+NV,1,cd119,B01002_001,Median age (years),39.1,0.3,census_acs5
+NV,1,cd119,B01003_001,Total population,771368.0,5307.0,census_acs5
+NV,1,cd119,B19013_001,Median household income (dollars),69532.0,1200.0,census_acs5
+NV,2,cd119,B01002_001,Median age (years),40.3,0.2,census_acs5
+NV,2,cd119,B01003_001,Total population,790547.0,273.0,census_acs5
+NV,2,cd119,B19013_001,Median household income (dollars),85247.0,1235.0,census_acs5
+NV,3,cd119,B01002_001,Median age (years),40.1,0.3,census_acs5
+NV,3,cd119,B01003_001,Total population,809043.0,7105.0,census_acs5
+NV,3,cd119,B19013_001,Median household income (dollars),84345.0,1508.0,census_acs5
+NV,4,cd119,B01002_001,Median age (years),37.0,0.3,census_acs5
+NV,4,cd119,B01003_001,Total population,813654.0,5277.0,census_acs5
+NV,4,cd119,B19013_001,Median household income (dollars),74580.0,1050.0,census_acs5
+NY,1,cd119,B01002_001,Median age (years),44.1,0.4,census_acs5
+NY,1,cd119,B01003_001,Total population,778092.0,4350.0,census_acs5
+NY,1,cd119,B19013_001,Median household income (dollars),134242.0,2552.0,census_acs5
+NY,2,cd119,B01002_001,Median age (years),39.7,0.4,census_acs5
+NY,2,cd119,B01003_001,Total population,782282.0,4159.0,census_acs5
+NY,2,cd119,B19013_001,Median household income (dollars),128330.0,2001.0,census_acs5
+NY,3,cd119,B01002_001,Median age (years),44.8,0.3,census_acs5
+NY,3,cd119,B01003_001,Total population,770395.0,5452.0,census_acs5
+NY,3,cd119,B19013_001,Median household income (dollars),139677.0,2025.0,census_acs5
+NY,4,cd119,B01002_001,Median age (years),40.7,0.3,census_acs5
+NY,4,cd119,B01003_001,Total population,773177.0,2078.0,census_acs5
+NY,4,cd119,B19013_001,Median household income (dollars),141082.0,1936.0,census_acs5
+NY,5,cd119,B01002_001,Median age (years),40.3,0.3,census_acs5
+NY,5,cd119,B01003_001,Total population,789687.0,8020.0,census_acs5
+NY,5,cd119,B19013_001,Median household income (dollars),86577.0,1168.0,census_acs5
+NY,6,cd119,B01002_001,Median age (years),43.0,0.4,census_acs5
+NY,6,cd119,B01003_001,Total population,733304.0,8602.0,census_acs5
+NY,6,cd119,B19013_001,Median household income (dollars),80301.0,1813.0,census_acs5
+NY,7,cd119,B01002_001,Median age (years),33.9,0.3,census_acs5
+NY,7,cd119,B01003_001,Total population,753548.0,10916.0,census_acs5
+NY,7,cd119,B19013_001,Median household income (dollars),88575.0,2409.0,census_acs5
+NY,8,cd119,B01002_001,Median age (years),38.7,0.4,census_acs5
+NY,8,cd119,B01003_001,Total population,759088.0,9387.0,census_acs5
+NY,8,cd119,B19013_001,Median household income (dollars),66089.0,1826.0,census_acs5
+NY,9,cd119,B01002_001,Median age (years),36.9,0.4,census_acs5
+NY,9,cd119,B01003_001,Total population,737304.0,9220.0,census_acs5
+NY,9,cd119,B19013_001,Median household income (dollars),75855.0,1819.0,census_acs5
+NY,10,cd119,B01002_001,Median age (years),36.4,0.3,census_acs5
+NY,10,cd119,B01003_001,Total population,733272.0,10921.0,census_acs5
+NY,10,cd119,B19013_001,Median household income (dollars),117000.0,3217.0,census_acs5
+NY,11,cd119,B01002_001,Median age (years),41.0,0.3,census_acs5
+NY,11,cd119,B01003_001,Total population,752901.0,4851.0,census_acs5
+NY,11,cd119,B19013_001,Median household income (dollars),90701.0,1467.0,census_acs5
+NY,12,cd119,B01002_001,Median age (years),40.3,0.3,census_acs5
+NY,12,cd119,B01003_001,Total population,719940.0,7622.0,census_acs5
+NY,12,cd119,B19013_001,Median household income (dollars),147775.0,3450.0,census_acs5
+NY,13,cd119,B01002_001,Median age (years),37.5,0.4,census_acs5
+NY,13,cd119,B01003_001,Total population,778141.0,9178.0,census_acs5
+NY,13,cd119,B19013_001,Median household income (dollars),53573.0,1861.0,census_acs5
+NY,14,cd119,B01002_001,Median age (years),37.0,0.3,census_acs5
+NY,14,cd119,B01003_001,Total population,718731.0,8569.0,census_acs5
+NY,14,cd119,B19013_001,Median household income (dollars),67549.0,1656.0,census_acs5
+NY,15,cd119,B01002_001,Median age (years),35.5,0.3,census_acs5
+NY,15,cd119,B01003_001,Total population,751695.0,7583.0,census_acs5
+NY,15,cd119,B19013_001,Median household income (dollars),47075.0,1074.0,census_acs5
+NY,16,cd119,B01002_001,Median age (years),41.0,0.3,census_acs5
+NY,16,cd119,B01003_001,Total population,775704.0,3717.0,census_acs5
+NY,16,cd119,B19013_001,Median household income (dollars),104031.0,1941.0,census_acs5
+NY,17,cd119,B01002_001,Median age (years),40.1,0.3,census_acs5
+NY,17,cd119,B01003_001,Total population,777627.0,719.0,census_acs5
+NY,17,cd119,B19013_001,Median household income (dollars),125890.0,2101.0,census_acs5
+NY,18,cd119,B01002_001,Median age (years),39.7,0.2,census_acs5
+NY,18,cd119,B01003_001,Total population,786484.0,632.0,census_acs5
+NY,18,cd119,B19013_001,Median household income (dollars),94063.0,1544.0,census_acs5
+NY,19,cd119,B01002_001,Median age (years),42.1,0.2,census_acs5
+NY,19,cd119,B01003_001,Total population,774788.0,704.0,census_acs5
+NY,19,cd119,B19013_001,Median household income (dollars),73134.0,979.0,census_acs5
+NY,20,cd119,B01002_001,Median age (years),39.7,0.2,census_acs5
+NY,20,cd119,B01003_001,Total population,782695.0,976.0,census_acs5
+NY,20,cd119,B19013_001,Median household income (dollars),86491.0,1157.0,census_acs5
+NY,21,cd119,B01002_001,Median age (years),42.4,0.2,census_acs5
+NY,21,cd119,B01003_001,Total population,770419.0,953.0,census_acs5
+NY,21,cd119,B19013_001,Median household income (dollars),70983.0,729.0,census_acs5
+NY,22,cd119,B01002_001,Median age (years),39.9,0.2,census_acs5
+NY,22,cd119,B01003_001,Total population,767369.0,689.0,census_acs5
+NY,22,cd119,B19013_001,Median household income (dollars),73829.0,1087.0,census_acs5
+NY,23,cd119,B01002_001,Median age (years),44.2,0.2,census_acs5
+NY,23,cd119,B01003_001,Total population,770072.0,1088.0,census_acs5
+NY,23,cd119,B19013_001,Median household income (dollars),72834.0,891.0,census_acs5
+NY,24,cd119,B01002_001,Median age (years),42.4,0.2,census_acs5
+NY,24,cd119,B01003_001,Total population,771272.0,1112.0,census_acs5
+NY,24,cd119,B19013_001,Median household income (dollars),72690.0,797.0,census_acs5
+NY,25,cd119,B01002_001,Median age (years),39.7,0.2,census_acs5
+NY,25,cd119,B01003_001,Total population,771484.0,318.0,census_acs5
+NY,25,cd119,B19013_001,Median household income (dollars),76853.0,1149.0,census_acs5
+NY,26,cd119,B01002_001,Median age (years),38.6,0.2,census_acs5
+NY,26,cd119,B01003_001,Total population,772895.0,540.0,census_acs5
+NY,26,cd119,B19013_001,Median household income (dollars),65395.0,1060.0,census_acs5
+OK,1,cd119,B01002_001,Median age (years),36.5,0.1,census_acs5
+OK,1,cd119,B01003_001,Total population,809593.0,1037.0,census_acs5
+OK,1,cd119,B19013_001,Median household income (dollars),70845.0,850.0,census_acs5
+OK,2,cd119,B01002_001,Median age (years),39.8,0.2,census_acs5
+OK,2,cd119,B01003_001,Total population,804459.0,945.0,census_acs5
+OK,2,cd119,B19013_001,Median household income (dollars),55652.0,619.0,census_acs5
+OK,3,cd119,B01002_001,Median age (years),35.6,0.2,census_acs5
+OK,3,cd119,B01003_001,Total population,797981.0,4064.0,census_acs5
+OK,3,cd119,B19013_001,Median household income (dollars),59242.0,746.0,census_acs5
+OK,4,cd119,B01002_001,Median age (years),36.5,0.2,census_acs5
+OK,4,cd119,B01003_001,Total population,804349.0,1197.0,census_acs5
+OK,4,cd119,B19013_001,Median household income (dollars),67010.0,938.0,census_acs5
+OK,5,cd119,B01002_001,Median age (years),37.0,0.2,census_acs5
+OK,5,cd119,B01003_001,Total population,812252.0,4037.0,census_acs5
+OK,5,cd119,B19013_001,Median household income (dollars),74730.0,1081.0,census_acs5
+OR,1,cd119,B01002_001,Median age (years),38.7,0.2,census_acs5
+OR,1,cd119,B01003_001,Total population,707875.0,3812.0,census_acs5
+OR,1,cd119,B19013_001,Median household income (dollars),98323.0,1469.0,census_acs5
+OR,2,cd119,B01002_001,Median age (years),42.8,0.2,census_acs5
+OR,2,cd119,B01003_001,Total population,708237.0,1761.0,census_acs5
+OR,2,cd119,B19013_001,Median household income (dollars),67259.0,976.0,census_acs5
+OR,3,cd119,B01002_001,Median age (years),39.1,0.3,census_acs5
+OR,3,cd119,B01003_001,Total population,699535.0,4587.0,census_acs5
+OR,3,cd119,B19013_001,Median household income (dollars),89326.0,1793.0,census_acs5
+OR,4,cd119,B01002_001,Median age (years),42.3,0.2,census_acs5
+OR,4,cd119,B01003_001,Total population,710014.0,1004.0,census_acs5
+OR,4,cd119,B19013_001,Median household income (dollars),68838.0,1004.0,census_acs5
+OR,5,cd119,B01002_001,Median age (years),41.6,0.2,census_acs5
+OR,5,cd119,B01003_001,Total population,714831.0,3577.0,census_acs5
+OR,5,cd119,B19013_001,Median household income (dollars),93030.0,1497.0,census_acs5
+OR,6,cd119,B01002_001,Median age (years),38.5,0.2,census_acs5
+OR,6,cd119,B01003_001,Total population,713801.0,3095.0,census_acs5
+OR,6,cd119,B19013_001,Median household income (dollars),87618.0,1363.0,census_acs5
+PA,1,cd119,B01002_001,Median age (years),43.8,0.2,census_acs5
+PA,1,cd119,B01003_001,Total population,767357.0,668.0,census_acs5
+PA,1,cd119,B19013_001,Median household income (dollars),113911.0,1899.0,census_acs5
+PA,2,cd119,B01002_001,Median age (years),36.3,0.3,census_acs5
+PA,2,cd119,B01003_001,Total population,746424.0,8389.0,census_acs5
+PA,2,cd119,B19013_001,Median household income (dollars),60334.0,1534.0,census_acs5
+PA,3,cd119,B01002_001,Median age (years),34.3,0.2,census_acs5
+PA,3,cd119,B01003_001,Total population,762762.0,8416.0,census_acs5
+PA,3,cd119,B19013_001,Median household income (dollars),64484.0,1161.0,census_acs5
+PA,4,cd119,B01002_001,Median age (years),42.1,0.3,census_acs5
+PA,4,cd119,B01003_001,Total population,774814.0,1848.0,census_acs5
+PA,4,cd119,B19013_001,Median household income (dollars),110538.0,1603.0,census_acs5
+PA,5,cd119,B01002_001,Median age (years),38.5,0.2,census_acs5
+PA,5,cd119,B01003_001,Total population,765322.0,3406.0,census_acs5
+PA,5,cd119,B19013_001,Median household income (dollars),87199.0,1211.0,census_acs5
+PA,6,cd119,B01002_001,Median age (years),39.8,0.2,census_acs5
+PA,6,cd119,B01003_001,Total population,779553.0,288.0,census_acs5
+PA,6,cd119,B19013_001,Median household income (dollars),106917.0,1538.0,census_acs5
+PA,7,cd119,B01002_001,Median age (years),41.2,0.2,census_acs5
+PA,7,cd119,B01003_001,Total population,775601.0,698.0,census_acs5
+PA,7,cd119,B19013_001,Median household income (dollars),82392.0,1378.0,census_acs5
+PA,8,cd119,B01002_001,Median age (years),42.9,0.2,census_acs5
+PA,8,cd119,B01003_001,Total population,768757.0,1178.0,census_acs5
+PA,8,cd119,B19013_001,Median household income (dollars),67979.0,1016.0,census_acs5
+PA,9,cd119,B01002_001,Median age (years),43.2,0.2,census_acs5
+PA,9,cd119,B01003_001,Total population,765525.0,1496.0,census_acs5
+PA,9,cd119,B19013_001,Median household income (dollars),69483.0,850.0,census_acs5
+PA,10,cd119,B01002_001,Median age (years),40.2,0.2,census_acs5
+PA,10,cd119,B01003_001,Total population,779640.0,924.0,census_acs5
+PA,10,cd119,B19013_001,Median household income (dollars),81964.0,1342.0,census_acs5
+PA,11,cd119,B01002_001,Median age (years),40.2,0.2,census_acs5
+PA,11,cd119,B01003_001,Total population,772863.0,795.0,census_acs5
+PA,11,cd119,B19013_001,Median household income (dollars),87221.0,1023.0,census_acs5
+PA,12,cd119,B01002_001,Median age (years),39.5,0.3,census_acs5
+PA,12,cd119,B01003_001,Total population,760856.0,1314.0,census_acs5
+PA,12,cd119,B19013_001,Median household income (dollars),71986.0,904.0,census_acs5
+PA,13,cd119,B01002_001,Median age (years),43.5,0.2,census_acs5
+PA,13,cd119,B01003_001,Total population,765396.0,492.0,census_acs5
+PA,13,cd119,B19013_001,Median household income (dollars),69259.0,865.0,census_acs5
+PA,14,cd119,B01002_001,Median age (years),45.3,0.2,census_acs5
+PA,14,cd119,B01003_001,Total population,757997.0,1187.0,census_acs5
+PA,14,cd119,B19013_001,Median household income (dollars),67375.0,846.0,census_acs5
+PA,15,cd119,B01002_001,Median age (years),42.3,0.2,census_acs5
+PA,15,cd119,B01003_001,Total population,758565.0,1006.0,census_acs5
+PA,15,cd119,B19013_001,Median household income (dollars),65472.0,629.0,census_acs5
+PA,16,cd119,B01002_001,Median age (years),42.9,0.1,census_acs5
+PA,16,cd119,B01003_001,Total population,762592.0,308.0,census_acs5
+PA,16,cd119,B19013_001,Median household income (dollars),67764.0,1093.0,census_acs5
+PA,17,cd119,B01002_001,Median age (years),43.2,0.3,census_acs5
+PA,17,cd119,B01003_001,Total population,754615.0,1108.0,census_acs5
+PA,17,cd119,B19013_001,Median household income (dollars),85933.0,1405.0,census_acs5
+RI,1,cd119,B01002_001,Median age (years),39.7,0.4,census_acs5
+RI,1,cd119,B01003_001,Total population,546488.0,2673.0,census_acs5
+RI,1,cd119,B19013_001,Median household income (dollars),82508.0,1456.0,census_acs5
+RI,2,cd119,B01002_001,Median age (years),41.3,0.3,census_acs5
+RI,2,cd119,B01003_001,Total population,555313.0,2673.0,census_acs5
+RI,2,cd119,B19013_001,Median household income (dollars),93597.0,1803.0,census_acs5
+SC,1,cd119,B01002_001,Median age (years),41.1,0.3,census_acs5
+SC,1,cd119,B01003_001,Total population,763792.0,3609.0,census_acs5
+SC,1,cd119,B19013_001,Median household income (dollars),90436.0,1281.0,census_acs5
+SC,2,cd119,B01002_001,Median age (years),39.6,0.3,census_acs5
+SC,2,cd119,B01003_001,Total population,749271.0,4245.0,census_acs5
+SC,2,cd119,B19013_001,Median household income (dollars),74611.0,1263.0,census_acs5
+SC,3,cd119,B01002_001,Median age (years),40.7,0.3,census_acs5
+SC,3,cd119,B01003_001,Total population,750357.0,2728.0,census_acs5
+SC,3,cd119,B19013_001,Median household income (dollars),62661.0,1298.0,census_acs5
+SC,4,cd119,B01002_001,Median age (years),38.2,0.3,census_acs5
+SC,4,cd119,B01003_001,Total population,765409.0,3834.0,census_acs5
+SC,4,cd119,B19013_001,Median household income (dollars),72664.0,1120.0,census_acs5
+SC,5,cd119,B01002_001,Median age (years),40.2,0.2,census_acs5
+SC,5,cd119,B01003_001,Total population,758357.0,3365.0,census_acs5
+SC,5,cd119,B19013_001,Median household income (dollars),71517.0,1162.0,census_acs5
+SC,6,cd119,B01002_001,Median age (years),36.8,0.3,census_acs5
+SC,6,cd119,B01003_001,Total population,745526.0,5744.0,census_acs5
+SC,6,cd119,B19013_001,Median household income (dollars),55782.0,1266.0,census_acs5
+SC,7,cd119,B01002_001,Median age (years),45.3,0.1,census_acs5
+SC,7,cd119,B01003_001,Total population,763513.0,914.0,census_acs5
+SC,7,cd119,B19013_001,Median household income (dollars),59582.0,1132.0,census_acs5
+SD,0,cd119,B01002_001,Median age (years),38.0,0.2,census_acs5
+SD,0,cd119,B01003_001,Total population,907428.0,,census_acs5
+SD,0,cd119,B19013_001,Median household income (dollars),75081.0,888.0,census_acs5
+VA,1,cd119,B01002_001,Median age (years),42.0,0.2,census_acs5
+VA,1,cd119,B01003_001,Total population,804410.0,4299.0,census_acs5
+VA,1,cd119,B19013_001,Median household income (dollars),104610.0,1503.0,census_acs5
+VA,2,cd119,B01002_001,Median age (years),39.1,0.2,census_acs5
+VA,2,cd119,B01003_001,Total population,787890.0,2424.0,census_acs5
+VA,2,cd119,B19013_001,Median household income (dollars),93757.0,1287.0,census_acs5
+VA,3,cd119,B01002_001,Median age (years),34.6,0.2,census_acs5
+VA,3,cd119,B01003_001,Total population,776096.0,2382.0,census_acs5
+VA,3,cd119,B19013_001,Median household income (dollars),67878.0,886.0,census_acs5
+VA,4,cd119,B01002_001,Median age (years),37.2,0.2,census_acs5
+VA,4,cd119,B01003_001,Total population,796326.0,4215.0,census_acs5
+VA,4,cd119,B19013_001,Median household income (dollars),70751.0,1055.0,census_acs5
+VA,5,cd119,B01002_001,Median age (years),41.5,0.2,census_acs5
+VA,5,cd119,B01003_001,Total population,798638.0,1798.0,census_acs5
+VA,5,cd119,B19013_001,Median household income (dollars),72558.0,1048.0,census_acs5
+VA,6,cd119,B01002_001,Median age (years),40.8,0.2,census_acs5
+VA,6,cd119,B01003_001,Total population,790761.0,1287.0,census_acs5
+VA,6,cd119,B19013_001,Median household income (dollars),71978.0,1128.0,census_acs5
+VA,7,cd119,B01002_001,Median age (years),37.0,0.2,census_acs5
+VA,7,cd119,B01003_001,Total population,806870.0,4397.0,census_acs5
+VA,7,cd119,B19013_001,Median household income (dollars),113817.0,1332.0,census_acs5
+VA,8,cd119,B01002_001,Median age (years),37.7,0.2,census_acs5
+VA,8,cd119,B01003_001,Total population,776847.0,4614.0,census_acs5
+VA,8,cd119,B19013_001,Median household income (dollars),131383.0,2068.0,census_acs5
+VA,9,cd119,B01002_001,Median age (years),44.0,0.2,census_acs5
+VA,9,cd119,B01003_001,Total population,780117.0,1633.0,census_acs5
+VA,9,cd119,B19013_001,Median household income (dollars),58380.0,934.0,census_acs5
+VA,10,cd119,B01002_001,Median age (years),38.3,0.2,census_acs5
+VA,10,cd119,B01003_001,Total population,802125.0,4573.0,census_acs5
+VA,10,cd119,B19013_001,Median household income (dollars),162359.0,1792.0,census_acs5
+VA,11,cd119,B01002_001,Median age (years),38.9,0.2,census_acs5
+VA,11,cd119,B01003_001,Total population,785090.0,4714.0,census_acs5
+VA,11,cd119,B19013_001,Median household income (dollars),160992.0,1927.0,census_acs5
+VT,0,cd119,B01002_001,Median age (years),43.1,0.2,census_acs5
+VT,0,cd119,B01003_001,Total population,647106.0,,census_acs5
+VT,0,cd119,B19013_001,Median household income (dollars),81203.0,1339.0,census_acs5
+WA,1,cd119,B01002_001,Median age (years),37.6,0.3,census_acs5
+WA,1,cd119,B01003_001,Total population,783828.0,4461.0,census_acs5
+WA,1,cd119,B19013_001,Median household income (dollars),134799.0,1648.0,census_acs5
+WA,2,cd119,B01002_001,Median age (years),40.3,0.2,census_acs5
+WA,2,cd119,B01003_001,Total population,781265.0,3422.0,census_acs5
+WA,2,cd119,B19013_001,Median household income (dollars),90029.0,1209.0,census_acs5
+WA,3,cd119,B01002_001,Median age (years),40.5,0.2,census_acs5
+WA,3,cd119,B01003_001,Total population,788069.0,2090.0,census_acs5
+WA,3,cd119,B19013_001,Median household income (dollars),90428.0,1304.0,census_acs5
+WA,4,cd119,B01002_001,Median age (years),34.9,0.1,census_acs5
+WA,4,cd119,B01003_001,Total population,781735.0,1353.0,census_acs5
+WA,4,cd119,B19013_001,Median household income (dollars),77137.0,1236.0,census_acs5
+WA,5,cd119,B01002_001,Median age (years),38.7,0.2,census_acs5
+WA,5,cd119,B01003_001,Total population,788007.0,1202.0,census_acs5
+WA,5,cd119,B19013_001,Median household income (dollars),75273.0,1248.0,census_acs5
+WA,6,cd119,B01002_001,Median age (years),42.4,0.3,census_acs5
+WA,6,cd119,B01003_001,Total population,782007.0,3266.0,census_acs5
+WA,6,cd119,B19013_001,Median household income (dollars),90625.0,1184.0,census_acs5
+WA,7,cd119,B01002_001,Median age (years),36.3,0.2,census_acs5
+WA,7,cd119,B01003_001,Total population,779308.0,4572.0,census_acs5
+WA,7,cd119,B19013_001,Median household income (dollars),125152.0,1883.0,census_acs5
+WA,8,cd119,B01002_001,Median age (years),39.4,0.3,census_acs5
+WA,8,cd119,B01003_001,Total population,781768.0,5186.0,census_acs5
+WA,8,cd119,B19013_001,Median household income (dollars),127442.0,1926.0,census_acs5
+WA,9,cd119,B01002_001,Median age (years),37.4,0.3,census_acs5
+WA,9,cd119,B01003_001,Total population,772812.0,5268.0,census_acs5
+WA,9,cd119,B19013_001,Median household income (dollars),100420.0,1823.0,census_acs5
+WA,10,cd119,B01002_001,Median age (years),36.8,0.3,census_acs5
+WA,10,cd119,B01003_001,Total population,777317.0,4469.0,census_acs5
+WA,10,cd119,B19013_001,Median household income (dollars),94427.0,1431.0,census_acs5
+WI,1,cd119,B01002_001,Median age (years),40.6,0.2,census_acs5
+WI,1,cd119,B01003_001,Total population,733917.0,742.0,census_acs5
+WI,1,cd119,B19013_001,Median household income (dollars),79703.0,1175.0,census_acs5
+WI,2,cd119,B01002_001,Median age (years),37.3,0.2,census_acs5
+WI,2,cd119,B01003_001,Total population,748550.0,821.0,census_acs5
+WI,2,cd119,B19013_001,Median household income (dollars),87636.0,1059.0,census_acs5
+WI,3,cd119,B01002_001,Median age (years),39.5,0.2,census_acs5
+WI,3,cd119,B01003_001,Total population,739573.0,896.0,census_acs5
+WI,3,cd119,B19013_001,Median household income (dollars),72409.0,868.0,census_acs5
+WI,4,cd119,B01002_001,Median age (years),34.0,0.2,census_acs5
+WI,4,cd119,B01003_001,Total population,725486.0,1155.0,census_acs5
+WI,4,cd119,B19013_001,Median household income (dollars),60201.0,969.0,census_acs5
+WI,5,cd119,B01002_001,Median age (years),43.2,0.2,census_acs5
+WI,5,cd119,B01003_001,Total population,742808.0,1338.0,census_acs5
+WI,5,cd119,B19013_001,Median household income (dollars),95803.0,1109.0,census_acs5
+WI,6,cd119,B01002_001,Median age (years),42.3,0.1,census_acs5
+WI,6,cd119,B01003_001,Total population,738897.0,817.0,census_acs5
+WI,6,cd119,B19013_001,Median household income (dollars),75789.0,940.0,census_acs5
+WI,7,cd119,B01002_001,Median age (years),45.2,0.2,census_acs5
+WI,7,cd119,B01003_001,Total population,743243.0,795.0,census_acs5
+WI,7,cd119,B19013_001,Median household income (dollars),72975.0,904.0,census_acs5
+WI,8,cd119,B01002_001,Median age (years),41.0,0.2,census_acs5
+WI,8,cd119,B01003_001,Total population,742398.0,614.0,census_acs5
+WI,8,cd119,B19013_001,Median household income (dollars),78966.0,917.0,census_acs5
+WV,1,cd119,B01002_001,Median age (years),43.9,0.2,census_acs5
+WV,1,cd119,B01003_001,Total population,877069.0,,census_acs5
+WV,1,cd119,B19013_001,Median household income (dollars),54402.0,857.0,census_acs5
+WV,2,cd119,B01002_001,Median age (years),41.6,0.1,census_acs5
+WV,2,cd119,B01003_001,Total population,901304.0,,census_acs5
+WV,2,cd119,B19013_001,Median household income (dollars),64829.0,987.0,census_acs5
+WY,0,cd119,B01002_001,Median age (years),39.1,0.2,census_acs5
+WY,0,cd119,B01003_001,Total population,582397.0,,census_acs5
+WY,0,cd119,B19013_001,Median household income (dollars),76176.0,1168.0,census_acs5

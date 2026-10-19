@@ -1,6 +1,12 @@
 {
   "failed": [],
   "ok": [
-    "candidates_official"
+    "state_offices",
+    "candidates_official",
+    "legislators",
+    "fec",
+    "history",
+    "boundaries",
+    "acs"
   ]
 }
