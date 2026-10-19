@@ -1,17 +1,25 @@
 ---
 // Title block shared by every page: optional breadcrumb, optional kicker line
-// (for example the office above a race title), the title, and a lede.
+// (for example the office above a race title), the title with an optional
+// status label beside it, and a lede.
 interface Props {
   title: string;
   kicker?: string;
   lede?: string;
+  status?: string;
+  provisional?: boolean;
 }
-const { title, kicker, lede } = Astro.props;
+const { title, kicker, lede, status, provisional = false } = Astro.props;
 ---
 <div class="page-header">
   {Astro.slots.has('crumbs') && <p class="crumbs"><slot name="crumbs" /></p>}
   {kicker && <p class="kicker">{kicker}</p>}
-  <h1>{title}</h1>
+  {status ? (
+    <div class="title-row">
+      <h1>{title}</h1>
+      <span class={`status${provisional ? ' provisional' : ''}`}>{status}</span>
+    </div>
+  ) : <h1>{title}</h1>}
   {lede && <p class="lede">{lede}</p>}
   <slot />
 </div>

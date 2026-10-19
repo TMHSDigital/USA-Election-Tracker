@@ -1,7 +1,9 @@
 ---
 import '@fontsource-variable/public-sans';
+import '@fontsource-variable/archivo/wdth.css';
 import '../styles/global.css';
 import fontUrl from '@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url';
+import displayUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import { t } from '../i18n';
 import { url } from '../lib/format';
 import DataUpdated from '../components/DataUpdated.astro';
@@ -16,32 +18,34 @@ const { title, description = t('site.tagline'), adapters = [], noindex = false }
 const fullTitle = title === t('site.name') ? title : `${title} | ${t('site.name')}`;
 const path = Astro.url.pathname;
 const nav = [
-  ['/', 'nav.home'],
   ['/states/', 'nav.states'],
   ['/lookup/', 'nav.lookup'],
   ['/how-to-vote/', 'nav.howToVote'],
   ['/election-night/', 'nav.electionNight'],
   ['/downloads/', 'nav.downloads'],
-  ['/search/', 'nav.search'],
   ['/about/', 'nav.about'],
 ] as const;
-const current = (p: string) => (p === '/' ? path === url('/') : path.startsWith(url(p)));
+const current = (p: string) => path.startsWith(url(p));
+const onSearchPage = path === url('/search/');
 const repo = 'https://github.com/TMHSDigital/USA-Election-Tracker';
 const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefined;
+const themeLabels = { auto: t('theme.auto'), light: t('theme.light'), dark: t('theme.dark') };
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f5f2" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141517" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef0eb" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111416" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href={fontUrl} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={displayUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -50,7 +54,18 @@ const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefine
     <a class="skip" href="#main">{t('skip')}</a>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href={url('/')}>{t('site.name')}<span>2026</span></a>
+        <a class="brand" href={url('/')}>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <defs>
+              <pattern id="brand-hatch" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <rect width="3" height="1.3" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect x="1" y="1" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M5 6.5h8.5l4 3.5-2.5 8H8.5L5 12.5z" fill="url(#brand-hatch)" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+          </svg>
+          <span>{t('site.name')}<b>2026</b></span>
+        </a>
         <nav class="site-nav" aria-label={t('nav.label')}>
           <ul>
             {nav.map(([href, key]) => (
@@ -58,6 +73,27 @@ const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefine
             ))}
           </ul>
         </nav>
+        <details class="menu">
+          <summary>{t('nav.menu')}</summary>
+          <nav aria-label={t('nav.label')}>
+            <ul>
+              {nav.map(([href, key]) => (
+                <li><a href={url(href)} aria-current={current(href) ? 'page' : undefined}>{t(key)}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </details>
+        {!onSearchPage && (
+          <form class="site-search" role="search" action={url('/search/')} method="get">
+            <label for="site-q" class="visually-hidden">{t('search.label')}</label>
+            <input id="site-q" type="search" name="q" placeholder={t('search.placeholder')} autocomplete="off" />
+            <button class="button" type="submit">{t('nav.search')}</button>
+          </form>
+        )}
+        <button class="theme" type="button" id="theme-btn" hidden aria-label={t('theme.label')} data-labels={JSON.stringify(themeLabels)}>
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor" /></svg>
+          <span></span>
+        </button>
       </div>
     </header>
     <main id="main" class="wrap" data-pagefind-body>
@@ -81,6 +117,7 @@ const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefine
             <li><a href={url('/corrections/')}>{t('footer.corrections')}</a></li>
             <li><a href={url('/disclaimer/')}>{t('footer.disclaimer')}</a></li>
             <li><a href={url('/about/')}>{t('nav.about')}</a></li>
+            <li><a href={url('/search/')}>{t('nav.search')}</a></li>
           </ul>
         </nav>
         <div>
@@ -94,6 +131,7 @@ const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE as string | undefine
         </div>
       </div>
     </footer>
+    <script is:inline>(function(){var b=document.getElementById('theme-btn');if(!b)return;var L=JSON.parse(b.getAttribute('data-labels')),h=document.documentElement,o=['auto','light','dark'];function cur(){return h.getAttribute('data-theme')||'auto'}function show(){b.lastElementChild.textContent=L[cur()]}b.addEventListener('click',function(){var n=o[(o.indexOf(cur())+1)%3];if(n==='auto')h.removeAttribute('data-theme');else h.setAttribute('data-theme',n);try{if(n==='auto')localStorage.removeItem('theme');else localStorage.setItem('theme',n)}catch(e){}show()});show();b.hidden=false})();</script>
     {goatcounter && <script is:inline async data-goatcounter={`https://${goatcounter}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}
   </body>
 </html>
