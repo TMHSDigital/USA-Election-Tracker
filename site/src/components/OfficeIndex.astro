@@ -1,5 +1,6 @@
 ---
-// Index of every race for one office. House races are grouped by state.
+// Index of every race for one office. House races are grouped by state with
+// a sticky jump bar; Senate and governor races are one grid of tiles.
 import Base from '../layouts/Base.astro';
 import PageHeader from './PageHeader.astro';
 import { ADAPTERS_FOR, getRaceIndex, type Office, type RaceSummary } from '../lib/data';
@@ -24,17 +25,33 @@ const statusText = (r: RaceSummary) =>
 <Base title={officeName(office)} description={t(introKey, { count: races.length })} adapters={ADAPTERS_FOR.state}>
   <PageHeader title={officeName(office)} lede={t(introKey, { count: races.length })} />
   {office === 'house' ? (
-    [...byState.entries()].map(([state, list]) => (
-      <section aria-labelledby={`s-${list[0].state_po}`}>
-        <h2 id={`s-${list[0].state_po}`}><a href={stateUrl(list[0].state_po)}>{state}</a></h2>
-        <ul class="race-list">
-          {list.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+    <>
+      <nav class="jump" aria-label={t('office.jump')}>
+        <ul>
+          {[...byState.values()].map((list) => (
+            <li><a href={`#s-${list[0].state_po}`} title={list[0].state_name}>{list[0].state_po}</a></li>
+          ))}
         </ul>
-      </section>
-    ))
+      </nav>
+      {[...byState.entries()].map(([state, list]) => (
+        <section aria-labelledby={`s-${list[0].state_po}`} class="index-state">
+          <h2 id={`s-${list[0].state_po}`}><a href={stateUrl(list[0].state_po)}>{state}</a></h2>
+          <ul class="tiles">
+            {list.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+          </ul>
+        </section>
+      ))}
+    </>
   ) : (
-    <ul class="race-list">
+    <ul class="tiles wide">
       {races.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
     </ul>
   )}
 </Base>
+
+<style is:global>
+  .index-state { scroll-margin-top: 4rem; }
+  .index-state h2 { margin-top: var(--s4); }
+  .index-state h2 a { text-decoration: none; }
+  .index-state h2 a:hover { text-decoration: underline; }
+</style>

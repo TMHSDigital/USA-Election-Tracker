@@ -25,7 +25,7 @@ const statusKey = ls === 'official' ? 'race.status.official' : ls === 'fec_regis
     <dd>{fmtDate(race.election_date)}</dd>
     <dt>{t('race.aside.list')}</dt>
     <dd>
-      <span class={`status${ls === 'official' ? '' : ' provisional'}`}>{t(statusKey)}</span>
+      {t(statusKey)}
       {ls === 'official' && race.candidate_list.url && <><br /><a href={race.candidate_list.url}>{t('race.officialList')}</a></>}
     </dd>
     {office?.results_url && (

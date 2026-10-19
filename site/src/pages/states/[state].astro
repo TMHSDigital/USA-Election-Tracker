@@ -21,6 +21,8 @@ const groups = [
   ['house', 'state.house', null],
 ] as const;
 const countLabel = (n: number) => (n === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: n }));
+const statusText = (r: (typeof races)[number]) =>
+  r.list_status === 'official' ? countLabel(r.candidate_count) : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
 const description = t('state.description', { state: state.state_name, count: races.length });
 ---
 <Base title={state.state_name} description={description} adapters={ADAPTERS_FOR.state}>
@@ -68,11 +70,11 @@ const description = t('state.description', { state: state.state_name, count: rac
             <>
               <h3>{t(label)}</h3>
               {list.length === 0 && none ? <p>{t(none, { state: state.state_name })}</p> : (
-                <ul class="race-list">
+                <ul class="tiles">
                   {list.map((r) => (
                     <li>
                       <a href={raceUrl(r.race_id)}>{raceTitle(r)}</a>
-                      <span class="note">{r.list_status === 'official' ? countLabel(r.candidate_count) : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable')}</span>
+                      <span class="note">{statusText(r)}</span>
                     </li>
                   ))}
                 </ul>

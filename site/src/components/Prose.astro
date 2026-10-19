@@ -18,17 +18,21 @@ const headings = page.getHeadings().filter((h) => h.depth === 2);
 ---
 <Base title={title}>
   <PageHeader title={title} />
-  <div class="layout">
-    <aside class="aside">
-      {headings.length > 2 && (
+  {headings.length > 2 ? (
+    <div class="layout">
+      <aside class="aside">
         <nav class="toc" aria-label={t('race.aside.onThisPage')} style="margin-top:0;padding-top:0;border-top:0">
           <strong>{t('race.aside.onThisPage')}</strong>
           <ul>{headings.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
         </nav>
-      )}
-    </aside>
-    <div class="content prose">
+      </aside>
+      <div class="content prose">
+        <Content />
+      </div>
+    </div>
+  ) : (
+    <div class="prose">
       <Content />
     </div>
-  </div>
+  )}
 </Base>

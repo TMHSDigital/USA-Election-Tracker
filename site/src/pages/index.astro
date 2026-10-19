@@ -18,18 +18,32 @@ const offices = [
 <Base title={t('site.name')} adapters={ADAPTERS_FOR.home}>
   <div class="hero">
     <PageHeader title={t('home.title')} lede={t('site.tagline')} />
-    <UsMap />
+    <div class="hero-map">
+      <UsMap />
+    </div>
   </div>
 
-  <section aria-labelledby="h-offices">
-    <h2 id="h-offices">{t('home.officesHeading')}</h2>
-    <p class="note">{t('home.officesLede')}</p>
-    <ul class="offices">
-      {offices.map(([href, name, seats, n]) => (
-        <li><a href={url(href)}>{t(name)}</a><p>{t(seats, { count: n })}</p></li>
-      ))}
-    </ul>
-  </section>
+  <ul class="entry">
+    <li>
+      <h2>{t('home.entry.lookup')}</h2>
+      <p>{t('home.entry.lookupBody')}</p>
+      <a class="button" href={url('/lookup/')}>{t('home.entry.lookup')}</a>
+    </li>
+    <li>
+      <h2>{t('home.entry.offices')}</h2>
+      <p>{t('home.entry.officesBody')}</p>
+      <ul>
+        {offices.map(([href, name, seats, n]) => (
+          <li><a href={url(href)}>{t(name)}</a><span>{t(seats, { count: n })}</span></li>
+        ))}
+      </ul>
+    </li>
+    <li>
+      <h2>{t('home.entry.states')}</h2>
+      <p>{t('home.entry.statesBody')}</p>
+      <a class="button secondary" href="#h-states">{t('home.entry.statesCta')}</a>
+    </li>
+  </ul>
 
   <section aria-labelledby="h-states">
     <h2 id="h-states">{t('home.statesHeading')}</h2>
@@ -39,8 +53,8 @@ const offices = [
   </section>
 
   <section aria-labelledby="h-principles">
-    <h2 id="h-principles">{t('home.principles')}</h2>
-    <ul>
+    <h2 id="h-principles">{t('home.about')}</h2>
+    <ul class="principles">
       <li>{t('home.p1')}</li>
       <li>{t('home.p2')}</li>
       <li>{t('home.p3')}</li>

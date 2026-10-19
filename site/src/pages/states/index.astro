@@ -11,7 +11,9 @@ const states = getStates();
 <Base title={t('states.title')} description={t('states.intro')}>
   <div class="hero">
     <PageHeader title={t('states.title')} lede={t('states.intro')} />
-    <UsMap />
+    <div class="hero-map">
+      <UsMap />
+    </div>
   </div>
   <ul class="grid">
     {states.map((s) => <li><a href={stateUrl(s.state_po)}>{s.state_name}</a></li>)}

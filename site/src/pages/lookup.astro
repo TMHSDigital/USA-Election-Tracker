@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getStates } from '../lib/data';
+import MapDefs from '../components/MapDefs.astro';
 import { dataUrl, url } from '../lib/format';
 import { t } from '../i18n';
 
@@ -32,9 +33,12 @@ const strings = {
   </PageHeader>
   <noscript><p class="notice">{t('lookup.noJs')} <a href={url('/states/')}>{t('nav.states')}</a></p></noscript>
 
+  <svg width="0" height="0" aria-hidden="true" focusable="false" class="defs-only"><MapDefs /></svg>
   <div id="lookup" data-base={dataUrl('')} data-strings={JSON.stringify(strings)} hidden>
     <div class="panel lookup-controls">
-      <p><button type="button" class="button" id="locate">{t('lookup.useLocation')}</button></p>
+      <div>
+        <button type="button" class="button" id="locate">{t('lookup.useLocation')}</button>
+      </div>
       <p class="or">{t('lookup.or')}</p>
       <p>
         <label for="state">{t('lookup.chooseState')}</label><br />
@@ -58,21 +62,25 @@ const strings = {
 </Base>
 
 <style is:global>
-  .lookup-controls { max-width: 34rem; }
+  .defs-only { position: absolute; }
+  .lookup-controls { max-width: 40rem; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); }
   .lookup-controls p { margin: 0; }
-  .lookup-controls .or { margin: 0.75rem 0; color: var(--graphite); font-size: 0.875rem; }
+  .lookup-controls .or { color: var(--graphite); font-size: var(--step--1); }
   .lookup-controls select { min-width: 16rem; margin-top: 0.3rem; }
-  #result { max-width: var(--measure); margin-top: 1.5rem; }
-  #result h2 { margin-top: 1.5rem; }
-  #map svg { width: 100%; max-width: 40rem; height: auto; display: block; }
+  #status:not(:empty) { margin-top: var(--s2); }
+  #result:not(:empty) { max-width: var(--measure); margin-top: var(--s3); padding: var(--s3); background: var(--paper-2); border-left: 4px solid var(--accent); }
+  #result > p:first-child { font-family: var(--display); font-stretch: var(--condensed); font-weight: 700; font-size: var(--step-2); line-height: 1.1; }
+  #result h2 { margin-top: var(--s3); font-size: var(--step-1); }
+  #result ul { padding-left: 1.1rem; }
+  #map svg { width: 100%; max-width: 44rem; max-height: 60vh; height: auto; display: block; }
   #map path { cursor: pointer; outline: none; }
-  #map path:hover, #map path:focus-visible { fill: var(--map-fill-active); stroke: var(--ink); stroke-width: 1.5; }
-  #map path:focus-visible { stroke: var(--seal); stroke-width: 3; }
-  #map path[aria-pressed="true"] { fill: var(--seal-tint); stroke: var(--ink); stroke-width: 1.5; }
-  .chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: 40rem; }
-  .chips li { max-width: none; }
-  .chips button { background: none; border: 1px solid var(--graphite); border-radius: var(--radius); padding: 0.4rem 0.75rem; font: inherit; font-size: 0.9375rem; color: var(--ink); cursor: pointer; }
-  .chips button:hover { background: var(--stone-2); border-color: var(--ink); }
+  #map path:hover, #map path:focus-visible { fill: url(#hatch); stroke: var(--ink); stroke-width: 1.5; }
+  #map path:focus-visible { stroke: var(--focus); stroke-width: 3; }
+  #map path[aria-pressed="true"] { fill: var(--accent-tint); stroke: var(--ink); stroke-width: 2.5; }
+  .chips { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); max-width: 44rem; }
+  .chips li { max-width: none; display: flex; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .chips button { flex: 1; background: var(--paper); border: 0; padding: 0.7rem 0.75rem; font: inherit; font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: 1rem; color: var(--ink); cursor: pointer; text-align: left; }
+  .chips button:hover { background: var(--hatch); }
 </style>
 
 <script>

@@ -18,7 +18,7 @@ const bundle = url('/pagefind/');
     const s = document.createElement('script');
     s.src = bundle + 'pagefind-ui.js';
     s.onload = () => {
-      new PagefindUI({
+      const ui = new PagefindUI({
         element: '#search',
         bundlePath: bundle,
         showImages: false,
@@ -26,6 +26,8 @@ const bundle = url('/pagefind/');
         excerptLength: 20,
         translations: { placeholder: root.dataset.placeholder },
       });
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) ui.triggerSearch(q);
       const input = root.querySelector('input');
       if (input) input.focus();
     };
@@ -42,12 +44,12 @@ const bundle = url('/pagefind/');
     --pagefind-ui-text: var(--ink);
     --pagefind-ui-background: var(--paper);
     --pagefind-ui-border: var(--graphite);
-    --pagefind-ui-tag: var(--stone-2);
+    --pagefind-ui-tag: var(--paper-2);
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 3px;
     --pagefind-ui-font: var(--font);
   }
-  #search .pagefind-ui__result-link { text-decoration-color: var(--seal); }
-  #search .pagefind-ui__result-title { font-weight: 600; }
-  #search mark { background: var(--seal-tint); color: inherit; }
+  #search .pagefind-ui__result-link { text-decoration-color: var(--accent); font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: var(--step-1); }
+  #search .pagefind-ui__result-title { font-weight: 700; }
+  #search mark { background: var(--accent-tint); color: inherit; }
 </style>

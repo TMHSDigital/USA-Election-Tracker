@@ -41,7 +41,7 @@ const sections = [
 ];
 ---
 <Base title={heading} description={`${heading}. ${t('race.electionDate', { date: fmtDate(race.election_date) })}`} adapters={ADAPTERS_FOR.race}>
-  <PageHeader title={raceTitle(race)} kicker={officeName(race.office)}>
+  <PageHeader title={raceTitle(race)} kicker={officeName(race.office)} status={ls === 'official' ? t('race.status.official') : ls === 'fec_registrants' ? t('race.status.fec') : t('race.status.unavailable')} provisional={ls !== 'official'}>
     <Fragment slot="crumbs"><a href={url('/states/')}>{t('nav.states')}</a> / <a href={stateUrl(race.state_po)}>{race.state_name}</a></Fragment>
   </PageHeader>
 
