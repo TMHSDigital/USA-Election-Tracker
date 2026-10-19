@@ -3,14 +3,30 @@
 // its page. One fill for all states: nothing here encodes parties or outcomes.
 // Small northeastern states and DC are listed down the right edge with leader
 // lines, so each of the 51 jurisdictions has a readable text link in the map.
-import { getStates, readGeo } from '../lib/data';
+//
+// Hover or keyboard focus on a state reveals a small tip with its name and the
+// offices on its 2026 ballot. The tips live in a group drawn after every state
+// so they are never covered, and CSS sibling selectors show the right one.
+// No JavaScript: browsers that miss the selector still get the <title>.
+import { getRaceIndex, getStates, readGeo } from '../lib/data';
 import { bboxOf, labelPoint, projectUsStates } from '../lib/geo';
 import { stateUrl } from '../lib/format';
 import { t } from '../i18n';
+import MapDefs from './MapDefs.astro';
 
 const geo = readGeo('states.geojson');
 const names = new Map(getStates().map((s) => [s.state_po, s.state_name]));
 const shapes = geo ? projectUsStates(geo) : [];
+
+const races = getRaceIndex();
+function seats(po: string): string {
+  const mine = races.filter((r) => r.state_po === po);
+  const house = mine.filter((r) => r.office === 'house').length;
+  const parts = [house === 1 ? t('map.tip.houseOne') : t('map.tip.house', { count: house })];
+  if (mine.some((r) => r.office === 'senate')) parts.push(t('map.tip.senate'));
+  if (mine.some((r) => r.office === 'governor')) parts.push(t('map.tip.governor'));
+  return parts.join(', ');
+}
 
 // States too small to label in place, in north-to-south order for the side list.
 const SIDE = ['VT', 'NH', 'MA', 'RI', 'CT', 'NJ', 'DE', 'MD', 'DC'];
@@ -34,12 +50,33 @@ const minY = Math.min(...boxes.map((b) => b[1])) - 8;
 const maxX = Math.max(SIDE_X + 36, ...boxes.map((b) => b[2])) + 8;
 const maxY = Math.max(...boxes.map((b) => b[3])) + 8;
 const viewBox = `${minX} ${minY} ${maxX - minX} ${maxY - minY}`;
+
+// Tip boxes: anchored to the label point, flipped to stay inside the canvas.
+const TIP_W = 204, TIP_H = 46;
+const tips = labels.map((l) => {
+  const sideIndex = sideItems.findIndex((s) => s.po === l.po);
+  let x: number, y: number;
+  if (sideIndex >= 0) {
+    x = SIDE_X - TIP_W - 12;
+    y = SIDE_Y0 + sideIndex * SIDE_STEP - TIP_H / 2;
+  } else {
+    x = l.x + 16;
+    y = l.y - TIP_H - 10;
+    if (x + TIP_W > maxX - 4) x = l.x - TIP_W - 16;
+    if (y < minY + 4) y = l.y + 14;
+  }
+  return { po: l.po, x: Math.round(x), y: Math.round(y) };
+});
+const tipCss = labels
+  .map((l) => `.us-map a[data-po="${l.po}"]:hover ~ .tips .tip[data-po="${l.po}"],.us-map a[data-po="${l.po}"]:focus-visible ~ .tips .tip[data-po="${l.po}"]{display:block}`)
+  .join('');
 ---
 {shapes.length > 0 && (
   <figure class="map-nav us-map">
     <svg viewBox={viewBox} role="group" aria-label={t('map.us.label')}>
+      <MapDefs />
       {shapes.map((s) => (
-        <a href={stateUrl(s.key)} aria-label={names.get(s.key) ?? s.key}>
+        <a href={stateUrl(s.key)} aria-label={names.get(s.key) ?? s.key} data-po={s.key}>
           <title>{names.get(s.key) ?? s.key}</title>
           <path d={s.d} />
         </a>
@@ -47,26 +84,34 @@ const viewBox = `${minX} ${minY} ${maxX - minX} ${maxY - minY}`;
       <g class="labels" aria-hidden="true">
         {labels.filter((l) => !l.side).map((l) => <text x={l.x} y={l.y} font-size="13">{l.po}</text>)}
       </g>
-      <g class="side">
-        {sideItems.map((l, i) => {
-          const y = SIDE_Y0 + i * SIDE_STEP;
-          return (
-            <>
-              <a href={stateUrl(l.po)} aria-label={names.get(l.po) ?? l.po}>
-                <title>{names.get(l.po) ?? l.po}</title>
-                <text x={SIDE_X} y={y} font-size="13">{l.po}</text>
-              </a>
-              <line x1={SIDE_X - 6} y1={y} x2={l.x} y2={l.y} />
-            </>
-          );
-        })}
+      <g class="leaders" aria-hidden="true">
+        {sideItems.map((l, i) => <line x1={SIDE_X - 6} y1={SIDE_Y0 + i * SIDE_STEP} x2={l.x} y2={l.y} />)}
+      </g>
+      {sideItems.map((l, i) => (
+        <a class="side" href={stateUrl(l.po)} aria-label={names.get(l.po) ?? l.po} data-po={l.po}>
+          <title>{names.get(l.po) ?? l.po}</title>
+          <text x={SIDE_X} y={SIDE_Y0 + i * SIDE_STEP} font-size="13">{l.po}</text>
+        </a>
+      ))}
+      <g class="tips" aria-hidden="true">
+        {tips.map((tip) => (
+          <g class="tip" data-po={tip.po}>
+            <rect x={tip.x} y={tip.y} width={TIP_W} height={TIP_H} />
+            <text class="tip-name" x={tip.x + 10} y={tip.y + 19}>{names.get(tip.po) ?? tip.po}</text>
+            <text class="tip-seats" x={tip.x + 10} y={tip.y + 36}>{seats(tip.po)}</text>
+          </g>
+        ))}
       </g>
     </svg>
     <figcaption class="map-caption">{t('map.us.caption')}</figcaption>
+    <Fragment set:html={`<style>${tipCss}</style>`} />
   </figure>
 )}
 
-<style>
+<style is:global>
   /* Labels are unreadable on narrow screens; the full state list follows the map. */
-  @media (max-width: 40rem) { .us-map .labels, .us-map .side { display: none; } }
+  @media (max-width: 40rem) { .us-map .labels, .us-map .leaders, .us-map .side, .us-map .tips { display: none; } }
+  .us-map .side text { text-anchor: start; pointer-events: auto; }
+  .us-map .side:hover text, .us-map .side:focus-visible text { text-decoration: underline; fill: var(--accent); }
+  .us-map .leaders line { stroke: var(--graphite); stroke-width: 1; }
 </style>

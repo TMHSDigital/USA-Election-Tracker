@@ -1,0 +1,15 @@
+---
+// Shared SVG definitions for navigation maps. The hatch is the hover and
+// focus fill: a tint plus diagonal lines, so the active shape is readable
+// without relying on color alone. Colors come from CSS custom properties.
+interface Props {
+  id?: string;
+}
+const { id = 'hatch' } = Astro.props;
+---
+<defs>
+  <pattern id={id} width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <rect class="hatch-bg" width="6" height="6" />
+    <line class="hatch-line" x1="0" y1="0" x2="0" y2="6" />
+  </pattern>
+</defs>

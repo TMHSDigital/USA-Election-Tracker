@@ -1,8 +1,10 @@
 ---
 // Static, zero-JS SVG of a district, framed with its neighbors for context.
-// Geography only: no colors encode parties or outcomes.
+// Neighboring districts carry their numbers where there is room, so the
+// district's position reads from the drawing alone. Geography only: no
+// colors encode parties or outcomes.
 import { readGeo } from '../lib/data';
-import { focusViewBox, intersects, projectFeatures } from '../lib/geo';
+import { focusViewBox, intersects, labelPoint, projectFeatures } from '../lib/geo';
 
 interface Props {
   displayPath: string;
@@ -22,11 +24,28 @@ const projected = geo && zoom > 1.2 ? projectFeatures(geo, Math.round(600 * zoom
 const target = projected?.shapes.find((s) => Number(s.key) === district);
 const viewBox = projected && target ? focusViewBox(projected.viewBox, target.d) : projected?.viewBox;
 const id = `map-${displayPath.replace(/\W/g, '')}-${district}`;
+const others = projected && viewBox ? projected.shapes.filter((s) => s !== target && intersects(s.d, viewBox)) : [];
+// Label scale follows the frame so numbers stay legible at any zoom.
+const frameW = viewBox ? Number(viewBox.split(' ')[2]) : 600;
+const fontSize = Math.max(9, Math.round(frameW / 42));
+const inside = (p: { x: number; y: number }) => {
+  if (!viewBox) return false;
+  const [x, y, w, h] = viewBox.split(' ').map(Number);
+  return p.x > x + fontSize && p.x < x + w - fontSize && p.y > y + fontSize && p.y < y + h - fontSize;
+};
+const otherLabels = others
+  .map((s) => ({ n: Number(s.key), p: labelPoint(s.d) }))
+  .filter((l): l is { n: number; p: NonNullable<typeof l.p> } => l.p !== null && l.n > 0 && l.p.size >= fontSize * 2.2 && inside(l.p));
+const targetLabel = target ? labelPoint(target.d) : null;
 ---
 {projected && (
   <svg class="district-map" viewBox={viewBox} role="img" aria-labelledby={id} preserveAspectRatio="xMidYMid meet">
     <title id={id}>{label}</title>
-    {projected.shapes.filter((s) => s !== target && intersects(s.d, viewBox!)).map((s) => <path class="other" d={s.d} />)}
+    {others.map((s) => <path class="other" d={s.d} />)}
     {target && <path class="this" d={target.d} />}
+    <g aria-hidden="true">
+      {otherLabels.map((l) => <text x={l.p.x} y={l.p.y} font-size={fontSize}>{l.n}</text>)}
+      {targetLabel && district > 0 && targetLabel.size >= fontSize * 2 && <text class="this-label" x={targetLabel.x} y={targetLabel.y} font-size={fontSize * 1.4}>{district}</text>}
+    </g>
   </svg>
 )}

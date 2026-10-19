@@ -5,6 +5,7 @@ import { getRaceIndex, readGeo } from '../lib/data';
 import { labelPoint, projectFeatures } from '../lib/geo';
 import { raceUrl, raceTitle } from '../lib/format';
 import { t } from '../i18n';
+import MapDefs from './MapDefs.astro';
 
 interface Props {
   statePo: string;
@@ -22,6 +23,7 @@ const labels = shapes
 {projected && (
   <figure class="map-nav state-map">
     <svg viewBox={projected.viewBox} role="group" aria-label={t('map.state.label', { state: stateName })}>
+      <MapDefs />
       {shapes.map((s) => s.race ? (
         <a href={raceUrl(s.race.race_id)} aria-label={raceTitle(s.race)}>
           <title>{raceTitle(s.race)}</title>
@@ -29,9 +31,13 @@ const labels = shapes
         </a>
       ) : <path d={s.d} />)}
       <g aria-hidden="true">
-        {labels.map((l) => <text x={l.p.x} y={l.p.y} font-size="13">{l.d}</text>)}
+        {labels.map((l) => <text x={l.p.x} y={l.p.y} font-size="14">{l.d}</text>)}
       </g>
     </svg>
     <figcaption class="map-caption"><slot /></figcaption>
   </figure>
 )}
+
+<style is:global>
+  .state-map svg { max-height: 70vh; margin: 0 auto; }
+</style>
