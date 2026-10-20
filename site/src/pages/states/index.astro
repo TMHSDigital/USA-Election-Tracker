@@ -9,12 +9,12 @@ import { t } from '../../i18n';
 const states = getStates();
 ---
 <Base title={t('states.title')} description={t('states.intro')}>
-  <div class="hero">
+  <Fragment slot="hero">
     <PageHeader title={t('states.title')} lede={t('states.intro')} />
     <div class="hero-map">
       <UsMap />
     </div>
-  </div>
+  </Fragment>
   <ul class="grid">
     {states.map((s) => <li><a href={stateUrl(s.state_po)}>{s.state_name}</a></li>)}
   </ul>

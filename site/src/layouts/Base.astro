@@ -42,8 +42,7 @@ const themeLabels = { auto: t('theme.auto'), light: t('theme.light'), dark: t('t
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef0eb" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111416" />
+    <meta name="theme-color" content="#121517" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href={fontUrl} />
@@ -98,6 +97,7 @@ const themeLabels = { auto: t('theme.auto'), light: t('theme.light'), dark: t('t
         </button>
       </div>
     </header>
+    {Astro.slots.has('hero') && <div class="band hero-band"><div class="wrap"><slot name="hero" /></div></div>}
     <main id="main" class="wrap" data-pagefind-body>
       {Object.entries(filters).map(([name, value]) => <span hidden data-pagefind-filter={`${name}:${value}`}></span>)}
       <slot />

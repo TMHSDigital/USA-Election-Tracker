@@ -16,12 +16,12 @@ const offices = [
 ] as const;
 ---
 <Base title={t('site.name')} adapters={ADAPTERS_FOR.home}>
-  <div class="hero">
+  <Fragment slot="hero">
     <PageHeader title={t('home.title')} lede={t('site.tagline')} />
     <div class="hero-map">
       <UsMap />
     </div>
-  </div>
+  </Fragment>
 
   <ul class="entry">
     <li>

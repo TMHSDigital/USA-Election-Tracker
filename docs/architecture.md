@@ -86,7 +86,13 @@ referenced source id is undefined.
   colors, one map fill; dark mode mirrors every token, and a theme control in
   the header (light, dark, or follow the system) stores its choice only in
   the browser.
-- Design: every page is a sheet in an atlas of the ballot. The national map
+- Design: every page is a sheet in an atlas of the ballot, framed top and
+  bottom by ink-dark bands (header and footer) in both themes; the home and
+  states pages open with a full-width band holding the national map. Bands
+  work by scoped token overrides (`.band`), so components keep one set of
+  rules. Race and state title blocks carry a plate (the state code and a
+  short line) like a sheet number, and section headings open with a short
+  accent rule. Maps are tinted verdigris. The national map
   is the hero and the primary navigation. Hover and keyboard focus on any map
   shape fill it with a hatch pattern (an SVG `<pattern>` in `MapDefs.astro`)
   on top of the tint, so the active shape never depends on color alone. On

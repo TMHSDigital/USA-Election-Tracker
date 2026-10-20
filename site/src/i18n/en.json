@@ -116,6 +116,8 @@
   "state.voteGov": "Registration information on Vote.gov",
   "state.boundaries": "Congressional district boundaries for 2026",
   "state.statewide": "Statewide",
+  "plate.races": "{count} races",
+  "plate.raceOne": "1 race",
   "state.house": "U.S. House",
   "state.senate": "U.S. Senate",
   "state.governor": "Governor",

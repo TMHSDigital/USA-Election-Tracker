@@ -23,7 +23,7 @@ const statusText = (r: (typeof races)[number]) =>
 const description = t('state.description', { state: state.state_name, count: races.length });
 ---
 <Base title={state.state_name} description={description} adapters={ADAPTERS_FOR.state} filters={{ [t('search.filter.type')]: t('search.type.state'), [t('search.filter.state')]: state.state_name }}>
-  <PageHeader title={state.state_name} lede={description}>
+  <PageHeader title={state.state_name} lede={description} plate={{ mark: state.state_po, label: races.length === 1 ? t('plate.raceOne') : t('plate.races', { count: races.length }) }}>
     <a slot="crumbs" href={url('/states/')}>{t('nav.states')}</a>
   </PageHeader>
 

@@ -8,10 +8,13 @@ interface Props {
   lede?: string;
   status?: string;
   provisional?: boolean;
+  /** Sheet number shown as a plate: a short mark (state code) and a line beneath it. */
+  plate?: { mark: string; label: string };
 }
-const { title, kicker, lede, status, provisional = false } = Astro.props;
+const { title, kicker, lede, status, provisional = false, plate } = Astro.props;
 ---
-<div class="page-header">
+<div class={`page-header${plate ? ' has-plate' : ''}`}>
+  {plate && <p class="plate" aria-hidden="true"><b>{plate.mark}</b><span>{plate.label}</span></p>}
   {Astro.slots.has('crumbs') && <p class="crumbs" data-pagefind-ignore><slot name="crumbs" /></p>}
   {kicker && <p class="kicker">{kicker}</p>}
   {status ? (
