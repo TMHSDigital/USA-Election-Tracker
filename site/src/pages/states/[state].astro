@@ -43,7 +43,7 @@ const description = t('state.description', { state: state.state_name, count: rac
   </div>
 
   <div class="layout">
-    <aside class="aside" aria-label={t('state.office')}>
+    <aside class="aside" aria-label={t('state.office')} data-pagefind-ignore>
       <dl>
         <dt>{t('state.generalElection')}</dt>
         <dd data-figure>{fmtDate(o?.general_election_date ?? '2026-11-03')}{o && <Cite ids={o.source_ids} />}</dd>

@@ -14,7 +14,7 @@ interface Props {
 const { title, kicker, lede, status, provisional = false, plate } = Astro.props;
 ---
 <div class={`page-header${plate ? ' has-plate' : ''}`}>
-  {plate && <p class="plate" aria-hidden="true"><b>{plate.mark}</b><span>{plate.label}</span></p>}
+  {plate && <p class="plate" aria-hidden="true" data-pagefind-ignore><b>{plate.mark}</b><span>{plate.label}</span></p>}
   {Astro.slots.has('crumbs') && <p class="crumbs" data-pagefind-ignore><slot name="crumbs" /></p>}
   {kicker && <p class="kicker">{kicker}</p>}
   {status ? (

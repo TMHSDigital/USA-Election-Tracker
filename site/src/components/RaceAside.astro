@@ -15,7 +15,7 @@ const officePath = { house: '/house/', senate: '/senate/', governor: '/governors
 const ls = race.candidate_list.status;
 const statusKey = ls === 'official' ? 'race.status.official' : ls === 'fec_registrants' ? 'race.status.fec' : 'race.status.unavailable';
 ---
-<aside class="aside" aria-label={t('race.aside.label')}>
+<aside class="aside" aria-label={t('race.aside.label')} data-pagefind-ignore>
   <dl>
     <dt>{t('race.aside.office')}</dt>
     <dd><a href={url(officePath)}>{officeName(race.office)}</a></dd>

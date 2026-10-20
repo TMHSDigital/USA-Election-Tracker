@@ -30,7 +30,7 @@ A TM Hospitality Strategies project.
 - A ballot lookup that finds your congressional district in your browser,
   with the national map as a state picker.
 - Site search that runs in the browser (Pagefind), with no query sent anywhere,
-  with filters by office, state and page type. The search box in the header
+  with filters by office, state and page type and one result per page. The search box in the header
   opens the search page with your query, and the slash key focuses it.
 - A light or dark theme control in the header. The choice is stored only in
   your browser.

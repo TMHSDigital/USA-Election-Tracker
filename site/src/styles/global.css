@@ -339,6 +339,9 @@ th.src, td.src { text-align: right; white-space: nowrap; width: 1%; }
 .tiles.compact a { font-size: 1.125rem; }
 .tiles .tile-kicker { display: block; font-family: var(--font); font-stretch: normal; font-weight: 500; font-size: 0.75rem; color: var(--graphite); margin-bottom: 0.1rem; }
 .tiles .tile-mark { display: block; font-size: var(--step-3); font-weight: 800; line-height: 0.95; font-stretch: var(--condensed); }
+.tiles .tile-name { display: block; font-family: var(--font); font-stretch: normal; font-weight: 500; font-size: 0.9375rem; line-height: 1.25; margin-top: 0.35rem; }
+.tiles.states { grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); }
+.tiles.states li { min-height: 7rem; padding: var(--s1) var(--s2); }
 
 .race-list { list-style: none; padding: 0; margin: 0; }
 .race-list li { display: flex; flex-wrap: wrap; gap: 0.2rem 0.75rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--line); max-width: none; }

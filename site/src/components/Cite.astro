@@ -18,7 +18,7 @@ for (const id of unique) {
 }
 const methodology = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/methodology/`;
 ---
-<span class="cite">{unique.map((id) => {
+<span class="cite" data-pagefind-ignore>{unique.map((id) => {
   const s = sources.get(id)!;
   return <a href={sourceUrl(id)} data-cite={id} title={s.name}>source<span class="visually-hidden">: {s.name}</span></a>;
 })}{derived && <a href={`${methodology}#${derived}`} data-derived={derived} title={t('cite.derived')}>calc<span class="visually-hidden">: {t('cite.derived')}</span></a>}</span>
