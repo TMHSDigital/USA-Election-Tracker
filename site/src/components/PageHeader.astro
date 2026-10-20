@@ -12,7 +12,7 @@ interface Props {
 const { title, kicker, lede, status, provisional = false } = Astro.props;
 ---
 <div class="page-header">
-  {Astro.slots.has('crumbs') && <p class="crumbs"><slot name="crumbs" /></p>}
+  {Astro.slots.has('crumbs') && <p class="crumbs" data-pagefind-ignore><slot name="crumbs" /></p>}
   {kicker && <p class="kicker">{kicker}</p>}
   {status ? (
     <div class="title-row">

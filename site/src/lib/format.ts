@@ -28,6 +28,17 @@ export function raceTitle(r: Pick<RaceSummary, 'office' | 'state_po' | 'state_na
   return t('race.title.governor', { state: r.state_name });
 }
 
+/** Title without the state name, for lists already grouped under a state. */
+export function raceShortTitle(r: Parameters<typeof raceTitle>[0]): string {
+  if (r.office === 'house') {
+    if (r.state_po === 'DC') return t('race.short.houseDelegate');
+    if (r.district === 0) return t('race.short.houseAtLarge');
+    return t('race.short.house', { district: r.district ?? '' });
+  }
+  if (r.office === 'senate') return t(r.special ? 'race.short.senateSpecial' : 'race.short.senate');
+  return t('race.short.governor');
+}
+
 export function raceHeading(r: Parameters<typeof raceTitle>[0]): string {
   return t('race.heading', { office: officeName(r.office), title: raceTitle(r) });
 }

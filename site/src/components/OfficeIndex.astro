@@ -4,7 +4,7 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from './PageHeader.astro';
 import { ADAPTERS_FOR, getRaceIndex, type Office, type RaceSummary } from '../lib/data';
-import { officeName, raceTitle, raceUrl, stateUrl } from '../lib/format';
+import { officeName, raceShortTitle, raceTitle, raceUrl, stateUrl } from '../lib/format';
 import { t } from '../i18n';
 
 interface Props {
@@ -36,8 +36,8 @@ const statusText = (r: RaceSummary) =>
       {[...byState.entries()].map(([state, list]) => (
         <section aria-labelledby={`s-${list[0].state_po}`} class="index-state">
           <h2 id={`s-${list[0].state_po}`}><a href={stateUrl(list[0].state_po)}>{state}</a></h2>
-          <ul class="tiles">
-            {list.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+          <ul class="tiles compact">
+            {list.map((r) => <li><a href={raceUrl(r.race_id)} aria-label={raceTitle(r)}>{raceShortTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
           </ul>
         </section>
       ))}

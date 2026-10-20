@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getStates } from '../lib/data';
 import MapDefs from '../components/MapDefs.astro';
+import UsMap from '../components/UsMap.astro';
 import { dataUrl, url } from '../lib/format';
 import { t } from '../i18n';
 
@@ -23,6 +24,9 @@ const strings = {
   atLarge: t('race.title.houseAtLarge', { state: '{state}' }),
   district: t('race.title.house', { state: '{state}', district: '{district}' }),
   delegate: t('race.title.houseDelegate'),
+  shortAtLarge: t('race.short.houseAtLarge'),
+  shortDistrict: t('race.short.house', { district: '{district}' }),
+  shortDelegate: t('race.short.houseDelegate'),
   mapHeading: t('lookup.mapHeading'),
   districtList: t('lookup.districtList'),
 };
@@ -57,12 +61,18 @@ const strings = {
       <h3>{t('lookup.districtList')}</h3>
       <ul id="district-list" class="chips"></ul>
     </section>
-    <p class="note">{t('lookup.accuracy')}</p>
   </div>
+  <div class="hero-map lookup-map" id="state-pick">
+    <UsMap caption={t('lookup.mapStates')} />
+  </div>
+  <p class="note">{t('lookup.accuracy')}</p>
 </Base>
 
 <style is:global>
   .defs-only { position: absolute; }
+  .lookup-map { margin-top: var(--s4); }
+  .lookup-map .us-map { max-width: 56rem; }
+  .lookup-map a[data-picked="true"] path { fill: var(--accent-tint); stroke: var(--ink); stroke-width: 2; }
   .lookup-controls { max-width: 40rem; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); }
   .lookup-controls p { margin: 0; }
   .lookup-controls .or { color: var(--graphite); font-size: var(--step--1); }
@@ -78,7 +88,7 @@ const strings = {
   #map path:hover, #map path:focus-visible { fill: url(#hatch); stroke: var(--ink); stroke-width: 1.5; }
   #map path:focus-visible { stroke: var(--focus); stroke-width: 3; }
   #map path[aria-pressed="true"] { fill: var(--accent-tint); stroke: var(--ink); stroke-width: 2.5; }
-  .chips { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); max-width: 44rem; }
+  .chips { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); max-width: 44rem; }
   .chips li { max-width: none; display: flex; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .chips button { flex: 1; background: var(--paper); border: 0; padding: 0.7rem 0.75rem; font: inherit; font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: 1rem; color: var(--ink); cursor: pointer; text-align: left; }
   .chips button:hover { background: var(--hatch); }
@@ -101,6 +111,8 @@ const strings = {
   const mapEl = document.getElementById('map')!;
   const list = document.getElementById('district-list')!;
   const select = document.getElementById('state') as HTMLSelectElement;
+  const statePick = document.getElementById('state-pick')!;
+  const stateLinks = [...statePick.querySelectorAll<HTMLAnchorElement>('a[data-po]')];
   const NEAR_METERS = 150;
 
   const cache = new Map<string, Promise<unknown>>();
@@ -119,6 +131,11 @@ const strings = {
   function districtLabel(po: string, name: string, d: number): string {
     if (po === 'DC') return S.delegate;
     return d === 0 ? fill(S.atLarge, { state: name }) : fill(S.district, { state: name, district: String(d) });
+  }
+  // Chip text under a heading that already names the state.
+  function shortLabel(po: string, d: number): string {
+    if (po === 'DC') return S.shortDelegate;
+    return d === 0 ? S.shortAtLarge : fill(S.shortDistrict, { district: String(d) });
   }
 
   async function show(po: string, district: number, near: boolean, picked = false) {
@@ -164,12 +181,19 @@ const strings = {
         if (!hit) { select.value = po; await showPicker(po); status.textContent = S.near; return; }
         const near = edgeDistanceMeters(hit, x, y) < NEAR_METERS;
         select.value = po;
+        markState(po);
         await show(po, Number(hit.properties.district), near);
       } catch { status.textContent = S.loadError; }
     }, () => { status.textContent = S.denied; }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 300000 });
   }
 
+  function markState(po: string) {
+    for (const a of stateLinks) a.setAttribute('data-picked', String(a.dataset.po === po));
+    statePick.hidden = po !== '';
+  }
+
   async function showPicker(po: string) {
+    markState(po);
     picker.hidden = false;
     mapEl.replaceChildren();
     list.replaceChildren();
@@ -228,8 +252,9 @@ const strings = {
       path.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(); } });
       svg.append(path);
       const li = el('li');
-      const b = el('button', label) as HTMLButtonElement;
+      const b = el('button', shortLabel(po, d)) as HTMLButtonElement;
       b.type = 'button';
+      b.setAttribute('aria-label', label);
       b.addEventListener('click', () => void show(po, d, false, true));
       li.append(b);
       list.append(li);
@@ -239,5 +264,13 @@ const strings = {
   }
 
   document.getElementById('locate')!.addEventListener('click', () => void locate());
-  select.addEventListener('change', () => { if (select.value) void showPicker(select.value); else picker.hidden = true; });
+  select.addEventListener('change', () => { if (select.value) void showPicker(select.value); else { picker.hidden = true; markState(''); } });
+  // With script, the national map picks a state in place instead of leaving the page.
+  for (const a of stateLinks) {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      select.value = a.dataset.po!;
+      void showPicker(select.value).then(() => picker.scrollIntoView({ block: 'start' }));
+    });
+  }
 </script>

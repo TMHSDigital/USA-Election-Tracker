@@ -29,7 +29,7 @@ const statusText = (r: RaceSummary) =>
     ? (r.candidate_count === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: r.candidate_count }))
     : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
 
-const [vx, vy, vw, vh] = (projected?.viewBox ?? '0 0 600 600').split(' ').map(Number);
+const [vx, vy, vw] = (projected?.viewBox ?? '0 0 600 600').split(' ').map(Number);
 const TIP_W = 190, TIP_H = 42;
 const tips = points
   .filter((x): x is { s: (typeof shapes)[number] & { race: RaceSummary }; p: NonNullable<typeof x.p> } => x.p !== null && x.s.race !== undefined)

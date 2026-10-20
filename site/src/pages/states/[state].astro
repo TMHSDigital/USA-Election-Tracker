@@ -4,7 +4,7 @@ import Cite from '../../components/Cite.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import StateMap from '../../components/StateMap.astro';
 import { ADAPTERS_FOR, getRaceIndex, getStates } from '../../lib/data';
-import { raceTitle, raceUrl, url, voteGovUrl } from '../../lib/format';
+import { raceShortTitle, raceTitle, raceUrl, url, voteGovUrl } from '../../lib/format';
 import { fmtDate, t } from '../../i18n';
 
 export function getStaticPaths() {
@@ -15,11 +15,8 @@ const state = getStates().find((s) => s.state_po.toLowerCase() === Astro.params.
 const races = getRaceIndex().filter((r) => r.state_po === state.state_po);
 const byOffice = (o: string) => races.filter((r) => r.office === o);
 const o = state.office;
-const groups = [
-  ['governor', 'state.governor', 'state.noGovernor'],
-  ['senate', 'state.senate', 'state.noSenate'],
-  ['house', 'state.house', null],
-] as const;
+const statewide = [...byOffice('governor'), ...byOffice('senate')];
+const missingKeys = (['governor', 'senate'] as const).filter((office) => byOffice(office).length === 0).map((office) => (office === 'governor' ? 'state.noGovernor' : 'state.noSenate') as 'state.noGovernor');
 const countLabel = (n: number) => (n === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: n }));
 const statusText = (r: (typeof races)[number]) =>
   r.list_status === 'official' ? countLabel(r.candidate_count) : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
@@ -64,24 +61,27 @@ const description = t('state.description', { state: state.state_name, count: rac
 
       <section aria-labelledby="h-races">
         <h2 id="h-races">{t('state.races')}</h2>
-        {groups.map(([office, label, none]) => {
-          const list = byOffice(office);
-          return (
-            <>
-              <h3>{t(label)}</h3>
-              {list.length === 0 && none ? <p>{t(none, { state: state.state_name })}</p> : (
-                <ul class="tiles">
-                  {list.map((r) => (
-                    <li>
-                      <a href={raceUrl(r.race_id)}>{raceTitle(r)}</a>
-                      <span class="note">{statusText(r)}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </>
-          );
-        })}
+        <h3>{t('state.statewide')}</h3>
+        {statewide.length > 0 && (
+          <ul class="tiles compact">
+            {statewide.map((r) => (
+              <li>
+                <a href={raceUrl(r.race_id)} aria-label={raceTitle(r)}>{raceShortTitle(r)}</a>
+                <span class="note">{statusText(r)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {missingKeys.map((key) => <p>{t(key, { state: state.state_name })}</p>)}
+        <h3>{t('state.house')}</h3>
+        <ul class="tiles compact">
+          {byOffice('house').map((r) => (
+            <li>
+              <a href={raceUrl(r.race_id)} aria-label={raceTitle(r)}>{raceShortTitle(r)}</a>
+              <span class="note">{statusText(r)}</span>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   </div>

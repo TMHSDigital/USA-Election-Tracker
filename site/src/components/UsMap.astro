@@ -14,6 +14,11 @@ import { stateUrl } from '../lib/format';
 import { t } from '../i18n';
 import MapDefs from './MapDefs.astro';
 
+interface Props {
+  caption?: string;
+}
+const { caption = t('map.us.caption') } = Astro.props;
+
 const geo = readGeo('states.geojson');
 const names = new Map(getStates().map((s) => [s.state_po, s.state_name]));
 const shapes = geo ? projectUsStates(geo) : [];
@@ -103,7 +108,7 @@ const tipCss = labels
         ))}
       </g>
     </svg>
-    <figcaption class="map-caption">{t('map.us.caption')}</figcaption>
+    <figcaption class="map-caption">{caption}</figcaption>
     <Fragment set:html={`<style>${tipCss}</style>`} />
   </figure>
 )}
