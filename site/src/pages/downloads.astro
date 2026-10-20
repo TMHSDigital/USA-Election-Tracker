@@ -9,7 +9,7 @@ import { t } from '../i18n';
 const downloads = getDownloads();
 ---
 <Base title={t('downloads.title')} description={t('downloads.intro')} adapters={ADAPTERS_FOR.home}>
-  <PageHeader title={t('downloads.title')} lede={t('downloads.intro')} />
+  <PageHeader slot="hero" title={t('downloads.title')} lede={t('downloads.intro')} />
   <ul class="downloads">
     {downloads.map((d) => (
       <li>

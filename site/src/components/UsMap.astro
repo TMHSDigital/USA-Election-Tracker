@@ -20,8 +20,10 @@ interface Props {
   only?: string[];
   /** Tip text per state; defaults to the offices on its ballot. */
   tip?: (po: string) => string;
+  /** Locator: the `only` states draw hatched and nothing is a link or a label. */
+  locator?: boolean;
 }
-const { caption = t('map.us.caption'), only, tip } = Astro.props;
+const { caption = t('map.us.caption'), only, tip, locator = false } = Astro.props;
 const active = (po: string) => !only || only.includes(po);
 
 const geo = readGeo('states.geojson');
@@ -83,15 +85,16 @@ const tipCss = labels
   .join('');
 ---
 {shapes.length > 0 && (
-  <figure class="map-nav us-map">
-    <svg viewBox={viewBox} role="group" aria-label={t('map.us.label')}>
+  <figure class={`map-nav us-map${locator ? ' locator' : ''}`}>
+    <svg viewBox={viewBox} role={locator ? 'img' : 'group'} aria-label={locator ? caption : t('map.us.label')}>
       <MapDefs />
-      {shapes.map((s) => active(s.key) ? (
+      {shapes.map((s) => locator ? <path class={active(s.key) ? 'mark' : 'muted'} d={s.d} /> : active(s.key) ? (
         <a href={stateUrl(s.key)} aria-label={names.get(s.key) ?? s.key} data-po={s.key}>
           <title>{names.get(s.key) ?? s.key}</title>
           <path d={s.d} />
         </a>
       ) : <path class="muted" d={s.d} />)}
+      {!locator && (<>
       <g class="labels" aria-hidden="true">
         {labels.filter((l) => !l.side).map((l) => <text class={active(l.po) ? undefined : 'muted'} x={l.x} y={l.y} font-size="13">{l.po}</text>)}
       </g>
@@ -113,9 +116,10 @@ const tipCss = labels
           </g>
         ))}
       </g>
+      </>)}
     </svg>
     <figcaption class="map-caption">{caption}</figcaption>
-    <Fragment set:html={`<style>${tipCss}</style>`} />
+    {!locator && <Fragment set:html={`<style>${tipCss}</style>`} />}
   </figure>
 )}
 
@@ -128,4 +132,6 @@ const tipCss = labels
   .us-map path.muted { fill: var(--paper-2); stroke: var(--line); }
   .us-map text.muted { fill: var(--graphite); font-weight: 500; }
   .us-map text.side.muted { text-anchor: start; }
+  .us-map.locator path.mark { fill: url(#hatch); stroke: var(--ink); stroke-width: 1.5; }
+  .us-map.locator svg { max-width: 30rem; display: block; margin: 0 auto; }
 </style>

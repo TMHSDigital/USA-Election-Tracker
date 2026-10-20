@@ -32,7 +32,7 @@ const strings = {
 };
 ---
 <Base title={t('lookup.title')} description={t('lookup.intro')}>
-  <PageHeader title={t('lookup.title')} lede={t('lookup.intro')}>
+  <PageHeader slot="hero" title={t('lookup.title')} lede={t('lookup.intro')}>
     <p class="note" style="margin-top:0.75rem">{t('lookup.privacy')}</p>
   </PageHeader>
   <noscript><p class="notice">{t('lookup.noJs')} <a href={url('/states/')}>{t('nav.states')}</a></p></noscript>

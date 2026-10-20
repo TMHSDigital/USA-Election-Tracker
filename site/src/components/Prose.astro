@@ -17,7 +17,7 @@ const { Content } = page;
 const headings = page.getHeadings().filter((h) => h.depth === 2);
 ---
 <Base title={title}>
-  <PageHeader title={title} />
+  <PageHeader slot="hero" title={title} />
   {headings.length > 2 ? (
     <div class="layout">
       <aside class="aside">

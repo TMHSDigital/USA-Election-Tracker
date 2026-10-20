@@ -290,8 +290,9 @@ th.src, td.src { text-align: right; white-space: nowrap; width: 1%; }
   .bars li { grid-template-columns: minmax(0, 1fr) auto; }
   .bar-label { grid-column: 1 / -1; margin-bottom: 0.3rem; }
 }
-.candidates th[scope="row"] { font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: var(--step-1); line-height: 1.1; }
-.candidates td { padding-top: 0.85rem; }
+.candidates th[scope="row"] { font-family: var(--display); font-stretch: 85%; font-weight: 700; font-size: var(--step-2); line-height: 1; letter-spacing: -0.005em; }
+.candidates tbody th, .candidates tbody td { padding-top: 1rem; padding-bottom: 1rem; }
+.candidates tbody td { padding-top: 1.15rem; }
 /* On narrow screens each candidate row stacks into a labeled block. Every
    row keeps the same cells in the same order. */
 @media (max-width: 40rem) {
@@ -334,8 +335,10 @@ th.src, td.src { text-align: right; white-space: nowrap; width: 1%; }
 .tiles .note { margin-top: auto; }
 .tiles.wide { grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
 .tiles.compact { grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); }
-.tiles.compact li { min-height: 4.75rem; padding: var(--s1) var(--s2); }
+.tiles.compact li { min-height: 6.25rem; padding: var(--s1) var(--s2); }
 .tiles.compact a { font-size: 1.125rem; }
+.tiles .tile-kicker { display: block; font-family: var(--font); font-stretch: normal; font-weight: 500; font-size: 0.75rem; color: var(--graphite); margin-bottom: 0.1rem; }
+.tiles .tile-mark { display: block; font-size: var(--step-3); font-weight: 800; line-height: 0.95; font-stretch: var(--condensed); }
 
 .race-list { list-style: none; padding: 0; margin: 0; }
 .race-list li { display: flex; flex-wrap: wrap; gap: 0.2rem 0.75rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--line); max-width: none; }
@@ -457,8 +460,27 @@ label { font-weight: 500; }
 .hero-band .map-nav a:hover path, .hero-band .map-nav a:focus-visible path { stroke: var(--band-ink); }
 .hero-band .map-nav .hatch-bg { fill: var(--band-accent-tint); }
 .hero-band .map-nav .hatch-line { stroke: var(--band-accent); }
+.hero-band .page-header .crumbs, .hero-band .page-header .note { color: var(--band-muted); }
+.hero-band > .wrap > :last-child, .hero-band .sheet > .page-header:last-child { margin-bottom: 0; }
 .hero-band + main { padding-top: var(--s5); }
+.hero-band + main > :first-child > h2:first-child, .hero-band + main > h2:first-child, .hero-band + main .content > section:first-child > h2:first-child { margin-top: 0; }
 @media (min-width: 64rem) { .hero-band { padding-top: var(--s5); } }
+
+/* Sheet: a title block beside the page's own map, the way a map sheet pairs
+   its title with its drawing. Stacks on narrow screens. */
+.sheet { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+.sheet .page-header { margin-bottom: 0; }
+.sheet-figure { margin: 0; padding: var(--s2); background-image: repeating-linear-gradient(0deg, var(--band-line) 0 1px, transparent 1px 2.75rem), repeating-linear-gradient(90deg, var(--band-line) 0 1px, transparent 1px 2.75rem); }
+.sheet-figure .district-map { margin: 0; max-height: 26rem; }
+.sheet-figure .state-map svg { max-height: 28rem; }
+.sheet-figure .map-caption { margin-top: var(--s1); }
+.sheet-figure .district-map a .other { fill: transparent; }
+.sheet-figure .district-map .other { stroke: color-mix(in srgb, var(--band-muted) 45%, transparent); }
+.sheet-figure .district-map a:hover .other, .sheet-figure .district-map a:focus-visible .other { fill: url(#hatch); stroke: var(--band-ink); }
+@media (min-width: 60rem) {
+  .sheet { grid-template-columns: minmax(0, 1fr) minmax(20rem, 42%); gap: var(--s5); align-items: start; }
+  .sheet-figure { padding: var(--s3); }
+}
 
 /* Prose pages */
 .prose { max-width: var(--measure); font-size: 1.0625rem; line-height: 1.6; }

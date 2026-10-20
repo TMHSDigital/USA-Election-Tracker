@@ -5,7 +5,7 @@ import { url } from '../lib/format';
 import { t } from '../i18n';
 ---
 <Base title={t('notFound.title')} noindex>
-  <PageHeader title={t('notFound.title')} lede={t('notFound.body')} />
+  <PageHeader slot="hero" title={t('notFound.title')} lede={t('notFound.body')} />
   <ul>
     <li><a href={url('/')}>{t('nav.home')}</a></li>
     <li><a href={url('/states/')}>{t('nav.states')}</a></li>

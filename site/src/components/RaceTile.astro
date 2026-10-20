@@ -1,0 +1,21 @@
+---
+// One tile in a race grid. Numbered House districts show the number large,
+// the way the maps label them; every other race shows its short title. Every
+// tile has the same layout whatever the race.
+import type { RaceSummary } from '../lib/data';
+import { raceShortTitle, raceTitle, raceUrl } from '../lib/format';
+import { t } from '../i18n';
+
+interface Props {
+  race: RaceSummary;
+  status: string;
+}
+const { race, status } = Astro.props;
+const numbered = race.office === 'house' && race.state_po !== 'DC' && (race.district ?? 0) > 0;
+---
+<li>
+  <a href={raceUrl(race.race_id)} aria-label={raceTitle(race)}>
+    {numbered ? <><span class="tile-kicker">{t('tile.district')}</span><b class="tile-mark">{race.district}</b></> : raceShortTitle(race)}
+  </a>
+  <span class="note">{status}</span>
+</li>

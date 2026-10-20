@@ -87,13 +87,19 @@ referenced source id is undefined.
   the header (light, dark, or follow the system) stores its choice only in
   the browser.
 - Design: every page is a sheet in an atlas of the ballot, framed top and
-  bottom by ink-dark bands (header and footer) in both themes; the home and
-  states pages open with a full-width band holding the national map. Bands
-  work by scoped token overrides (`.band`), so components keep one set of
-  rules. Race and state title blocks carry a plate (the state code and a
-  short line) like a sheet number, and section headings open with a short
-  accent rule. Maps are tinted verdigris. The national map
-  is the hero and the primary navigation. Hover and keyboard focus on any map
+  bottom by ink-dark bands (header and footer) in both themes, and every
+  page opens with a full-width band holding its title block (`Base`'s `hero`
+  slot). On race and state pages the band pairs the title with the page's own
+  map (`.sheet`): the district map on a House race, the district map of the
+  state on a state page, and a national locator with the state hatched
+  (`UsMap locator`) on Senate and governor races and single-district states.
+  The home, states and office indexes put the national map in the band.
+  Bands work by scoped token overrides (`.band`), so components keep one set
+  of rules. Race and state title blocks carry a plate (the state code and a
+  short line) like a sheet number, section headings open with a short accent
+  rule, and race grids (`RaceTile.astro`) show numbered districts as large
+  numerals the way the maps label them. Maps are tinted verdigris. The
+  national map is the hero and the primary navigation. Hover and keyboard focus on any map
   shape fill it with a hatch pattern (an SVG `<pattern>` in `MapDefs.astro`)
   on top of the tint, so the active shape never depends on color alone. On
   the home map each state also reveals a tip with its name and the offices on

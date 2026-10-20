@@ -10,7 +10,7 @@ const states = getStates();
 const live = getMeta().live_enabled;
 ---
 <Base title={t('night.title')} description={t('night.intro')} adapters={live ? [...ADAPTERS_FOR.state, 'live_clarity'] : ADAPTERS_FOR.state}>
-  <PageHeader title={t('night.title')} lede={t('night.intro')}>
+  <PageHeader slot="hero" title={t('night.title')} lede={t('night.intro')}>
     <p style="margin-top:1rem"><strong>{t('night.noCalls')}</strong></p>
   </PageHeader>
 

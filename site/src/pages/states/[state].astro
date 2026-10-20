@@ -2,9 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import Cite from '../../components/Cite.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import RaceTile from '../../components/RaceTile.astro';
 import StateMap from '../../components/StateMap.astro';
+import UsMap from '../../components/UsMap.astro';
 import { ADAPTERS_FOR, getRaceIndex, getStates } from '../../lib/data';
-import { raceShortTitle, raceTitle, raceUrl, url, voteGovUrl } from '../../lib/format';
+import { url, voteGovUrl } from '../../lib/format';
 import { fmtDate, t } from '../../i18n';
 
 export function getStaticPaths() {
@@ -23,9 +25,22 @@ const statusText = (r: (typeof races)[number]) =>
 const description = t('state.description', { state: state.state_name, count: races.length });
 ---
 <Base title={state.state_name} description={description} adapters={ADAPTERS_FOR.state} filters={{ [t('search.filter.type')]: t('search.type.state'), [t('search.filter.state')]: state.state_name }}>
-  <PageHeader title={state.state_name} lede={description} plate={{ mark: state.state_po, label: races.length === 1 ? t('plate.raceOne') : t('plate.races', { count: races.length }) }}>
-    <a slot="crumbs" href={url('/states/')}>{t('nav.states')}</a>
-  </PageHeader>
+  <div class="sheet" slot="hero">
+    <PageHeader title={state.state_name} lede={description} plate={{ mark: state.state_po, label: races.length === 1 ? t('plate.raceOne') : t('plate.races', { count: races.length }) }}>
+      <a slot="crumbs" href={url('/states/')}>{t('nav.states')}</a>
+    </PageHeader>
+    {byOffice('house').length > 1 ? (
+      <div class="sheet-figure" data-pagefind-ignore>
+        <StateMap statePo={state.state_po} stateName={state.state_name}>
+          {t('map.state.caption', { state: state.state_name })}
+        </StateMap>
+      </div>
+    ) : (
+      <div class="sheet-figure" data-pagefind-ignore>
+        <UsMap locator only={[state.state_po]} caption={t('map.locator', { state: state.state_name })} />
+      </div>
+    )}
+  </div>
 
   <div class="layout">
     <aside class="aside" aria-label={t('state.office')}>
@@ -50,37 +65,18 @@ const description = t('state.description', { state: state.state_name, count: rac
     </aside>
 
     <div class="content">
-      {byOffice('house').length > 1 && (
-        <section aria-labelledby="h-map">
-          <h2 id="h-map">{t('state.map')}</h2>
-          <StateMap statePo={state.state_po} stateName={state.state_name}>
-            {t('map.state.caption', { state: state.state_name })}
-          </StateMap>
-        </section>
-      )}
-
       <section aria-labelledby="h-races">
         <h2 id="h-races">{t('state.races')}</h2>
         <h3>{t('state.statewide')}</h3>
         {statewide.length > 0 && (
           <ul class="tiles compact">
-            {statewide.map((r) => (
-              <li>
-                <a href={raceUrl(r.race_id)} aria-label={raceTitle(r)}>{raceShortTitle(r)}</a>
-                <span class="note">{statusText(r)}</span>
-              </li>
-            ))}
+            {statewide.map((r) => <RaceTile race={r} status={statusText(r)} />)}
           </ul>
         )}
         {missingKeys.map((key) => <p>{t(key, { state: state.state_name })}</p>)}
         <h3>{t('state.house')}</h3>
         <ul class="tiles compact">
-          {byOffice('house').map((r) => (
-            <li>
-              <a href={raceUrl(r.race_id)} aria-label={raceTitle(r)}>{raceShortTitle(r)}</a>
-              <span class="note">{statusText(r)}</span>
-            </li>
-          ))}
+          {byOffice('house').map((r) => <RaceTile race={r} status={statusText(r)} />)}
         </ul>
       </section>
     </div>

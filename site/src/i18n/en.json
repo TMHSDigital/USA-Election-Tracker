@@ -118,6 +118,8 @@
   "state.statewide": "Statewide",
   "plate.races": "{count} races",
   "plate.raceOne": "1 race",
+  "tile.district": "District",
+  "map.locator": "Where {state} sits on the national map.",
   "state.house": "U.S. House",
   "state.senate": "U.S. Senate",
   "state.governor": "Governor",

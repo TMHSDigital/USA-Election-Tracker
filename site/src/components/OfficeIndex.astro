@@ -3,9 +3,10 @@
 // a sticky jump bar; Senate and governor races are one grid of tiles.
 import Base from '../layouts/Base.astro';
 import PageHeader from './PageHeader.astro';
+import RaceTile from './RaceTile.astro';
 import UsMap from './UsMap.astro';
 import { ADAPTERS_FOR, getRaceIndex, type Office, type RaceSummary } from '../lib/data';
-import { officeName, raceShortTitle, raceTitle, raceUrl, stateUrl } from '../lib/format';
+import { officeName, raceTitle, raceUrl, stateUrl } from '../lib/format';
 import { t } from '../i18n';
 
 interface Props {
@@ -30,7 +31,14 @@ const statusText = (r: RaceSummary) =>
     : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
 ---
 <Base title={officeName(office)} description={t(introKey, { count: races.length })} adapters={ADAPTERS_FOR.state}>
-  <PageHeader title={officeName(office)} lede={t(introKey, { count: races.length })} />
+  <Fragment slot="hero">
+    <PageHeader title={officeName(office)} lede={t(introKey, { count: races.length })} />
+    {office !== 'house' && (
+      <div class="hero-map">
+        <UsMap only={mapStates} tip={tipFor} caption={t('office.map.caption', { count: mapStates.length, office: officeName(office) })} />
+      </div>
+    )}
+  </Fragment>
   {office === 'house' ? (
     <>
       <nav class="jump" aria-label={t('office.jump')}>
@@ -44,20 +52,15 @@ const statusText = (r: RaceSummary) =>
         <section aria-labelledby={`s-${list[0].state_po}`} class="index-state">
           <h2 id={`s-${list[0].state_po}`}><a href={stateUrl(list[0].state_po)}>{state}</a></h2>
           <ul class="tiles compact">
-            {list.map((r) => <li><a href={raceUrl(r.race_id)} aria-label={raceTitle(r)}>{raceShortTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+            {list.map((r) => <RaceTile race={r} status={statusText(r)} />)}
           </ul>
         </section>
       ))}
     </>
   ) : (
-    <>
-      <div class="hero-map">
-        <UsMap only={mapStates} tip={tipFor} caption={t('office.map.caption', { count: mapStates.length, office: officeName(office) })} />
-      </div>
-      <ul class="tiles wide">
-        {races.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
-      </ul>
-    </>
+    <ul class="tiles wide">
+      {races.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+    </ul>
   )}
 </Base>
 

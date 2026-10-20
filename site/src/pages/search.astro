@@ -9,7 +9,7 @@ import { t } from '../i18n';
 const bundle = url('/pagefind/');
 ---
 <Base title={t('search.title')} description={t('search.intro')}>
-  <PageHeader title={t('search.title')} lede={t('search.intro')} />
+  <PageHeader slot="hero" title={t('search.title')} lede={t('search.intro')} />
   <noscript><p class="notice">{t('search.noJs')} <a href={url('/states/')}>{t('nav.states')}</a></p></noscript>
   <div id="search" data-bundle={bundle} data-placeholder={t('search.placeholder')} data-missing={t('search.missing')}></div>
   <link rel="stylesheet" href={`${bundle}pagefind-ui.css`} />

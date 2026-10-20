@@ -11,14 +11,17 @@ A TM Hospitality Strategies project.
 
 ## What it includes
 
-- A page for every race: candidates as listed by state election officials,
-  FEC fundraising totals for federal candidates (as a table and as bars in
-  ballot order, every bar the same fill), the district map for 2026
-  (neighboring districts on it link to their own races), past results for
-  the seat with total votes cast by election, and citations.
-- A page for every state, with a map of its congressional districts (each one
-  a link to its race, with the candidate count shown on hover or focus), its
-  races, and official election office links.
+- A page for every race that opens with its map beside the title: the 2026
+  district map for House races (neighboring districts on it link to their
+  own races) or a national locator for Senate and governor races. Then
+  candidates as listed by state election officials, FEC fundraising totals
+  for federal candidates (as a table and as bars in ballot order, every bar
+  the same fill), past results for the seat with total votes cast by
+  election, and citations.
+- A page for every state that opens with the map of its congressional
+  districts beside the title (each district a link to its race, with the
+  candidate count shown on hover or focus), then its races as a grid of
+  numbered tiles and official election office links.
 - A national map on the home page where every state is a link and shows the
   offices on its ballot when hovered or focused, plus an index
   page for each office (U.S. House, U.S. Senate, governor). The Senate and

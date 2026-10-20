@@ -9,7 +9,7 @@ import { t } from '../i18n';
 const states = getStates();
 ---
 <Base title={t('howToVote.title')} description={t('howToVote.intro')} adapters={ADAPTERS_FOR.state}>
-  <PageHeader title={t('howToVote.title')} lede={t('howToVote.intro')}>
+  <PageHeader slot="hero" title={t('howToVote.title')} lede={t('howToVote.intro')}>
     <p style="margin-top:1rem"><a href="https://vote.gov/">{t('howToVote.voteGov')}</a><Cite ids={['vote_gov']} /></p>
   </PageHeader>
   <div class="table-scroll">

@@ -8,7 +8,7 @@ import { fmtDateTime, t } from '../i18n';
 const sources = getSources();
 ---
 <Base title={t('sources.title')} description={t('sources.intro')}>
-  <PageHeader title={t('sources.title')} lede={t('sources.intro')} />
+  <PageHeader slot="hero" title={t('sources.title')} lede={t('sources.intro')} />
   <ul class="sources-list">
     {sources.map((s) => (
       <li id={sourceAnchor(s.source_id)}>

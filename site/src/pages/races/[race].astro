@@ -5,6 +5,7 @@ import DistrictMap from '../../components/DistrictMap.astro';
 import Bars from '../../components/Bars.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import RaceAside from '../../components/RaceAside.astro';
+import UsMap from '../../components/UsMap.astro';
 import { ADAPTERS_FOR, getRace, getRaceIndex, getStates, type Candidate } from '../../lib/data';
 import { officeName, raceHeading, raceShortTitle, raceTitle, stateUrl, url } from '../../lib/format';
 import { fmtDate, fmtInt, fmtMoney, fmtPct, t } from '../../i18n';
@@ -48,16 +49,31 @@ const fecUrl = (id: string) => `https://www.fec.gov/data/candidate/${encodeURICo
 const sections = [
   { id: 'h-candidates', label: t('race.candidates') },
   ...(hasCandidates ? [{ id: 'h-finance', label: t('finance.heading') }] : []),
-  ...(race.office === 'house' ? [{ id: 'h-map', label: t('map.heading') }] : []),
   ...(race.demographics ? [{ id: 'h-demo', label: t('demo.heading') }] : []),
   { id: 'h-history', label: t('history.heading') },
   { id: 'h-results', label: t('results.heading') },
 ];
 ---
 <Base title={heading} description={`${heading}. ${t('race.electionDate', { date: fmtDate(race.election_date) })}`} adapters={ADAPTERS_FOR.race} filters={{ [t('search.filter.type')]: t('search.type.race'), [t('search.filter.office')]: officeName(race.office), [t('search.filter.state')]: race.state_name }}>
-  <PageHeader title={raceTitle(race)} kicker={officeName(race.office)} plate={{ mark: race.state_po, label: raceShortTitle(race) }} status={ls === 'official' ? t('race.status.official') : ls === 'fec_registrants' ? t('race.status.fec') : t('race.status.unavailable')} provisional={ls !== 'official'}>
-    <Fragment slot="crumbs"><a href={url('/states/')}>{t('nav.states')}</a> / <a href={stateUrl(race.state_po)}>{race.state_name}</a></Fragment>
-  </PageHeader>
+  <div class="sheet" slot="hero">
+    <PageHeader title={raceTitle(race)} kicker={officeName(race.office)} plate={{ mark: race.state_po, label: raceShortTitle(race) }} status={ls === 'official' ? t('race.status.official') : ls === 'fec_registrants' ? t('race.status.fec') : t('race.status.unavailable')} provisional={ls !== 'official'}>
+      <Fragment slot="crumbs"><a href={url('/states/')}>{t('nav.states')}</a> / <a href={stateUrl(race.state_po)}>{race.state_name}</a></Fragment>
+    </PageHeader>
+    {race.office === 'house' && race.boundary ? (
+      <figure class="sheet-figure" data-pagefind-ignore>
+        <DistrictMap displayPath={race.boundary.display_path} district={race.district ?? 0} statePo={race.state_po} label={t('map.caption', { title: raceTitle(race) })} />
+        <figcaption class="map-caption" data-figure>
+          {t('map.caption', { title: raceTitle(race) })} {t('map.enacted', { instrument: race.boundary.enacting_instrument })}
+          {race.boundary.enacting_instrument_url && <> <a href={race.boundary.enacting_instrument_url}>{race.boundary.enacting_instrument_url.replace(/^https?:\/\//, '').split('/')[0]}</a></>}
+          <Cite ids={race.boundary.source_ids} />
+        </figcaption>
+      </figure>
+    ) : (
+      <div class="sheet-figure" data-pagefind-ignore>
+        <UsMap locator only={[race.state_po]} caption={t('map.locator', { state: race.state_name })} />
+      </div>
+    )}
+  </div>
 
   <div class="layout">
     <RaceAside race={race} office={office} sections={sections} />
@@ -146,22 +162,6 @@ const sections = [
               {race.candidates.some((c) => !c.finance) && <p class="note">{t('finance.noMatchNote')}</p>}
             </>
           ) : <p>{t('finance.notApplicable')}</p>}
-        </section>
-      )}
-
-      {race.office === 'house' && (
-        <section aria-labelledby="h-map">
-          <h2 id="h-map">{t('map.heading')}</h2>
-          {race.boundary ? (
-            <figure>
-              <DistrictMap displayPath={race.boundary.display_path} district={race.district ?? 0} statePo={race.state_po} label={t('map.caption', { title: raceTitle(race) })} />
-              <figcaption class="map-caption" data-figure>
-                {t('map.caption', { title: raceTitle(race) })} {t('map.enacted', { instrument: race.boundary.enacting_instrument })}
-                {race.boundary.enacting_instrument_url && <> <a href={race.boundary.enacting_instrument_url}>{race.boundary.enacting_instrument_url.replace(/^https?:\/\//, '').split('/')[0]}</a></>}
-                <Cite ids={race.boundary.source_ids} />
-              </figcaption>
-            </figure>
-          ) : <p>{t('map.unavailable')}</p>}
         </section>
       )}
 
