@@ -74,6 +74,7 @@
   "finance.noMatchNote": "\"No FEC filing matched\" means we could not confidently link this candidate to an FEC record. Some candidates are not required to file. We do not guess.",
   "map.heading": "District map",
   "map.caption": "{title} under the boundaries in effect for the 2026 election.",
+  "map.neighbor": "Open {title}",
   "map.enacted": "Boundaries for 2026: {instrument}.",
   "map.unavailable": "A map of this district is not available yet.",
   "map.altTable": "The district outline is described by its boundary file, which you can download from the Data page.",

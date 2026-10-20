@@ -139,7 +139,7 @@ const sections = [
           <h2 id="h-map">{t('map.heading')}</h2>
           {race.boundary ? (
             <figure>
-              <DistrictMap displayPath={race.boundary.display_path} district={race.district ?? 0} label={t('map.caption', { title: raceTitle(race) })} />
+              <DistrictMap displayPath={race.boundary.display_path} district={race.district ?? 0} statePo={race.state_po} label={t('map.caption', { title: raceTitle(race) })} />
               <figcaption class="map-caption" data-figure>
                 {t('map.caption', { title: raceTitle(race) })} {t('map.enacted', { instrument: race.boundary.enacting_instrument })}
                 {race.boundary.enacting_instrument_url && <> <a href={race.boundary.enacting_instrument_url}>{race.boundary.enacting_instrument_url.replace(/^https?:\/\//, '').split('/')[0]}</a></>}

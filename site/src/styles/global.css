@@ -354,7 +354,11 @@ label { font-weight: 500; }
 .hero-map .us-map { max-width: 64rem; margin: 0 auto; }
 
 .district-map { width: 100%; height: auto; max-height: 32rem; display: block; margin: var(--s0) 0; }
-.district-map .other { fill: none; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.district-map .other { fill: transparent; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.district-map a .other { fill: color-mix(in srgb, var(--map-fill) 35%, transparent); }
+.district-map a:hover .other, .district-map a:focus-visible .other { fill: url(#hatch); stroke: var(--ink); }
+.district-map a:focus-visible { outline: none; }
+.district-map a:focus-visible .other { stroke: var(--focus); stroke-width: 3; }
 .district-map .this { fill: var(--map-fill); stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .district-map text { font-family: var(--display); font-stretch: var(--condensed); font-weight: 700; fill: var(--graphite); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
 .district-map text.this-label { fill: var(--ink); }

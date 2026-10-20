@@ -12,15 +12,17 @@ A TM Hospitality Strategies project.
 ## What it includes
 
 - A page for every race: candidates as listed by state election officials,
-  FEC fundraising totals for federal candidates, the district map for 2026,
-  past results for the seat, and citations.
+  FEC fundraising totals for federal candidates, the district map for 2026
+  (neighboring districts on it link to their own races), past results for
+  the seat, and citations.
 - A page for every state, with a map of its congressional districts (each one
   a link to its race, with the candidate count shown on hover or focus), its
   races, and official election office links.
 - A national map on the home page where every state is a link and shows the
   offices on its ballot when hovered or focused, plus an index
   page for each office (U.S. House, U.S. Senate, governor).
-- A ballot lookup that finds your congressional district in your browser.
+- A ballot lookup that finds your congressional district in your browser,
+  with the national map as a state picker.
 - Site search that runs in the browser (Pagefind), with no query sent anywhere.
   The search box in the header opens the search page with your query.
 - A light or dark theme control in the header. The choice is stored only in

@@ -93,7 +93,9 @@ referenced source id is undefined.
   the home map each state also reveals a tip with its name and the offices on
   its ballot; the tips are drawn after every state and shown by CSS sibling
   selectors, so no script is involved and browsers without that support still
-  get the `<title>` tooltip. Race and state pages carry a legend column (facts
+  get the `<title>` tooltip. State maps do the same per district, and the
+  district map on a race page links each neighboring district to its race.
+  Race and state pages carry a legend column (facts
   and in-page links) beside the content. Race lists are grids of identical
   tiles.
 - Every figure is wrapped in an element marked `data-figure` containing a

@@ -1,17 +1,22 @@
 ---
 // Static, zero-JS SVG of a district, framed with its neighbors for context.
 // Neighboring districts carry their numbers where there is room, so the
-// district's position reads from the drawing alone. Geography only: no
-// colors encode parties or outcomes.
-import { readGeo } from '../lib/data';
+// district's position reads from the drawing alone, and each neighbor is a
+// link to its own race. Geography only: no colors encode parties or outcomes.
+import { getRaceIndex, readGeo } from '../lib/data';
 import { focusViewBox, intersects, labelPoint, projectFeatures } from '../lib/geo';
+import { raceTitle, raceUrl } from '../lib/format';
+import { t } from '../i18n';
+import MapDefs from './MapDefs.astro';
 
 interface Props {
   displayPath: string;
   district: number;
   label: string;
+  statePo: string;
 }
-const { displayPath, district, label } = Astro.props;
+const { displayPath, district, label, statePo } = Astro.props;
+const neighborRaces = new Map(getRaceIndex().filter((r) => r.office === 'house' && r.state_po === statePo).map((r) => [r.district ?? 0, r]));
 const geo = readGeo(displayPath);
 // First pass finds the framed area; second pass reprojects so that area is
 // about 600 units wide, keeping integer coordinates precise for small districts.
@@ -39,9 +44,18 @@ const otherLabels = others
 const targetLabel = target ? labelPoint(target.d) : null;
 ---
 {projected && (
-  <svg class="district-map" viewBox={viewBox} role="img" aria-labelledby={id} preserveAspectRatio="xMidYMid meet">
+  <svg class="district-map" viewBox={viewBox} role="group" aria-labelledby={id} preserveAspectRatio="xMidYMid meet">
     <title id={id}>{label}</title>
-    {others.map((s) => <path class="other" d={s.d} />)}
+    <MapDefs />
+    {others.map((s) => {
+      const r = neighborRaces.get(Number(s.key));
+      return r ? (
+        <a href={raceUrl(r.race_id)} aria-label={t('map.neighbor', { title: raceTitle(r) })}>
+          <title>{raceTitle(r)}</title>
+          <path class="other" d={s.d} />
+        </a>
+      ) : <path class="other" d={s.d} />;
+    })}
     {target && <path class="this" d={target.d} />}
     <g aria-hidden="true">
       {otherLabels.map((l) => <text x={l.p.x} y={l.p.y} font-size={fontSize}>{l.n}</text>)}
