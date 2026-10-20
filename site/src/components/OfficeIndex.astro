@@ -3,6 +3,7 @@
 // a sticky jump bar; Senate and governor races are one grid of tiles.
 import Base from '../layouts/Base.astro';
 import PageHeader from './PageHeader.astro';
+import UsMap from './UsMap.astro';
 import { ADAPTERS_FOR, getRaceIndex, type Office, type RaceSummary } from '../lib/data';
 import { officeName, raceShortTitle, raceTitle, raceUrl, stateUrl } from '../lib/format';
 import { t } from '../i18n';
@@ -17,6 +18,12 @@ const races = getRaceIndex()
 const introKey = { house: 'office.index.house', senate: 'office.index.senate', governor: 'office.index.governors' }[office] as 'office.index.house';
 const byState = new Map<string, RaceSummary[]>();
 for (const r of races) byState.set(r.state_name, [...(byState.get(r.state_name) ?? []), r]);
+const mapStates = [...new Set(races.map((r) => r.state_po))];
+const tipFor = (po: string) => {
+  const mine = races.filter((r) => r.state_po === po);
+  if (office === 'house') return mine.length === 1 ? t('map.tip.houseOne') : t('map.tip.house', { count: mine.length });
+  return mine.map((r) => (r.special ? t('office.map.special') : t('office.map.regular'))).join(', ');
+};
 const statusText = (r: RaceSummary) =>
   r.list_status === 'official'
     ? (r.candidate_count === 1 ? t('state.candidateCountOne') : t('state.candidateCount', { count: r.candidate_count }))
@@ -43,9 +50,14 @@ const statusText = (r: RaceSummary) =>
       ))}
     </>
   ) : (
-    <ul class="tiles wide">
-      {races.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
-    </ul>
+    <>
+      <div class="hero-map">
+        <UsMap only={mapStates} tip={tipFor} caption={t('office.map.caption', { count: mapStates.length, office: officeName(office) })} />
+      </div>
+      <ul class="tiles wide">
+        {races.map((r) => <li><a href={raceUrl(r.race_id)}>{raceTitle(r)}</a><span class="note">{statusText(r)}</span></li>)}
+      </ul>
+    </>
   )}
 </Base>
 

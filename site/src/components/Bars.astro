@@ -1,0 +1,36 @@
+---
+// Static horizontal bars for one measure across a short list of rows, built
+// from HTML and CSS at build time (no script, no chart library). Every row
+// keeps the same layout and every bar shares one fill, the hatch pattern, so
+// nothing here encodes a party or an outcome. Rows are cited figures; a row
+// with no value shows its note instead of a bar and carries no citation.
+import Cite from './Cite.astro';
+
+export interface BarItem {
+  label: string;
+  value: number | null;
+  display: string;
+  cite: string[];
+  derived?: string;
+  note?: string;
+}
+interface Props {
+  caption: string;
+  items: BarItem[];
+}
+const { caption, items } = Astro.props;
+const top = Math.max(0, ...items.map((i) => i.value ?? 0));
+const width = (v: number) => (top > 0 ? Math.max(0.4, (v / top) * 100) : 0).toFixed(1);
+---
+<figure class="bars">
+  <figcaption>{caption}</figcaption>
+  <ul>
+    {items.map((i) => (
+      <li data-figure={i.value != null || undefined}>
+        <span class="bar-label">{i.label}</span>
+        <span class="bar-track" aria-hidden="true">{i.value != null && <i style={`width:${width(i.value)}%`}></i>}</span>
+        <span class="bar-value">{i.value != null ? <>{i.display}<Cite ids={i.cite} derived={i.derived} /></> : i.note}</span>
+      </li>
+    ))}
+  </ul>
+</figure>

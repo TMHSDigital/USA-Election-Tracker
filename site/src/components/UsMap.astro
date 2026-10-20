@@ -16,8 +16,13 @@ import MapDefs from './MapDefs.astro';
 
 interface Props {
   caption?: string;
+  /** Postal codes that get a link and a tip; every other state draws muted, with no link. */
+  only?: string[];
+  /** Tip text per state; defaults to the offices on its ballot. */
+  tip?: (po: string) => string;
 }
-const { caption = t('map.us.caption') } = Astro.props;
+const { caption = t('map.us.caption'), only, tip } = Astro.props;
+const active = (po: string) => !only || only.includes(po);
 
 const geo = readGeo('states.geojson');
 const names = new Map(getStates().map((s) => [s.state_po, s.state_name]));
@@ -73,6 +78,7 @@ const tips = labels.map((l) => {
   return { po: l.po, x: Math.round(x), y: Math.round(y) };
 });
 const tipCss = labels
+  .filter((l) => active(l.po))
   .map((l) => `.us-map a[data-po="${l.po}"]:hover ~ .tips .tip[data-po="${l.po}"],.us-map a[data-po="${l.po}"]:focus-visible ~ .tips .tip[data-po="${l.po}"]{display:block}`)
   .join('');
 ---
@@ -80,30 +86,30 @@ const tipCss = labels
   <figure class="map-nav us-map">
     <svg viewBox={viewBox} role="group" aria-label={t('map.us.label')}>
       <MapDefs />
-      {shapes.map((s) => (
+      {shapes.map((s) => active(s.key) ? (
         <a href={stateUrl(s.key)} aria-label={names.get(s.key) ?? s.key} data-po={s.key}>
           <title>{names.get(s.key) ?? s.key}</title>
           <path d={s.d} />
         </a>
-      ))}
+      ) : <path class="muted" d={s.d} />)}
       <g class="labels" aria-hidden="true">
-        {labels.filter((l) => !l.side).map((l) => <text x={l.x} y={l.y} font-size="13">{l.po}</text>)}
+        {labels.filter((l) => !l.side).map((l) => <text class={active(l.po) ? undefined : 'muted'} x={l.x} y={l.y} font-size="13">{l.po}</text>)}
       </g>
       <g class="leaders" aria-hidden="true">
         {sideItems.map((l, i) => <line x1={SIDE_X - 6} y1={SIDE_Y0 + i * SIDE_STEP} x2={l.x} y2={l.y} />)}
       </g>
-      {sideItems.map((l, i) => (
+      {sideItems.map((l, i) => active(l.po) ? (
         <a class="side" href={stateUrl(l.po)} aria-label={names.get(l.po) ?? l.po} data-po={l.po}>
           <title>{names.get(l.po) ?? l.po}</title>
           <text x={SIDE_X} y={SIDE_Y0 + i * SIDE_STEP} font-size="13">{l.po}</text>
         </a>
-      ))}
+      ) : <text class="side muted" aria-hidden="true" x={SIDE_X} y={SIDE_Y0 + i * SIDE_STEP} font-size="13">{l.po}</text>)}
       <g class="tips" aria-hidden="true">
-        {tips.map((tip) => (
-          <g class="tip" data-po={tip.po}>
-            <rect x={tip.x} y={tip.y} width={TIP_W} height={TIP_H} />
-            <text class="tip-name" x={tip.x + 10} y={tip.y + 19}>{names.get(tip.po) ?? tip.po}</text>
-            <text class="tip-seats" x={tip.x + 10} y={tip.y + 36}>{seats(tip.po)}</text>
+        {tips.filter((tp) => active(tp.po)).map((tp) => (
+          <g class="tip" data-po={tp.po}>
+            <rect x={tp.x} y={tp.y} width={TIP_W} height={TIP_H} />
+            <text class="tip-name" x={tp.x + 10} y={tp.y + 19}>{names.get(tp.po) ?? tp.po}</text>
+            <text class="tip-seats" x={tp.x + 10} y={tp.y + 36}>{tip ? tip(tp.po) : seats(tp.po)}</text>
           </g>
         ))}
       </g>
@@ -119,4 +125,7 @@ const tipCss = labels
   .us-map .side text { text-anchor: start; pointer-events: auto; }
   .us-map .side:hover text, .us-map .side:focus-visible text { text-decoration: underline; fill: var(--accent); }
   .us-map .leaders line { stroke: var(--graphite); stroke-width: 1; }
+  .us-map path.muted { fill: var(--paper-2); stroke: var(--line); }
+  .us-map text.muted { fill: var(--graphite); font-weight: 500; }
+  .us-map text.side.muted { text-anchor: start; }
 </style>

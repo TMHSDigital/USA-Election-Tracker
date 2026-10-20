@@ -22,7 +22,7 @@ const statusText = (r: (typeof races)[number]) =>
   r.list_status === 'official' ? countLabel(r.candidate_count) : t(`state.listStatus.${r.list_status}` as 'state.listStatus.unavailable');
 const description = t('state.description', { state: state.state_name, count: races.length });
 ---
-<Base title={state.state_name} description={description} adapters={ADAPTERS_FOR.state}>
+<Base title={state.state_name} description={description} adapters={ADAPTERS_FOR.state} filters={{ [t('search.filter.type')]: t('search.type.state'), [t('search.filter.state')]: state.state_name }}>
   <PageHeader title={state.state_name} lede={description}>
     <a slot="crumbs" href={url('/states/')}>{t('nav.states')}</a>
   </PageHeader>

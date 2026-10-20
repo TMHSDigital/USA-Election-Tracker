@@ -13,8 +13,10 @@ interface Props {
   description?: string;
   adapters?: readonly string[];
   noindex?: boolean;
+  /** Pagefind filters for this page, shown as facets on the search page. */
+  filters?: Record<string, string>;
 }
-const { title, description = t('site.tagline'), adapters = [], noindex = false } = Astro.props;
+const { title, description = t('site.tagline'), adapters = [], noindex = false, filters = { [t('search.filter.type')]: t('search.type.page') } } = Astro.props;
 const fullTitle = title === t('site.name') ? title : `${title} | ${t('site.name')}`;
 const path = Astro.url.pathname;
 const nav = [
@@ -97,6 +99,7 @@ const themeLabels = { auto: t('theme.auto'), light: t('theme.light'), dark: t('t
       </div>
     </header>
     <main id="main" class="wrap" data-pagefind-body>
+      {Object.entries(filters).map(([name, value]) => <span hidden data-pagefind-filter={`${name}:${value}`}></span>)}
       <slot />
       {adapters.length > 0 && <div data-pagefind-ignore><DataUpdated adapters={adapters} /></div>}
     </main>
@@ -131,7 +134,8 @@ const themeLabels = { auto: t('theme.auto'), light: t('theme.light'), dark: t('t
         </div>
       </div>
     </footer>
-    <script is:inline>(function(){var b=document.getElementById('theme-btn');if(!b)return;var L=JSON.parse(b.getAttribute('data-labels')),h=document.documentElement,o=['auto','light','dark'];function cur(){return h.getAttribute('data-theme')||'auto'}function show(){b.lastElementChild.textContent=L[cur()]}b.addEventListener('click',function(){var n=o[(o.indexOf(cur())+1)%3];if(n==='auto')h.removeAttribute('data-theme');else h.setAttribute('data-theme',n);try{if(n==='auto')localStorage.removeItem('theme');else localStorage.setItem('theme',n)}catch(e){}show()});show();b.hidden=false})();</script>
+    <script is:inline>(function(){var b=document.getElementById('theme-btn');if(!b)return;var L=JSON.parse(b.getAttribute('data-labels')),h=document.documentElement,o=['auto','light','dark'];function cur(){return h.getAttribute('data-theme')||'auto'}function show(){b.lastElementChild.textContent=L[cur()]}b.addEventListener('click',function(){var n=o[(o.indexOf(cur())+1)%3];if(n==='auto')h.removeAttribute('data-theme');else h.setAttribute('data-theme',n);try{if(n==='auto')localStorage.removeItem('theme');else localStorage.setItem('theme',n)}catch(e){}show()});show();b.hidden=false})();
+(function(){document.addEventListener('keydown',function(e){if(e.key!=='/'||e.ctrlKey||e.metaKey||e.altKey)return;var t=e.target,n=t&&t.tagName;if(n==='INPUT'||n==='TEXTAREA'||n==='SELECT'||(t&&t.isContentEditable))return;var i=document.getElementById('site-q')||document.querySelector('#search input');if(i){e.preventDefault();i.focus()}})})();</script>
     {goatcounter && <script is:inline async data-goatcounter={`https://${goatcounter}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}
   </body>
 </html>
