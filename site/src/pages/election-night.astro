@@ -11,13 +11,13 @@ const live = getMeta().live_enabled;
 ---
 <Base title={t('night.title')} description={t('night.intro')} adapters={live ? [...ADAPTERS_FOR.state, 'live_clarity'] : ADAPTERS_FOR.state}>
   <PageHeader slot="hero" title={t('night.title')} lede={t('night.intro')}>
-    <p style="margin-top:1rem"><strong>{t('night.noCalls')}</strong></p>
+    <p class="statement">{t('night.noCalls')}</p>
   </PageHeader>
 
   <section aria-labelledby="h-official">
-    <h2 id="h-official" style="margin-top:0">{t('night.officialHeading')}</h2>
+    <h2 id="h-official">{t('night.officialHeading')}</h2>
     <div class="table-scroll">
-      <table>
+      <table class="register">
         <thead><tr><th scope="col">{t('night.col.state')}</th><th scope="col">{t('night.col.results')}</th><th scope="col" class="src">{t('race.col.source')}</th></tr></thead>
         <tbody>
           {states.map((s) => (

@@ -1,15 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import StatePlates from '../../components/StatePlates.astro';
 import UsMap from '../../components/UsMap.astro';
-import { getRaceIndex, getStates } from '../../lib/data';
-import { stateUrl } from '../../lib/format';
 import { t } from '../../i18n';
-
-const states = getStates();
-const races = getRaceIndex();
-const countFor = (po: string) => races.filter((r) => r.state_po === po).length;
-const countLabel = (n: number) => (n === 1 ? t('plate.raceOne') : t('plate.races', { count: n }));
 ---
 <Base title={t('states.title')} description={t('states.intro')}>
   <Fragment slot="hero">
@@ -18,12 +12,5 @@ const countLabel = (n: number) => (n === 1 ? t('plate.raceOne') : t('plate.races
       <UsMap />
     </div>
   </Fragment>
-  <ul class="tiles states">
-    {states.map((s) => (
-      <li>
-        <a href={stateUrl(s.state_po)} aria-label={s.state_name}><b class="tile-mark">{s.state_po}</b><span class="tile-name">{s.state_name}</span></a>
-        <span class="note">{countLabel(countFor(s.state_po))}</span>
-      </li>
-    ))}
-  </ul>
+  <StatePlates />
 </Base>

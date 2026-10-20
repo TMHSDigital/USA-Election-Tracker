@@ -129,7 +129,7 @@ const sections = [
               <p class="note">{t('finance.intro')}</p>
               {anyFinance && <Bars caption={t(race.order_method === 'ballot' ? 'finance.chart' : 'finance.chartAlphabetical')} items={receiptBars} />}
               <div class="table-scroll">
-                <table>
+                <table class="register">
                   <thead>
                     <tr>
                       <th scope="col">{t('race.col.name')}</th>
@@ -171,7 +171,7 @@ const sections = [
           {race.demographics.available ? (
             <>
               <p class="note">{t('demo.vintage')}</p>
-              <table>
+              <table class="register">
                 <thead><tr><th scope="col">{t('demo.col.measure')}</th><th scope="col" class="num">{t('demo.col.estimate')}</th><th scope="col" class="num">{t('demo.col.moe')}</th><th scope="col" class="src">{t('race.col.source')}</th></tr></thead>
                 <tbody>
                   {race.demographics.rows.map((d) => (
@@ -198,7 +198,7 @@ const sections = [
         {turnoutBars.length > 1 && <Bars caption={t('history.chart')} items={turnoutBars} />}
         {race.history.map((h) => (
           <div class="table-scroll">
-            <table>
+            <table class="register">
               <caption>{h.special ? t('history.yearSpecial', { year: h.year }) : t('history.year', { year: h.year })}</caption>
               <thead>
                 <tr>

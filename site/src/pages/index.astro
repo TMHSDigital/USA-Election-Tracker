@@ -1,18 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import StatePlates from '../components/StatePlates.astro';
 import UsMap from '../components/UsMap.astro';
-import { ADAPTERS_FOR, getRaceIndex, getStates } from '../lib/data';
-import { stateUrl, url } from '../lib/format';
+import { ADAPTERS_FOR, getRaceIndex } from '../lib/data';
+import { url } from '../lib/format';
 import { t } from '../i18n';
 
 const races = getRaceIndex();
 const count = (o: string) => races.filter((r) => r.office === o).length;
-const states = getStates();
 const offices = [
-  ['/house/', 'office.house', 'home.houseSeats', count('house')],
-  ['/senate/', 'office.senate', 'home.senateSeats', count('senate')],
-  ['/governors/', 'office.governor', 'home.governorSeats', count('governor')],
+  ['/house/', 'office.house', 'home.office.houseNote', count('house')],
+  ['/senate/', 'office.senate', 'home.office.senateNote', count('senate')],
+  ['/governors/', 'office.governor', null, count('governor')],
 ] as const;
 ---
 <Base title={t('site.name')} adapters={ADAPTERS_FOR.home}>
@@ -23,33 +23,30 @@ const offices = [
     </div>
   </Fragment>
 
-  <ul class="entry">
-    <li>
-      <h2>{t('home.entry.lookup')}</h2>
+  <section aria-labelledby="h-offices">
+    <h2 id="h-offices">{t('home.officesHeading')}</h2>
+    <p class="note">{t('home.officesLede')}</p>
+    <ul class="tiles offices">
+      {offices.map(([href, name, note, n]) => (
+        <li>
+          <a href={url(href)}><span class="tile-kicker">{t('home.office.kicker')}</span><b class="tile-mark">{n}</b><span class="tile-name">{t(name)}</span></a>
+          {note && <span class="note">{t(note)}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="lookup-call" aria-labelledby="h-lookup">
+    <div>
+      <h2 id="h-lookup">{t('home.entry.lookup')}</h2>
       <p>{t('home.entry.lookupBody')}</p>
-      <a class="button" href={url('/lookup/')}>{t('home.entry.lookup')}</a>
-    </li>
-    <li>
-      <h2>{t('home.entry.offices')}</h2>
-      <p>{t('home.entry.officesBody')}</p>
-      <ul>
-        {offices.map(([href, name, seats, n]) => (
-          <li><a href={url(href)}>{t(name)}</a><span>{t(seats, { count: n })}</span></li>
-        ))}
-      </ul>
-    </li>
-    <li>
-      <h2>{t('home.entry.states')}</h2>
-      <p>{t('home.entry.statesBody')}</p>
-      <a class="button secondary" href="#h-states">{t('home.entry.statesCta')}</a>
-    </li>
-  </ul>
+    </div>
+    <a class="button" href={url('/lookup/')}>{t('home.entry.lookup')}</a>
+  </section>
 
   <section aria-labelledby="h-states">
     <h2 id="h-states">{t('home.statesHeading')}</h2>
-    <ul class="grid">
-      {states.map((s) => <li><a href={stateUrl(s.state_po)}>{s.state_name}</a></li>)}
-    </ul>
+    <StatePlates />
   </section>
 
   <section aria-labelledby="h-principles">

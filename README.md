@@ -22,11 +22,12 @@ A TM Hospitality Strategies project.
   districts beside the title (each district a link to its race, with the
   candidate count shown on hover or focus), then its races as a grid of
   numbered tiles and official election office links.
-- A national map on the home page where every state is a link and shows the
-  offices on its ballot when hovered or focused, plus an index
-  page for each office (U.S. House, U.S. Senate, governor). The Senate and
-  governor indexes open with the same map showing only the states that vote
-  for that office in 2026.
+- A home page that opens with the national map, where every state is a link
+  and shows the offices on its ballot when hovered or focused, followed by a
+  plate for each office with its seat count and a plate for every state with
+  its race count. Each office (U.S. House, U.S. Senate, governor) has an index
+  page; the Senate and governor indexes open with the same map showing only
+  the states that vote for that office in 2026.
 - A ballot lookup that finds your congressional district in your browser,
   with the national map as a state picker.
 - Site search that runs in the browser (Pagefind), with no query sent anywhere,

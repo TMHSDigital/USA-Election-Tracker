@@ -98,7 +98,11 @@ referenced source id is undefined.
   of rules. Race and state title blocks carry a plate (the state code and a
   short line) like a sheet number, section headings open with a short accent
   rule, and race grids (`RaceTile.astro`) show numbered districts as large
-  numerals the way the maps label them. Maps are tinted verdigris. The
+  numerals the way the maps label them. The home page and states index list
+  every state as a plate (`StatePlates.astro`: code, name, race count), and
+  the home page gives each office a plate with its seat count. Tables other
+  than the candidate list carry `.register` (row headers in the display face,
+  year captions as sheet headings). Maps are tinted verdigris. The
   national map is the hero and the primary navigation. Hover and keyboard focus on any map
   shape fill it with a hatch pattern (an SVG `<pattern>` in `MapDefs.astro`)
   on top of the tint, so the active shape never depends on color alone. On
